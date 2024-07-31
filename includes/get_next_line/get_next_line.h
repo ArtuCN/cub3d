@@ -1,44 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:56:10 by aconti            #+#    #+#             */
-/*   Updated: 2024/07/31 18:39:42 by aconti           ###   ########.fr       */
+/*   Created: 2024/06/14 10:39:33 by aconti            #+#    #+#             */
+/*   Updated: 2024/07/31 16:08:55 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#ifndef GET_NEXT_LINE_H
+#define GET_NEXT_LINE_H
 
-int free_matrix(char **matrix)
-{
-	int i;
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-	return (1);
-}
+#define BUFFER_SIZE 42
 
-int main(int ac, char **av)
-{
-	t_cub cub;
-	(void)av;
-	if (ac == 2)
-	{
-		if (!regular_map(av[1], &cub))
-			return (0);
-		if (!init_cube(&cub))
-			return (0);
-	}
-	else
-		printf("Error\n");
-	free_matrix(cub.map);
-	// free(cub.img);
-}
+char *get_next_line(int fd);
+
+#endif
