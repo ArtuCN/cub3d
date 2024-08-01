@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/07/31 17:49:11 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 13:28:49 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdio.h>
 # include <X11/X.h>
 
+
+typedef struct s_data t_data;
 
 typedef struct s_img
 {
@@ -38,19 +40,35 @@ typedef struct s_cub
 	void		*win;
 	int 		width;
 	int 		height;
+	int			len;
 	t_img		*img;
-	char		**map;
+	t_data		*data;
 }				t_cub;
 
+typedef struct s_data
+{
+	char *north;
+	char *south;
+	char *west;
+	char *east;
+	char *floor;
+	char *ceiling;
+	char **matrix;
+	char **map;
+	t_cub *cub;
+}				t_data;
 
 
 //window
 int	init_cube(t_cub *cub);
 //parsing
 int	regular_map(char *name, t_cub *cub);
-int	check_map(t_cub *cub);
+int check_map(char **matrix);
+int	check_matrix(t_data *data);
 //events
 void	events(t_cub *cub);
+//free
+void	free_cub(t_cub *cub);
 
 
 #endif

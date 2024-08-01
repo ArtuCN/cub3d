@@ -6,47 +6,68 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/07/31 17:29:04 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 13:30:29 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int len_mat(int fd, t_cub *cub)
+int len_mat(int fd, t_data *data)
 {
 	int		i;
 	char *line;
 
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), 0);
 	i = 0;
-	while (((line = get_next_line(fd)) != NULL))
+	while ((line != NULL))
 	{
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
-	cub->map = malloc(sizeof(char *) * i + 1);
-	if (!cub->map)
+	data->matrix = malloc(sizeof(char *) * i + 1);
+	if (!data->matrix)
 		return (printf("Error\nmalloc failed\n"), 0);
+	data->matrix[i] = NULL;
 	close(fd);
 	return (1);
 }
 
-int	put_map(int fd, t_cub *cub)
+int	put_map(int fd, t_data *data)
 {
 	char *line;
 	int i;
 	
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), 0);
 	i = 0;
-	while (((line = get_next_line(fd)) != NULL))
+	while (line != NULL)
 	{
-		cub->map[i] = ft_strdup(line);
+		data->matrix[i] = ft_strdup(line);
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (1);
 }
 
-int regular_map(char *name, t_cub *cube)
+// void print_matrix(char **matrix)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (matrix[i])
+// 	{
+// 		printf("%s\n", matrix[i]);
+// 		i++;
+// 	}
+// }
+
+int regular_map(char *name, t_cub *cub)
 {
 	int fd;
 
@@ -55,13 +76,17 @@ int regular_map(char *name, t_cub *cube)
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nopen failed\n"), 0);
-	if (!len_mat(fd, cube))
+	if (!len_mat(fd, cub->data))
 		return (0);
 	fd = open(name, O_RDONLY);
-	if (!put_map(fd, cube))
-		return (1);
+	if (!put_map(fd, cub->data))
+		return (0);
 	close(fd);
-	if (!check_map(cube))
-		return (printf("Error\nmap not regular\n"), 0);
+	// print_matrix(cub->data->matrix);
+	if (!check_matrix(cub->data))
+		return (0);
+
+	// if (!check_map(cub)) 
+		// return (printf("Error\nmap not regular\n"), 0);
 	return (1);
 }

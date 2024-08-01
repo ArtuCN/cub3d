@@ -13,9 +13,10 @@
 NAME = cub3d
 
 # Source files
+FREE = free_all/free_cub.c
 EVENTS = events/close.c
 WINDOW = window/init_win.c
-PARSING = parsing/parsing_map.c parsing/map_checks.c
+PARSING = parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
 MAIN = main.c
 GET_NEXT_LINE = includes/get_next_line/get_next_line.c
 LIBFT_DIR = includes/libft
@@ -31,7 +32,7 @@ FLAGS = -L$(DEST_DIR)/$(MLX_DIR) -lmlx -lX11 -lXext -L$(LIBFT_DIR) -lft
 COMPILE = gcc -Wall -Wextra -Werror -g
 
 # Source and object files
-SRCS = $(MAIN) $(WINDOW) $(PARSING) $(EVENTS) $(GET_NEXT_LINE)
+SRCS = $(MAIN) $(WINDOW) $(PARSING) $(EVENTS) $(GET_NEXT_LINE) $(FREE)
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

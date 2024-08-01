@@ -6,13 +6,13 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/07/31 17:29:07 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 13:34:35 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int check_d_left(char **map, int x, int y)
+int check_d_left(char **map, int x, int y, char player)
 {
 	int x1;
 	int y1;
@@ -24,7 +24,7 @@ int check_d_left(char **map, int x, int y)
 		x--;
 		y++;
 	}
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);	
 	x = x1;
 	y = y1;
@@ -33,12 +33,12 @@ int check_d_left(char **map, int x, int y)
 		x--;
 		y--;
 	}
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	return (1);
 }
 
-int check_d_right(char **map, int x, int y)
+int check_d_right(char **map, int x, int y, char player)
 {
 	int x1;
 	int y1;
@@ -50,7 +50,7 @@ int check_d_right(char **map, int x, int y)
 		x++;
 		y--;
 	}
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);	
 	x = x1;
 	y = y1;
@@ -59,12 +59,12 @@ int check_d_right(char **map, int x, int y)
 		x++;
 		y++;
 	}
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	return (1);
 }
 
-int	check_zero(char **map, int x, int y)
+int	check_zero(char **map, int x, int y, char player)
 {
 	int x1;
 	int y1;
@@ -73,41 +73,87 @@ int	check_zero(char **map, int x, int y)
 	x1 = x;
 	while (map[y][x] == '0')
 		x++;
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);	
 	x = x1;
 	while (map[y][x] == '0' && x > 0)
 		x--;
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	x = x1;
 	while (map[y][x] == '0')
 		y++;
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	y = y1;
 	while (map[y][x] == '0' && y > 0)
 		y--;
-	if (map[y][x] != '1')
+	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);	
 	return (1);
 }
 
-int check_map(t_cub *cub)
+int check_char(int c)
+{
+	if (c == '0' || c == '1' || c == 'N'
+		|| c == 'S' || c == 'W' || c == 'E'
+		|| c == ' ' || c == '\n')
+		return (1);
+	return (0);
+}
+
+int	check_player(char **map, int x, int y, char *i)
+{
+	if (map[y][x] == 'N' || map[y][x] == 'S'
+		|| map[y][x] == 'W' || map[y][x] == 'E')
+	{
+		if (*i != 0)
+			return (0);
+		if ((map[y][x + 1] != '0' && map[y][x + 1] != '1')
+			|| (map[y][x - 1] != '0' && map[y][x - 1] != '1')
+			|| (map[y + 1][x] != '0' && map[y + 1][x] != '1')
+			|| (map[y - 1][x] != '0' && map[y - 1][x] != '1')
+			|| (map[y + 1][x + 1] != '0' && map[y + 1][x + 1] != '1')
+			|| (map[y + 1][x - 1] != '0' && map[y + 1][x - 1] != '1')
+			|| (map[y - 1][x + 1] != '0' && map[y - 1][x + 1] != '1')
+			|| (map[y - 1][x - 1] != '0' && map[y - 1][x - 1] != '1'))
+			return (0);
+		(*i) = map[y][x];
+	}
+	return (1);
+}
+
+int check_map(char **matrix)
 {
 	int x;
 	int y;
+	char player;
 
 	y = 0;
-	while (cub->map[y])
+	player = 0;
+	while(matrix[y])
 	{
 		x = 0;
-		while (cub->map[y][x])
+		while(matrix[y][x])
 		{
-			if (cub->map[y][x] == '0')
-				if (!check_zero(cub->map, x, y)
-					|| !check_d_left(cub->map, x, y)
-					|| !check_d_right(cub->map, x, y))
+			if (!check_char(matrix[y][x]))
+				return (printf("CHAR\n"),0);
+			if (!check_player(matrix, x, y, &player))
+					return (printf("PLAYER\n"),0);
+			x++;
+		}
+		y++;
+	}
+	y = 0;
+	while (matrix[y])
+	{
+		x = 0;
+		while (matrix[y][x])
+		{
+			if (matrix[y][x] == '0')
+				if (!check_zero(matrix, x, y, player)
+					|| !check_d_left(matrix, x, y, player)
+					|| !check_d_right(matrix, x, y, player))
 					return (0);
 			x++;
 		}

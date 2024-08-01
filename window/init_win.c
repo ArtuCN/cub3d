@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/07/31 18:38:16 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 12:09:26 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 int	close_window(t_cub *cub)
 {
-	printf("Closing window\n");
 	mlx_destroy_image(cub->mlx,
 		cub->img->img_ptr);
-	printf("Closing window1\n");
 	mlx_destroy_window(cub->mlx,
 		cub->win);
-	printf("Closing window2\n");
 	mlx_destroy_display (cub->mlx);
-	printf("Closing window3\n");
 	free (cub->mlx);
-	printf("Closing window4\n");
-	return (EXIT_SUCCESS);
+	// free_cub(cub);
+	exit(EXIT_SUCCESS);
 }
 
 int	key_handler(int keysym, t_cub *cub)
