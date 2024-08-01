@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 13:35:22 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:03:45 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,17 @@ int check_cor(char *line)
 	return (0);
 }
 
-char **copy_map(char **matrix, int g)
+void print_matrix(char **matrix)
+{
+	int i = 0;
+	while (matrix[i])
+	{
+		printf("%s\n", matrix[i]);
+		i++;
+	}
+}
+
+void copy_map(char **matrix, int g, t_data *data)
 {
 	char **map;
 	int	i;
@@ -37,11 +47,10 @@ char **copy_map(char **matrix, int g)
 	
 	i = 0;
 	len = 0;
+	print_matrix(matrix);
 	while (matrix[g + len])
 		len++;
-	map = malloc(sizeof(char *) * len + 1);
-	if (!map)
-		return (0);
+	map = malloc(sizeof(char *) * (len + 1));
 	while (matrix[g])
 	{
 		map[i] = ft_strdup(matrix[g]);
@@ -49,20 +58,7 @@ char **copy_map(char **matrix, int g)
 		g++;
 	}
 	map[i] = NULL;
-	return (map);
-}
-
-void print_matrix(char **matrix)
-{
-	int i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		printf("%s", matrix[i]);
-		i++;
-	}
-	printf("\n");
+	data->map = map;
 }
 
 int	check_first_char(char **matrix, t_data *data)
@@ -77,17 +73,16 @@ int	check_first_char(char **matrix, t_data *data)
 		while (!ft_strncmp(matrix[g], "\n", 1))
 			g++;
 		if ((matrix[g][0] <= '9' && matrix[g][0] >= '0') || !check_cor(matrix[g]))
-			return (printf("map isn't correct1\n"), 0);
+			return (printf("map isn't correct\n"), 0);
 		else if (check_cor(matrix[g]))
 			i++;
 		g++;
 	}
 	while (!ft_strncmp(matrix[g], "\n", 1))
 		g++;
-	data->map = copy_map(matrix, g);
-	print_matrix(data->map);
-	if (!check_map(data->map))
-		return (printf("map isn't correct2\n"), 0);
+	copy_map(matrix, g, data);
+	if (!check_map(data->map, data))
+		return (printf("map isn't correct\n"), 0);
 	return (1);
 }
 
@@ -95,6 +90,7 @@ int	check_matrix(t_data *data)
 {
 	if (!check_first_char(data->matrix, data))
 		return (0);
-	printf("Matrix is correct3\n");
+	if (!init_data(data))
+		return (0);
 	return (1);
 }

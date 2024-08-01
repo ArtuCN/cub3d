@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 13:34:35 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 15:10:13 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	check_player(char **map, int x, int y, char *i)
 	return (1);
 }
 
-int check_map(char **matrix)
+int check_map(char **matrix, t_data *data)
 {
 	int x;
 	int y;
@@ -137,27 +137,15 @@ int check_map(char **matrix)
 		while(matrix[y][x])
 		{
 			if (!check_char(matrix[y][x]))
-				return (printf("CHAR\n"),0);
+				return (0);
 			if (!check_player(matrix, x, y, &player))
-					return (printf("PLAYER\n"),0);
-			x++;
-		}
-		y++;
-	}
-	y = 0;
-	while (matrix[y])
-	{
-		x = 0;
-		while (matrix[y][x])
-		{
-			if (matrix[y][x] == '0')
-				if (!check_zero(matrix, x, y, player)
-					|| !check_d_left(matrix, x, y, player)
-					|| !check_d_right(matrix, x, y, player))
 					return (0);
 			x++;
 		}
 		y++;
 	}
+	data->player_dir = player;
+	if (!check_map_continue(matrix, player))
+		return (0);
 	return (1);
 }

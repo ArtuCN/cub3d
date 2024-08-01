@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 13:30:29 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:01:11 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int len_mat(int fd, t_data *data)
 		i++;
 		line = get_next_line(fd);
 	}
-	data->matrix = malloc(sizeof(char *) * i + 1);
+	data->matrix = malloc(sizeof(char *) * (i + 1));
 	if (!data->matrix)
 		return (printf("Error\nmalloc failed\n"), 0);
 	data->matrix[i] = NULL;
@@ -55,18 +55,6 @@ int	put_map(int fd, t_data *data)
 	return (1);
 }
 
-// void print_matrix(char **matrix)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (matrix[i])
-// 	{
-// 		printf("%s\n", matrix[i]);
-// 		i++;
-// 	}
-// }
-
 int regular_map(char *name, t_cub *cub)
 {
 	int fd;
@@ -82,11 +70,7 @@ int regular_map(char *name, t_cub *cub)
 	if (!put_map(fd, cub->data))
 		return (0);
 	close(fd);
-	// print_matrix(cub->data->matrix);
 	if (!check_matrix(cub->data))
 		return (0);
-
-	// if (!check_map(cub)) 
-		// return (printf("Error\nmap not regular\n"), 0);
 	return (1);
 }

@@ -6,22 +6,38 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 12:09:22 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:13:09 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// void	free_cub(t_cub *cub)
-// {
-// 	int i;
+void	free_matrix(char **mat)
+{
+	int i;
 
-// 	i = 0;
-// 	while (cub->map[i])
-// 	{
-// 		free(cub->map[i]);
-// 		cub->map[i] = NULL;
-// 		i++;
-// 	}
-// 	free(cub->map);
-// }
+	i = 0;
+	while (mat[i])
+	{
+		free(mat[i]);
+		mat[i] = NULL;
+		i++;
+	}
+	free(mat);
+}
+
+void	free_cub(t_cub *cub)
+{
+	t_data *data;
+
+	data = cub->data;
+	free(cub->img);
+	free_matrix(data->matrix);
+	free_matrix(data->map);
+	free(data->north);
+	free(data->south);
+	free(data->west);
+	free(data->east);
+	free(data->ceiling);
+	free(data->floor);
+}

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 13:28:49 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:23:36 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,29 @@ typedef struct s_data
 	char *ceiling;
 	char **matrix;
 	char **map;
+	char player_dir;
 	t_cub *cub;
 }				t_data;
 
 
 //window
 int	init_cube(t_cub *cub);
+int	draw_minimap(t_cub *cub, char **map);
+
 //parsing
 int	regular_map(char *name, t_cub *cub);
-int check_map(char **matrix);
+int	check_zero(char **map, int x, int y, char player);
+int check_d_right(char **map, int x, int y, char player);
+int check_d_left(char **map, int x, int y, char player);
+
+int	init_data(t_data *data);
+int check_map(char **matrix, t_data *data);
 int	check_matrix(t_data *data);
+int	check_map_continue(char **matrix, char player);
 //events
 void	events(t_cub *cub);
 //free
 void	free_cub(t_cub *cub);
-
+void	print_matrix(char **matrix);
 
 #endif

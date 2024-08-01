@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_continue.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:56:10 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 16:39:37 by aconti           ###   ########.fr       */
+/*   Created: 2024/08/01 14:21:19 by aconti            #+#    #+#             */
+/*   Updated: 2024/08/01 14:21:34 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int main(int ac, char **av)
+int	check_map_continue(char **matrix, char player)
 {
-	t_cub cub;
-	t_data data;
-	
-	cub.data = &data;
-	data.cub = &cub;
-	(void)av;
-	if (ac == 2)
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (matrix[y])
 	{
-		if (!regular_map(av[1], &cub))
-			return (0);
-		if (!init_cube(&cub))
-			return (0);
-		// if (!draw_minimap(&cub, data.map))
-			// return (0);
+		x = 0;
+		while (matrix[y][x])
+		{
+			if (matrix[y][x] == '0')
+				if (!check_zero(matrix, x, y, player)
+					|| !check_d_left(matrix, x, y, player)
+					|| !check_d_right(matrix, x, y, player))
+					return (0);
+			x++;
+		}
+		y++;
 	}
-	else
-		return(printf("Error\n"), 0);
-	// free_matrix(cub.map);
-	// free(cub.img);
+	return (1);
 }

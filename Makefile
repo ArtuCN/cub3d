@@ -15,8 +15,8 @@ NAME = cub3d
 # Source files
 FREE = free_all/free_cub.c
 EVENTS = events/close.c
-WINDOW = window/init_win.c
-PARSING = parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
+WINDOW = window/init_win.c window/minimap.c
+PARSING = parsing/init_data.c parsing/check_continue.c parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
 MAIN = main.c
 GET_NEXT_LINE = includes/get_next_line/get_next_line.c
 LIBFT_DIR = includes/libft
