@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 16:23:36 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/02 17:44:09 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ typedef struct s_data
 	char *ceiling;
 	char **matrix;
 	char **map;
+	int		max_x;
+	int		max_y;
 	char player_dir;
-	t_cub *cub;
 }				t_data;
 
 
@@ -79,5 +80,8 @@ void	events(t_cub *cub);
 //free
 void	free_cub(t_cub *cub);
 void	print_matrix(char **matrix);
+//math
+int	fmap(int unscaled_num, int new_max, int old_max);
+
 
 #endif

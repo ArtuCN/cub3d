@@ -39,7 +39,7 @@ char *ft_strdup(char *s)
 	return x;
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char *ft_strjoinfree(char *s1, char *s2)
 {
 	if(!s1 || !s2)
 		return(NULL);
@@ -80,7 +80,7 @@ char *get_next_line(int fd)
 	while(!(fstrchr(line, '\n')) && (letti = read(fd, cont, BUFFER_SIZE)) > 0)
 	{
 		cont[letti] = '\0';
-		line = ft_strjoin(line, cont);
+		line = ft_strjoinfree(line, cont);
 	}
 	if(ft_strlen(line) == 0)
 		return(free(line),NULL);

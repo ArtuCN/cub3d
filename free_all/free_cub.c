@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 16:13:09 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/02 18:24:48 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	free_cub(t_cub *cub)
 	free(data->east);
 	free(data->ceiling);
 	free(data->floor);
+	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 17:16:04 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/02 17:18:24 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	init_cube(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
 	if (!cub->img->img_ptr)
 		return (failing_img_addr(cub));
+	draw_minimap(cub, cub->data->map);
 	mlx_key_hook (cub->win, key_handler, cub);
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
-	draw_minimap(cub, cub->data->map);
 	mlx_loop(cub->mlx);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/01 16:01:11 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/02 18:23:26 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int regular_map(char *name, t_cub *cub)
 {
 	int fd;
 
+	cub->data = malloc(sizeof(t_data));
 	if (!name)
 		return (printf("Error\nno map\n"), 0);
 	fd = open(name, O_RDONLY);

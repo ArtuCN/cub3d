@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   fmap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/02 17:40:54 by aconti           ###   ########.fr       */
+/*   Created: 2024/08/02 17:43:48 by aconti            #+#    #+#             */
+/*   Updated: 2024/08/02 17:44:49 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#include "../includes/cub3d.h"
 
-# define WALL 1
-# define EMPTY 0
-# define WIDTH 1500
-# define HEIGHT 1000
-
-#endif
+int	fmap(int unscaled_num, int new_max, int old_max)
+{
+	return (new_max * (unscaled_num) / (old_max));
+}
