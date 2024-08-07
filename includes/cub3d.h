@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/02 17:44:09 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 12:21:24 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
+typedef struct s_player
+{
+	int x;
+	int y;
+}				t_player;
+
 typedef struct s_cub
 {
 	char 		*name;
@@ -43,6 +49,7 @@ typedef struct s_cub
 	int			len;
 	t_img		*img;
 	t_data		*data;
+	t_player	*player;
 }				t_cub;
 
 typedef struct s_data
@@ -64,6 +71,7 @@ typedef struct s_data
 //window
 int	init_cube(t_cub *cub);
 int	draw_minimap(t_cub *cub, char **map);
+void	player_init(t_cub *cub);
 
 //parsing
 int	regular_map(char *name, t_cub *cub);

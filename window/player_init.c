@@ -1,45 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cub.c                                         :+:      :+:    :+:   */
+/*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:23:21 by aconti           ###   ########.fr       */
+/*   Created: 2024/08/07 12:14:11 by aconti            #+#    #+#             */
+/*   Updated: 2024/08/07 12:25:45 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	free_matrix(char **mat)
+void	find_player_pos(t_cub *cub, t_data *data)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (mat[i])
+	while (data->map[i])
 	{
-		free(mat[i]);
-		mat[i] = NULL;
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == data->player_dir)
+			{
+				cub->player->x = j;
+				cub->player->y = i;
+				return ;
+			}
+			j++;
+		}
 		i++;
 	}
-	free(mat);
 }
 
-void	free_cub(t_cub *cub)
+void	player_init(t_cub *cub)
 {
-	t_data *data;
-
-	data = cub->data;
-	free(cub->img);
-	free_matrix(data->matrix);
-	free_matrix(data->map);
-	free(data->north);
-	free(data->south);
-	free(data->west);
-	free(data->east);
-	free(data->ceiling);
-	free(data->floor);
-	free(data);
-	free(cub->player);
+	t_player *player;
+	player = malloc(sizeof(t_player));
+	
+	cub->player = player;
+	if (!cub->player)
+	{
+		free(cub->mlx);
+		free(cub->win);
+		free(cub->img);
+		return ;
+	}
+	find_player_pos(cub, cub->data);
 }
