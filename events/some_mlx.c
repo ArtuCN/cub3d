@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 14:43:30 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:47:09 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	check_move(int keysym, t_cub *cub, char **map)
 	x = cub->player->x;
 	y = cub->player->y;
 	if (keysym == SYM_D)
-		x += 5;
+		x += 10;
 	if (keysym == SYM_A)
 		x -= 5;
 	if (keysym == SYM_W)
 		y -= 5;
 	if (keysym == SYM_S)
-		y += 5;
+		y += 10;
 	if (map[(int)(y / (HEIGHT / 50))][(int)(x / (WIDTH / 50))] == '1')
 		return (0);
 	return (1);

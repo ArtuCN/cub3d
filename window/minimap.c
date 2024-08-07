@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 14:35:58 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:44:27 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 
 void	my_mlx_pixel_put(t_cub *cub, int x, int y, unsigned int color)
 {
-	//char	*dst;
 	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-	{	
-		//dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		//*(unsigned int*)dst = color;	
 		mlx_pixel_put(cub->mlx, cub->win, x, y, color);
-	}
 }
 
 int	draw_square(t_cub *cub, int x, int y, unsigned int color)
@@ -29,7 +24,6 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
 	int i;
 	int j;
 	
-	//i = (x * 50);
 	j = (y * (HEIGHT / 50));
 	while(j <= ((HEIGHT / 50) + (y * (HEIGHT / 50))))
 	{
@@ -37,10 +31,9 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
 		while(i <= ((WIDTH / 50) + (x * (WIDTH / 50))))
 		{
 			if ((i == 0) || (i % (WIDTH / 50) == 0) || (j == 0) || (j % (HEIGHT / 50) == 0))
-				my_mlx_pixel_put(cub, i, j, 0xFFFFFF);
+				my_mlx_pixel_put(cub, i, j, 0x000000);
 			else 
 				my_mlx_pixel_put(cub, i, j, color);
-			// printf("%d, %d \n", i, j);
 			i++;
 		}
 		j++;
@@ -51,10 +44,10 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
 
 int	put_player(t_cub *cub, int x, int y, unsigned int color)
 {
-	int start_x = x - 5;
-	int start_y = y - 5;
-	int end_x = x + 5;
-	int end_y = y + 5;
+	int start_x = x;
+	int start_y = y;
+	int end_x = x + 10;
+	int end_y = y + 10;
 
 	// Ensure we don't draw out of bounds
 	if (start_x < 0) start_x = 0;
@@ -82,7 +75,7 @@ int	draw_minimap(t_cub *cub, char **map)
 	int y;
 
 	y = 0;
-	printf("%d, %d \n", fmap(cub->player->x, WIDTH, cub->data->max_x), fmap(cub->player->y, HEIGHT, cub->data->max_y));
+	// printf("%d, %d \n", fmap(cub->player->x, WIDTH, cub->data->max_x), fmap(cub->player->y, HEIGHT, cub->data->max_y));
 	while(map[y])
 	{
 		x = 0;
