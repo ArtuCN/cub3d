@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:26:47 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:22:57 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ int failing_img_addr(t_cub *cub)
 	return (printf("Error\nmlx_get_data_addr failed\n"), 0);
 }
 
-int	close_window(t_cub *cub)
-{
-	mlx_destroy_image(cub->mlx,
-		cub->img->img_ptr);
-	mlx_destroy_window(cub->mlx,
-		cub->win);
-	mlx_destroy_display (cub->mlx);
-	free (cub->mlx);
-	free_cub(cub);
-	exit(EXIT_SUCCESS);
-}
-
-int	key_handler(int keysym, t_cub *cub)
-{
-	if (keysym == 65307)
-		close_window (cub);
-	return (0);
-}
-
 int	init_cube(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -74,9 +55,6 @@ int	init_cube(t_cub *cub)
 	if (!cub->img->img_ptr)
 		return (failing_img_addr(cub));
 	player_init(cub);
-	draw_minimap(cub, cub->data->map);
-	mlx_key_hook (cub->win, key_handler, cub);
-	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
-	mlx_loop(cub->mlx);
+	calling_mlx(cub);
 	return (1);
 }

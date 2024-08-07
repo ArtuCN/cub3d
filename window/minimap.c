@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:47:17 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:35:58 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,16 @@ int	put_player(t_cub *cub, int x, int y, unsigned int color)
 	if (end_x >= WIDTH) end_x = WIDTH - 1;
 	if (end_y >= HEIGHT) end_y = HEIGHT - 1;
 
-	for (int i = start_x; i <= end_x; i++)
+	int i = start_x;
+	while (i <= end_x)
 	{
-		for (int j = start_y; j <= end_y; j++)
+		int j = start_y;
+		while (j <= end_y)
 		{
 			my_mlx_pixel_put(cub, i, j, color);
+			j++;
 		}
+		i++;
 	}
 	return (1);
 }
@@ -95,6 +99,6 @@ int	draw_minimap(t_cub *cub, char **map)
 		}
 		y++;
 	}
-	put_player(cub, fmap(cub->player->x, WIDTH, cub->data->max_x), fmap(cub->player->y, HEIGHT, cub->data->max_y), RED);
+	put_player(cub, cub->player->x, cub->player->y, RED);
 	return (1);
 }

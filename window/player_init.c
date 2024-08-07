@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:14:11 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:25:45 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:35:34 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	find_player_pos(t_cub *cub, t_data *data)
 {
-	int i;
-	int j;
+	int y;
+	int x;
 
-	i = 0;
-	while (data->map[i])
+	y = 0;
+	while (data->map[y])
 	{
-		j = 0;
-		while (data->map[i][j])
+		x = 0;
+		while (data->map[y][x])
 		{
-			if (data->map[i][j] == data->player_dir)
+			if (data->map[y][x] == data->player_dir)
 			{
-				cub->player->x = j;
-				cub->player->y = i;
+				cub->player->x = fmap(x, WIDTH, data->max_x);
+				cub->player->y = fmap(y, HEIGHT, data->max_y);
 				return ;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 

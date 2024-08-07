@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:06:59 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:26:17 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,11 @@
 # define BLUE 0x0000FF
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
+
+# define SYM_A 97
+# define SYM_D 100
+# define SYM_S 115
+# define SYM_W 119
+
 
 #endif

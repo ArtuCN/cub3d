@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 12:21:24 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:23:33 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int	check_matrix(t_data *data);
 int	check_map_continue(char **matrix, char player);
 //events
 void	events(t_cub *cub);
+void	calling_mlx(t_cub *cub);
+int		close_window(t_cub *cub);
+
 //free
 void	free_cub(t_cub *cub);
 void	print_matrix(char **matrix);

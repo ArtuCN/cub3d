@@ -15,7 +15,7 @@ NAME = cub3d
 # Source files
 FREE = free_all/free_cub.c
 MATH = math/fmap.c
-EVENTS = events/close.c
+EVENTS = events/close.c events/some_mlx.c
 WINDOW = window/init_win.c window/minimap.c window/player_init.c
 PARSING = parsing/init_data.c parsing/check_continue.c parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
 MAIN = main.c
