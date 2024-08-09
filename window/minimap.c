@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 15:44:27 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/09 10:40:44 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	put_player(t_cub *cub, int x, int y, unsigned int color)
 {
 	int start_x = x;
 	int start_y = y;
-	int end_x = x + 10;
-	int end_y = y + 10;
+	int end_x = x + 5;
+	int end_y = y + 5;
 
 	// Ensure we don't draw out of bounds
 	if (start_x < 0) start_x = 0;

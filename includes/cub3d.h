@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/07 14:23:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:12:10 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int x;
-	int y;
+	double 	x;
+	double 	y;
+	double	angle;
 }				t_player;
 
 typedef struct s_cub
@@ -72,6 +73,7 @@ typedef struct s_data
 int	init_cube(t_cub *cub);
 int	draw_minimap(t_cub *cub, char **map);
 void	player_init(t_cub *cub);
+void	my_mlx_pixel_put(t_cub *cub, int x, int y, unsigned int color);
 
 //parsing
 int	regular_map(char *name, t_cub *cub);
@@ -93,6 +95,9 @@ void	free_cub(t_cub *cub);
 void	print_matrix(char **matrix);
 //math
 int	fmap(int unscaled_num, int new_max, int old_max);
+//raycasting
+
+
 
 
 #endif

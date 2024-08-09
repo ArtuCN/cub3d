@@ -19,6 +19,7 @@ EVENTS = events/close.c events/some_mlx.c
 WINDOW = window/init_win.c window/minimap.c window/player_init.c
 PARSING = parsing/init_data.c parsing/check_continue.c parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
 MAIN = main.c
+RAYCASTING = raycasting/raycasting.c
 GET_NEXT_LINE = includes/get_next_line/get_next_line.c
 LIBFT_DIR = includes/libft
 
@@ -29,11 +30,11 @@ MLX_DIR = minilibx-linux
 DEST_DIR = includes
 
 # Compilation flags
-FLAGS = -L$(DEST_DIR)/$(MLX_DIR) -lmlx -lX11 -lXext -L$(LIBFT_DIR) -lft
+FLAGS = -L$(DEST_DIR)/$(MLX_DIR) -lmlx -lX11 -lXext -lm -L$(LIBFT_DIR) -lft
 COMPILE = gcc -Wall -Wextra -Werror -g
 
 # Source and object files
-SRCS = $(MAIN) $(WINDOW) $(PARSING) $(EVENTS) $(GET_NEXT_LINE) $(FREE) $(MATH)
+SRCS = $(MAIN) $(WINDOW) $(PARSING) $(EVENTS) $(GET_NEXT_LINE) $(FREE) $(MATH) $(RAYCASTING)
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
