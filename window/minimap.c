@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 10:40:44 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/09 13:57:28 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	put_player(t_cub *cub, int x, int y, unsigned int color)
 {
 	int start_x = x;
 	int start_y = y;
-	int end_x = x + 5;
-	int end_y = y + 5;
+	int end_x = x + 2;
+	int end_y = y + 2;
 
 	// Ensure we don't draw out of bounds
 	if (start_x < 0) start_x = 0;
@@ -75,6 +75,7 @@ int	draw_minimap(t_cub *cub, char **map)
 	int y;
 
 	y = 0;
+	// cast_rays(cub);
 	// printf("%d, %d \n", fmap(cub->player->x, WIDTH, cub->data->max_x), fmap(cub->player->y, HEIGHT, cub->data->max_y));
 	while(map[y])
 	{
@@ -93,5 +94,6 @@ int	draw_minimap(t_cub *cub, char **map)
 		y++;
 	}
 	put_player(cub, cub->player->x, cub->player->y, RED);
+	find_wall(cub);
 	return (1);
 }

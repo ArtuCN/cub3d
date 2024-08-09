@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 10:31:15 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/09 11:57:46 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define EMPTY 0
 # define WIDTH 1500
 # define HEIGHT 1000
+# define FOV 60
+# define MAX_RENDER_DISTANCE 2.0
 
 # define YELLOW 0xFFFF00
 # define RED 0xFF0000

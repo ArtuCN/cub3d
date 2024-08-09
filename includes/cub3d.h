@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 11:12:10 by aconti           ###   ########.fr       */
+/*   Updated: 2024/08/09 13:57:10 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	print_matrix(char **matrix);
 int	fmap(int unscaled_num, int new_max, int old_max);
 //raycasting
 
+void	find_wall(t_cub *cub);
+void cast_rays(t_cub *cub);
 
 
 
