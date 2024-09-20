@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 17:32:57 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/20 17:51:08 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ray_distance(t_player *player, int i, long double temp_ang)
 	player->ray[i].x += step_x;
 	player->ray[i].y += step_y;
 	player->ray[i].distance += sqrt(step_x * step_x + step_y * step_y) * 0.15;
+	player->ray[i].distance = fabs((double)player->ray[i].distance);
 }
 
 void	start_raycast(t_cub *cub, t_player *player)
@@ -48,7 +49,7 @@ void	start_raycast(t_cub *cub, t_player *player)
 		while (!is_wall(ray[i].x, ray[i].y, cub))
 			ray_distance(player, i, temp_ang);
 		corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
-		ray[i].distance = corrected_distance;
+		ray[i].distance = fabs((double)corrected_distance);
 		adding_ray_info(&ray[i]);
 		ray[i].angle = temp_ang;
 		if (!is_same(ray, i))
@@ -61,6 +62,7 @@ void	start_raycast(t_cub *cub, t_player *player)
 			ray[i].wall = ray[i - 1].wall;
 		temp_ang += player->increment;
 	}
+	printf("FINE WHILE");
 	adding_pix_to_img(cub, ray);
 	// drawing_rays(player, cub);
 }
