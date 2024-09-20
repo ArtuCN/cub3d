@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 14:42:03 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/20 17:32:57 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	start_raycast(t_cub *cub, t_player *player)
 	t_ray		*ray;
 	int			i;
 	long double	temp_ang;
+	long double corrected_distance;
 	i = -1;
 
 	temp_ang = (long double)(cub->player->angle - 30);
@@ -46,6 +47,8 @@ void	start_raycast(t_cub *cub, t_player *player)
 		ray[i].distance = 0;
 		while (!is_wall(ray[i].x, ray[i].y, cub))
 			ray_distance(player, i, temp_ang);
+		corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
+		ray[i].distance = corrected_distance;
 		adding_ray_info(&ray[i]);
 		ray[i].angle = temp_ang;
 		if (!is_same(ray, i))

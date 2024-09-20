@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artucn <artucn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:14:11 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/18 16:01:29 by artucn           ###   ########.fr       */
+/*   Updated: 2024/09/20 17:13:47 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	find_player_pos(t_cub *cub, t_data *data)
 		{
 			if (data->map[y][x] == data->player_dir)
 			{
-				cub->player->x = x * (WIDTH / 50);
-				cub->player->y = y * (HEIGHT / 50);
+				cub->player->x = (x + 0.5) * (WIDTH / 50);
+				cub->player->y = (y + 0.5) * (HEIGHT / 50);
 				return ;
 			}
 			x++;

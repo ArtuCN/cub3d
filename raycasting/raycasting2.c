@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:02 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 15:08:17 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/20 17:06:55 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	other_info(t_ray *ray, t_cub *cub)
 	ray->hit_y = ray->y + ray->distance * sin(ray->angle * PI / 180);
 	ray->wall->wall_hit_x = ray->hit_x - (long double)floor(ray->hit_x);
 	ray->wall->wall_hit_y = ray->hit_y - (long double)floor(ray->hit_y);
-	//printf("wall hit x and y: %Lf, %Lf\n",
-		// ray->wall->wall_hit_x, ray->wall->wall_hit_y);
 	if (ray->wall->direction != 'A')
 		get_w_h(ray, cub);
 }
