@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 17:55:59 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/23 17:06:16 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,37 @@ void	ray_distance(t_player *player, int i, long double temp_ang)
 	player->ray[i].distance = fabs((double)player->ray[i].distance);
 }
 
+// void	function(t_wall *wall, t_cub *cub, t_ray *ray)
+// {
+// 	ray->hit_x
+// }
+
+
+void	change_ray_info(t_ray *ray)
+{
+	long double temp_distance;
+	long double rd;
+	long double wd;
+	
+	rd = ray->distance;
+	wd = ray->wall->distance;
+	temp_distance = sqrt((rd * rd) + (wd * wd) - (2 * rd * wd) * cos((ray->angle) * (PI / 180.0)));
+	
+	temp_distance = temp_distance - (long double)floor(temp_distance);
+	//printf("ray->wall->first_hit_y: %Lf\n", ray->wall->first_hit_y);
+	//printf("temp_distance: %Lf\n", temp_distance);
+	ray->hit_y = ray->wall->first_hit_y - temp_distance;
+	ray->hit_x = ray->wall->first_hit_x + temp_distance;
+	if (ray->wall->direction == 'N')
+		ray->hit_x = ray->hit_x + (long double)floor(ray->hit_x);
+	else if (ray->wall->direction == 'S')
+		ray->hit_x = ray->hit_x - (long double)floor(ray->hit_x);
+	else if (ray->wall->direction == 'W')
+		ray->hit_y = ray->hit_y - (long double)floor(ray->hit_y);
+	else if (ray->wall->direction == 'E')
+		ray->hit_y = ray->hit_y + (long double)floor(ray->hit_y);
+}	
+
 void	start_raycast(t_cub *cub, t_player *player)
 {
 	t_ray		*ray;
@@ -48,21 +79,27 @@ void	start_raycast(t_cub *cub, t_player *player)
 		ray[i].distance = 0;
 		while (!is_wall(ray[i].x, ray[i].y, cub))
 			ray_distance(player, i, temp_ang);
+		ray[i].angle = temp_ang;
 		corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
 		ray[i].distance = fabs((double)corrected_distance);
 		adding_ray_info(&ray[i]);
 		ray[i].angle = temp_ang;
 		if (!is_same(ray, i))
 		{
+			printf("Ray %d is different from the previous one\n", i);
 			ray[i].wall = malloc(sizeof(t_wall));
+			ray[i].wall->n_rays = 0;
 			add_wall_info(&ray[i], cub->data->map, cub);
 			cub->num_walls++;
 		}
 		else
+		{
 			ray[i].wall = ray[i - 1].wall;
+			change_ray_info(&ray[i]);
+		}
+		// function(ray[i].wall, cub, &ray[i]);
 		temp_ang += player->increment;
 	}
-	printf("FINE WHILE");
 	adding_pix_to_img(cub, ray);
 	// drawing_rays(player, cub);
 }

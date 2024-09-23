@@ -6,33 +6,13 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:02 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 17:45:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/23 16:06:03 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	print_rays(t_player *player)
-{
-	int	i;
 
-	i = -1;
-	while (++i < player->num_rays)
-	{
-		// printf("Ray %d: x = %f, y = %f, angle = %f, distance = %Lf\n",
-		// 	i, player->ray[i].x, player->ray[i].y,
-		// 	player->ray[i].angle, player->ray[i].distance);
-		// printf("Wall: x = %d, y = %d\n", player->ray[i].wall->x,
-		// 	player->ray[i].wall->y);
-		// printf("Wall direction: %c\n", player->ray[i].wall->direction);
-		// printf("wall start and end: %f, %f\n",
-		// 	player->ray[i].wall->wall_start, player->ray[i].wall->wall_end);
-		printf("ray hit x and y: %Lf, %Lf\n",
-			player->ray[i].hit_x, player->ray[i].hit_y);
-		printf("wall hit x and y: %Lf, %Lf\n",
-			player->ray[i].wall->wall_hit_x, player->ray[i].wall->wall_hit_y);
-	}
-}
 
 void	get_w_h(t_ray *ray, t_cub *cub)
 {
@@ -67,9 +47,6 @@ void	other_info(t_ray *ray, t_cub *cub)
 {
 	ray->hit_x = ray->x + ray->distance * cos(ray->angle * PI / 180);
 	ray->hit_y = ray->y + ray->distance * sin(ray->angle * PI / 180);
-	printf("distance  = %Lf\n", ray->distance);
-	ray->wall->wall_hit_x = ray->hit_x - (long double)floor(ray->hit_x);
-	ray->wall->wall_hit_y = ray->hit_y - (long double)floor(ray->hit_y);
 	if (ray->wall->direction != 'A')
 		get_w_h(ray, cub);
 }
@@ -101,7 +78,8 @@ void	add_wall_info(t_ray *ray, char **map, t_cub *cub)
 		ray->wall->direction = 'S';
 	else
 		ray->wall->direction = 'A';
-	ray->wall->wall_start = (HEIGHT / 2) - (HEIGHT / ray->distance);
-	ray->wall->wall_end = (HEIGHT / 2) + (HEIGHT / ray->distance);
+	ray->wall->distance = ray->distance;
+	ray->wall->first_hit_x = ray->hit_x - floor(ray->hit_x);
+	ray->wall->first_hit_y = ray->hit_y - floor(ray->hit_y);
 	other_info(ray, cub);
 }

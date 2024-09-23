@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/20 17:07:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/23 16:35:21 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ typedef struct s_img
 
 typedef struct s_wall
 {
+	int		n_rays;
+	long double first_hit_x;
+	long double first_hit_y;
+	long double	distance;
 	int		height;
 	int		width;
 	char	direction;
 	int		door;
 	int		x;
 	int		y;
-	long double	wall_hit_x;
-	long double	wall_hit_y;
 	double	wall_start;
 	double	wall_end;
 }		t_wall;

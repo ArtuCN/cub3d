@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:41:03 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/19 14:24:01 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/23 10:48:31 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,4 @@ void	draw_all(t_cub *cub, t_player *player)
 		while (++temp < HEIGHT)
 			my_mlx_pixel_put(cub, i, temp, cub->data->color_floor);
 	}
-	printf("Drawing all\n");
 }
