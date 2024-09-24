@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/24 12:19:50 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:02:21 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_dda
 	long double angle;
 	int		posX;
 	int		posY;
+	int		side;
 	double	rayDirX;
 	double	rayDirY;
 	double	sideDistX;

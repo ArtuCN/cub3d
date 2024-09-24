@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 13:58:44 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:06:52 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ int		is_door(int x, int y, t_cub *cub)
 
 void	add_direction(t_ray *ray, t_dda *dda)
 {
-	if (dda->sideDistX > dda->sideDistY)
-	{
+	if (dda->side == 0)
+    {	
 		if (dda->rayDirX > 0)
 			ray->wall->direction = 'E';
-		else
+    	else
 			ray->wall->direction = 'W';
-	}
-	else
+	} 
+	else 
 	{
-		if (dda->rayDirY > 0)
-			ray->wall->direction = 'S';
-		else
-			ray->wall->direction = 'N';
+    	if (dda->rayDirY > 0)
+        	ray->wall->direction = 'S';
+    	else
+        	ray->wall->direction = 'N';
 	}
 }
 
@@ -126,6 +126,7 @@ void	start_dda(t_cub *cub, t_ray *ray)
 			{
 				dda->sideDistX += dda->deltaDistX;
 				dda->posX += dda->stepX;
+				dda->side = 0;
 				dda->hit = is_wall(dda->posX, dda->posY, cub);
 				{
 					ray[i].from_x = dda->posX;
@@ -136,6 +137,7 @@ void	start_dda(t_cub *cub, t_ray *ray)
 			{
 				dda->sideDistY += dda->deltaDistY;
 				dda->posY += dda->stepY;
+				dda->side = 1;
 				dda->hit = is_wall(dda->posX, dda->posY, cub);
 				if (dda->hit == 0)
 				{
