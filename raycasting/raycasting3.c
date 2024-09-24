@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/23 16:15:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 15:14:20 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,28 @@ int	same_dir(t_ray *old, t_ray *ray)
 
 	h = (old->from_x * 50 / WIDTH);
 	i = (old->from_y * 50 / HEIGHT);
-	
 	j = (ray->from_y * 50 / HEIGHT);
 	k = (ray->from_x * 50 / WIDTH);	
-	if (h  == k && i == j)
+	if (h == k && i == j)
 		return (1);
 	return (0);
 }
 
-int	is_same(t_ray *ray, int i)
+int	is_same(t_cub *cub, t_ray *ray, int i)
 {
 	int	j;
 	int	k;
-
+	int h;
+	int l;
+	
+	h = (ray[i - 1].y * 50 / HEIGHT);
+	l = (ray[i - 1].x * 50 / WIDTH);
 	j = (ray[i].y * 50 / HEIGHT);
 	k = (ray[i].x * 50 / WIDTH);
 	if (i > 0)
 	{
-		if ((k == (int)ray[i - 1].wall->x && j == (int)ray[i - 1].wall->y) && same_dir(&ray[i - 1], &ray[i]))
+		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])
+			&& (cub->data->map[j][k] == cub->data->map[h][l]))
 			return (1);//uguali
 	}
 	return (0);//diversi

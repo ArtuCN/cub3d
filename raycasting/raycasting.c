@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 12:39:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:43:57 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	start_raycast(t_cub *cub, t_player *player)
 		ray[i].distance = fabs((double)corrected_distance);
 		adding_ray_info(&ray[i]);
 		ray[i].angle = temp_ang;
-		if (!is_same(ray, i))
+		if (!is_same(cub, ray, i))
 		{
 			ray[i].wall = malloc(sizeof(t_wall));
 			ray[i].wall->n_rays = 0;

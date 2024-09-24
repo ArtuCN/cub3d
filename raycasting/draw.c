@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/24 13:59:13 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:35:51 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ unsigned int	get_color(t_wall *wall, int i, t_cub *cub, int temp)
 	else
 		x = (cub->player->ray[temp].hit_y) * wall->width;
 	if (x < 0)
-		x = 0;
+		x *= -1;
 	if (x >= wall->width)
 		x = wall->width - 1;
 	y = ((i - cub->player->ray[temp].wall_start) * wall->height) / (cub->player->ray[temp].wall_end - cub->player->ray[temp].wall_start);
@@ -79,23 +79,23 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 		}
 		// if (ray[temp].wall->direction == 'A')
 		// {
-		// 	color = BLACK;
-		// 	while (i < HEIGHT && i < ray[temp].wall_end)
-		// 	{
-		// 		offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
-		// 		*(unsigned int *)(cub->img->addr + offset) = color;
-		// 		i++;
-		// 	}
+		 	color = BLACK;
+		 	while (i < HEIGHT && i < ray[temp].wall_end)
+		 	{
+		 		offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
+		 		*(unsigned int *)(cub->img->addr + offset) = color;
+		 		i++;
+		 	}
 		// }
 		// else
 		// {
-			while (i < HEIGHT && i < ray[temp].wall_end)
-			{
-				offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
-				color = get_color(ray[temp].wall, i, cub, temp);
-				*(unsigned int *)(cub->img->addr + offset) = color;
-				i++;
-			}
+			// while (i < HEIGHT && i < ray[temp].wall_end)
+			// {
+			// 	offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
+			// 	color = get_color(ray[temp].wall, i, cub, temp);
+			// 	*(unsigned int *)(cub->img->addr + offset) = color;
+			// 	i++;
+			// }
 		// }
 		color = cub->data->color_floor;
 		while (i < HEIGHT)

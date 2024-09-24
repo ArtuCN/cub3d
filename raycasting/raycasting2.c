@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:02 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/23 16:06:03 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:39:59 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	get_w_h(t_ray *ray, t_cub *cub)
 {
-	if (ray->wall->door == 1)
+	if (ray->wall->direction == 'D')
 	{
 		ray->wall->width = cub->wall_cub[DOOR].width;
 		ray->wall->height = cub->wall_cub[DOOR].height;

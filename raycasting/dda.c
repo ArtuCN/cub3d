@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 14:06:52 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 15:13:20 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@ int		is_door(int x, int y, t_cub *cub)
 	return (0);
 }
 
-void	add_direction(t_ray *ray, t_dda *dda)
+void	add_direction(t_cub *cub, t_ray *ray, t_dda *dda)
 {
+	int j;
+	int	k;
+	
+	j = (dda->posY * 50 / HEIGHT);
+	k = (dda->posX * 50 / WIDTH);
 	if (dda->side == 0)
     {	
 		if (dda->rayDirX > 0)
 			ray->wall->direction = 'E';
-    	else
+    	else 
 			ray->wall->direction = 'W';
 	} 
 	else 
@@ -38,6 +43,11 @@ void	add_direction(t_ray *ray, t_dda *dda)
         	ray->wall->direction = 'S';
     	else
         	ray->wall->direction = 'N';
+	}
+	if(cub->data->map[j][k] == 'D')
+	{
+		ray->wall->door = 1;
+		ray->wall->direction = 'D';
 	}
 }
 
@@ -82,19 +92,20 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
 	ray[i].angle = dda->angle;
-	ray[i].wall_start = (HEIGHT / 2) - (HEIGHT / ray[i].distance);
-	ray[i].wall_end = (HEIGHT / 1.5) + (HEIGHT / ray[i].distance);
-	if (is_same(ray, i))
+	ray[i].wall_start = (HEIGHT / 3) - (HEIGHT / ray[i].distance);
+	ray[i].wall_end = (HEIGHT / 3 * 2) + (HEIGHT / ray[i].distance);
+	if (is_same(cub,ray, i))
 		ray[i].wall = ray[i - 1].wall;
 	else
 	{
+		printf("x  = %d, y = %d\n", dda->posX * 50 / WIDTH, dda->posY * 50 /HEIGHT);
 		ray[i].wall = malloc(sizeof(t_wall));
 		ray[i].wall->distance = ray[i].distance;
-		add_direction(&ray[i], dda);
 		ray[i].wall->door = 0;
+		add_direction(cub, &ray[i], dda);
 		//printf("x: %d, y: %d, map: %c\n", dda->posX, dda->posY, cub->data->map[(dda->posY * 50 / WIDTH)][(dda->posY * 50 / HEIGHT)]);
-		if (is_door(dda->posX, dda->posY, cub))
-			ray[i].wall->door = 1;
+//		if (is_door(dda->posX, dda->posY, cub))
+//			ray[i].wall->door = 1;
 		get_w_h(&ray[i], cub);
 		cub->num_walls++;
 	}
