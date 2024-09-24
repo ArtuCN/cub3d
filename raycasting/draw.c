@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/23 17:07:20 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 13:59:13 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 			*(unsigned int *)(cub->img->addr + offset) = color;
 			i++;
 		}
-		if (ray[temp].wall->direction == 'A')
-		{
-			color = BLACK;
-			while (i < HEIGHT && i < ray[temp].wall_end)
-			{
-				offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
-				*(unsigned int *)(cub->img->addr + offset) = color;
-				i++;
-			}
-		}
-		else
-		{
+		// if (ray[temp].wall->direction == 'A')
+		// {
+		// 	color = BLACK;
+		// 	while (i < HEIGHT && i < ray[temp].wall_end)
+		// 	{
+		// 		offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
+		// 		*(unsigned int *)(cub->img->addr + offset) = color;
+		// 		i++;
+		// 	}
+		// }
+		// else
+		// {
 			while (i < HEIGHT && i < ray[temp].wall_end)
 			{
 				offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
@@ -96,7 +96,7 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 				*(unsigned int *)(cub->img->addr + offset) = color;
 				i++;
 			}
-		}
+		// }
 		color = cub->data->color_floor;
 		while (i < HEIGHT)
 		{

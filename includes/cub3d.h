@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 12:54:08 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 13:12:27 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void	add_wall_info(t_ray *ray, char **map, t_cub *cub);
 void	draw_all(t_cub *cub, t_player *player);
 void	adding_ray_info(t_ray *ray);
 void	adding_pix_to_img(t_cub *cub, t_ray *ray);
+void	get_w_h(t_ray *ray, t_cub *cub);
+//dda
+void	start_dda(t_cub *cub, t_ray *ray);
 
 #endif

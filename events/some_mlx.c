@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 14:27:30 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 12:40:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	key_handler(int keysym, t_cub *cub)
 	mlx_clear_window(cub->mlx, cub->win);
 	free_wall(cub->player);
 	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
-	start_raycast(cub, cub->player);
+	//start_raycast(cub, cub->player);
+	start_dda(cub, cub->player->ray);
 	draw_minimap(cub, cub->data,cub->data->map);
 	return (0);
 }

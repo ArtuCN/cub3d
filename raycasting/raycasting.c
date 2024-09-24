@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/23 17:06:16 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 12:39:28 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	change_ray_info(t_ray *ray)
 	temp_distance = sqrt((rd * rd) + (wd * wd) - (2 * rd * wd) * cos((ray->angle) * (PI / 180.0)));
 	
 	temp_distance = temp_distance - (long double)floor(temp_distance);
-	//printf("ray->wall->first_hit_y: %Lf\n", ray->wall->first_hit_y);
-	//printf("temp_distance: %Lf\n", temp_distance);
 	ray->hit_y = ray->wall->first_hit_y - temp_distance;
 	ray->hit_x = ray->wall->first_hit_x + temp_distance;
 	if (ray->wall->direction == 'N')
@@ -86,7 +84,6 @@ void	start_raycast(t_cub *cub, t_player *player)
 		ray[i].angle = temp_ang;
 		if (!is_same(ray, i))
 		{
-			printf("Ray %d is different from the previous one\n", i);
 			ray[i].wall = malloc(sizeof(t_wall));
 			ray[i].wall->n_rays = 0;
 			add_wall_info(&ray[i], cub->data->map, cub);

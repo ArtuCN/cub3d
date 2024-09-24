@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/23 16:35:21 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 12:19:50 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,22 @@ typedef struct s_ray
 	t_wall			*wall;
 }				t_ray;
 
+typedef struct s_dda
+{
+	long double angle;
+	int		posX;
+	int		posY;
+	double	rayDirX;
+	double	rayDirY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+}	t_dda;
 
 
 typedef struct s_player
@@ -91,6 +107,7 @@ typedef struct s_cub
 	t_data		*data;
 	t_player	*player;
 	t_wall_cub	*wall_cub;
+	t_dda		*dda;
 	int			pressed;
 	int			num_walls;
 }				t_cub;
