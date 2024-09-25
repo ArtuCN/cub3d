@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 13:17:21 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:21:17 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
     int player_minimap_y = cub->player->y;
     int offset_x = player_minimap_x - MINIMAP_WIDTH / 4;
     int offset_y = player_minimap_y - MINIMAP_HEIGHT / 4;
-	int minimap_x = x * (WIDTH / 50) - offset_x + MINIMAP_X;
+	int minimap_x = x * (HEIGHT / 50) - offset_x + MINIMAP_X;
     int minimap_y = y * (HEIGHT / 50) - offset_y + MINIMAP_Y;
 	
     j = minimap_y;
     while (j <= minimap_y + (HEIGHT / 50)) 
 	{
         i = minimap_x;
-        while (i <= minimap_x + (WIDTH / 50)) 
+        while (i <= minimap_x + (HEIGHT / 50)) 
 		{
             if ((i == (int)minimap_x) //|| (i % (int)((minimap_x)) == 0)
                 || (j == (int)minimap_y)) //|| (j % (int)((minimap_y)) == 0))
@@ -46,10 +46,10 @@ int	is_wall(long double x, long double y, t_cub *cub)
 	long double	j;
 	long double	i;
 
-	if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+	if (x < 0 || y < 0 || x > HEIGHT || y > HEIGHT)
 		return (1);
 	j = (y * 50 / HEIGHT);
-	i = (x * 50 / WIDTH);
+	i = (x * 50 / HEIGHT);
 	if (cub->data->map[(int)j][(int)i] == '1'
 		|| cub->data->map[(int)j][(int)i] == '\n'
 		|| !cub->data->map[(int)j][(int)i]
@@ -90,7 +90,7 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	int	i;
 	int	j;
 	
-	cub->data->offset_x = x - MINIMAP_WIDTH / 4;
+	cub->data->offset_x = x - MINIMAP_HEIGHT / 4;
     cub->data->offset_y = y - MINIMAP_HEIGHT / 4;
 	int minimap_x = x - cub->data->offset_x + MINIMAP_X;
     int minimap_y = y - cub->data->offset_y + MINIMAP_Y;
@@ -116,7 +116,7 @@ int	draw_minimap(t_cub *cub, t_data *data, char **map)
 	int	final_x;
 	int	final_y;
 
-	int player_x = (int)(cub->player->x) * 50 / WIDTH;
+	int player_x = (int)(cub->player->x) * 50 / HEIGHT;
 	int player_y = (int)(cub->player->y)* 50 / HEIGHT;
 	(void)data;
 	if (!cub->add_minimap)
@@ -129,7 +129,7 @@ int	draw_minimap(t_cub *cub, t_data *data, char **map)
 	final_y = player_y + 6;
 	while (map[player_y] && player_y <= final_y)
 	{
-		player_x = (int)(cub->player->x) * 50 / WIDTH;
+		player_x = (int)(cub->player->x) * 50 / HEIGHT;
 		if (player_x < 3)
 		player_x = 0;
 		else

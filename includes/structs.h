@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/24 14:02:21 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 14:16:39 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ray
 	double			from_y;
 	double			wall_start;
 	double			wall_end;
+	double			wall_height;
 	unsigned int	color;
 	t_img			*column_img;
 	t_wall			*wall;

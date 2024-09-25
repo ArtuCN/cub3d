@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:14:11 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 17:13:47 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:13:42 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	find_player_pos(t_cub *cub, t_data *data)
 		{
 			if (data->map[y][x] == data->player_dir)
 			{
-				cub->player->x = (x + 0.5) * (WIDTH / 50);
+				cub->player->x = (x + 0.5) * (HEIGHT / 50);
 				cub->player->y = (y + 0.5) * (HEIGHT / 50);
+				printf("player x: %f player y: %f\n", cub->player->x, cub->player->y);
+				printf("reverted x: %d reverted y: %d\n", (int)(cub->player->x * 50 / HEIGHT), (int)(cub->player->y * 50 / HEIGHT));
 				return ;
 			}
 			x++;

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/20 14:41:07 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 12:39:07 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ void	free_wall(t_player *player)
 
 }
 
+void	free_img(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		mlx_destroy_image(cub->mlx, cub->wall_cub[i].img->img_ptr);
+		i++;
+	}
+}
 
 
 
@@ -64,4 +75,5 @@ void	free_cub(t_cub *cub)
 	free(cub->player->ray);
 	free(cub->player);
 	free(data);
+	//free_img(cub); MANDA IN SIGSEV
 }
