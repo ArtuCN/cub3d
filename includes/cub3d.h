@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 13:12:27 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/24 15:14:25 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	start_raycast(t_cub *cub, t_player *player);
 int		is_wall(long double x, long double y, t_cub *cub);
 void	drawing_rays(t_player *player, t_cub *cub);
 void	print_rays(t_player *player);
-int     is_same(t_ray *ray, int i);
+int     is_same(t_cub *cub, t_ray *ray, int i);
 void	adding_img(t_cub *cub, int i);
 void	add_wall_info(t_ray *ray, char **map, t_cub *cub);
 void	draw_all(t_cub *cub, t_player *player);

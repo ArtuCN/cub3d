@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:13:23 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:37:58 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,21 @@ int	same_dir(t_ray *old, t_ray *ray)
 	return (0);
 }
 
-int	is_same(t_ray *ray, int i)
+int	is_same(t_cub *cub, t_ray *ray, int i)
 {
 	int	j;
 	int	k;
-
+	int h;
+	int l;
+	
+	h = (ray[i - 1].y * 50 / HEIGHT);
+	l = (ray[i - 1].x * 50 / WIDTH);
 	j = (ray[i].y * 50 / HEIGHT);
 	k = (ray[i].x * 50 / HEIGHT);
 	if (i > 0)
 	{
-		if ((k == (int)ray[i - 1].wall->x && j == (int)ray[i - 1].wall->y) && same_dir(&ray[i - 1], &ray[i]))
+		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])
+			&& (cub->data->map[j][k] == cub->data->map[h][l]))
 			return (1);//uguali
 	}
 	return (0);//diversi

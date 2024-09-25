@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:16:15 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:40:25 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,11 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 	ray[i].wall_start = -ray[i].wall_height / 2 + (HEIGHT / 2);
 	ray[i].wall_end = ray[i].wall_height / 2 + (HEIGHT / 2);
 	// min();
-	if (is_same(ray, i))
+	if (is_same(cub, ray, i))
 		ray[i].wall = ray[i - 1].wall;
 	else
 	{
+		printf("x  = %d, y = %d\n", dda->posX * 50 / WIDTH, dda->posY * 50 /HEIGHT);
 		ray[i].wall = malloc(sizeof(t_wall));
 		ray[i].wall->distance = ray[i].distance;
 		add_direction(&ray[i], dda);
