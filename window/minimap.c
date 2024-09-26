@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:21:17 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/26 12:55:27 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	int	j;
 	
 	cub->data->offset_x = x - MINIMAP_HEIGHT / 4;
-    cub->data->offset_y = y - MINIMAP_HEIGHT / 4;
+    cub->data->offset_y = y - MINIMAP_WIDTH / 4;
 	int minimap_x = x - cub->data->offset_x + MINIMAP_X;
     int minimap_y = y - cub->data->offset_y + MINIMAP_Y;
 

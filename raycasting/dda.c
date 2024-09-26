@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:40:25 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:13:55 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ int		is_door(int x, int y, t_cub *cub)
 
 void	add_direction(t_ray *ray, t_dda *dda)
 {
-	if (dda->side == 0)
+	if ((dda->sideDistX == dda->sideDistY))
+	{
+		ray->wall->direction = 'A'; // Colpito un angolo
+	}
+	else if (dda->side == 0)
     {	
 		if (dda->rayDirX > 0)
 			ray->wall->direction = 'E';
@@ -41,8 +45,6 @@ void	add_direction(t_ray *ray, t_dda *dda)
     	else if (dda->rayDirY < 0)
         	ray->wall->direction = 'N';
 	}
-	else
-		ray->wall->direction = 'A';
 }
 
 void	add_position(t_wall *wall, int x, int y)
@@ -57,14 +59,8 @@ void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
 	dda->posY = (int)player->y;
 	dda->rayDirX = cos(temp_ang * PI / 180.0);
 	dda->rayDirY = sin(temp_ang * PI / 180.0);
-	// if (dda->rayDirX == 0)
-	// 	dda->deltaDistX = 1e30;
-	// else
-		dda->deltaDistX = fabs(1.0 / dda->rayDirX);
-	// if (dda->rayDirY == 0)
-	// 	dda->deltaDistY = 1e30;
-	// else
-		dda->deltaDistY = fabs(1.0 / dda->rayDirY);
+	dda->deltaDistX = fabs(1.0 / dda->rayDirX);
+	dda->deltaDistY = fabs(1.0 / dda->rayDirY);
 	dda->hit = 0;
 	dda->angle = temp_ang;
 	if (dda->rayDirX > 0)
@@ -92,11 +88,7 @@ void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
 void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 {
 	double corrected_distance;
-	// if (dda->sideDistX < dda->sideDistY)
-	// 	ray[i].distance = (dda->posX - cub->player->x + (1 - dda->stepX) / 2.0) / dda->rayDirX;
-	// else
-	// 	ray[i].distance = (dda->posY - cub->player->y + (1 - dda->stepY) / 2.0) / dda->rayDirY;
-
+	
 	if (dda->side == 0)
 		ray[i].distance = dda->sideDistX - dda->deltaDistX;
 	else
@@ -104,22 +96,17 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		
 	ray[i].angle = dda->angle;
 	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
-	ray[i].distance = fabs(corrected_distance);
+	ray[i].distance = fabs(corrected_distance) * 50 / HEIGHT;
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
-	// ray[i].wall_start = (HEIGHT / 2.0) - (HEIGHT / ray[i].distance);
-	// ray[i].wall_end = (HEIGHT / 2.0) + (HEIGHT / ray[i].distance);
-	// ray[i].wall_height = ray[i].wall_end - ray[i].wall_start;
-
 	ray[i].wall_height = HEIGHT / ray[i].distance;
 	ray[i].wall_start = -ray[i].wall_height / 2 + (HEIGHT / 2);
 	ray[i].wall_end = ray[i].wall_height / 2 + (HEIGHT / 2);
-	// min();
 	if (is_same(cub, ray, i))
 		ray[i].wall = ray[i - 1].wall;
 	else
 	{
-		printf("x  = %d, y = %d\n", dda->posX * 50 / WIDTH, dda->posY * 50 /HEIGHT);
+		
 		ray[i].wall = malloc(sizeof(t_wall));
 		ray[i].wall->distance = ray[i].distance;
 		add_direction(&ray[i], dda);
@@ -128,6 +115,7 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		if (is_door(dda->posX, dda->posY, cub))
 			ray[i].wall->door = 1;
 		get_w_h(&ray[i], cub);
+		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
 	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX;
@@ -181,11 +169,6 @@ void	start_dda(t_cub *cub, t_ray *ray)
 			}
 		}
 		init_ray(ray, dda, cub, i);
-		// printf("Ray %d - Distance: %Lf, Player X: %f, Player Y: %f, PosX: %d, PosY: %d\n",
-    //    i, ray[i].distance, cub->player->x, cub->player->y, dda->posX, dda->posY);
-		// printf("start wall %f end wall %f %d\n", ray[i].wall_start, ray[i].wall_end, i);
-		// printf("wall height %f ID %d\n", ray[i].wall_height, i);
-		// printf("distance %Lf id %d\n", ray[i].distance, i);
 		temp_ang += cub->player->increment;
 		if (temp_ang > 360)
 			temp_ang = temp_ang - 360;

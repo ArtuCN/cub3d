@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/25 17:33:59 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:46:33 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,37 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	int x;
 	int	y;
 	int dir;
-	
+	int start_cell;
+
+
 	dir = get_dir(ray->wall->direction, ray->wall->door);
 	if (dir == 'N' || dir == 'S')
-    x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
-else
-    x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
-
+	{
+		start_cell = (int)(ray->hit_x / (WIDTH / 50)) * (WIDTH / 50);
+		x = (ray->hit_x - start_cell) * ray->wall->width / (WIDTH / 50);
+	}
+	else
+	{
+		start_cell = (int)(ray->hit_y / (WIDTH / 50)) * (WIDTH / 50);
+		x = (ray->hit_y - start_cell) * ray->wall->width / (WIDTH / 50);
+	}
+    // x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
+    // x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
+	printf("WALL ID %d ray hit y %Lf ray hit x %Lf x %d start cell %d\n", ray->wall->id, ray->hit_y, ray->hit_x ,x, start_cell);
 	if (x < 0)
 		x = 0;
 	if (x >= ray->wall->width)
 		x = ray->wall->width - 1;
-	y = ((i - ray->wall_start) * ray->wall->height) / (ray->wall_end - ray->wall_start);
+	i -= ray->wall_start;
+	y = i * ray->wall->height / ray->wall_height;
 	if (y < 0)
 		y = 0;
 	if (y >= ray->wall->height)
 		y = ray->wall->height - 1;
+	// printf("WALL I %d\n", i);
+	// printf("WALL ID: %d DISTANCE: %Lf x: %d y: %d\n", ray->wall->id,ray->distance, x, y);
 	offset = (y * cub->wall_cub[dir].img->line_len + x * (cub->wall_cub[dir].img->bpp / 8));
 	color = *(unsigned int *)(cub->wall_cub[dir].img->addr + offset);
-	//printf("Ray: %d, wall_start: %d, wall_end: %d, i: %d, y: %d, tex_x: %d, tex_y: %d\n", 
-        //temp,  (int)cub->player->ray[temp].wall_start,  (int)cub->player->ray[temp].wall_end, i, y, x, y);
 	return (color);
 }
 
