@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 14:49:52 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/27 17:01:42 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		is_door(int x, int y, t_cub *cub)
 {
 	int i;
 	int j;
-	j = (y * 50 / HEIGHT);
-	i = (x * 50 / HEIGHT);
+	j = (y / 10);
+	i = (x / 10);
 	if (!cub->data->map[j])
 		return (0);
 	if (cub->data->map[j][i] == 'D')
@@ -50,8 +50,8 @@ void	add_direction(t_ray *ray, t_dda *dda)
 
 void	add_position(t_wall *wall, int x, int y)
 {
-	wall->x = x * 50 / HEIGHT;
-	wall->y = y * 50 / HEIGHT;
+	wall->x = x / 10;
+	wall->y = y / 10;
 }
 
 void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
@@ -97,7 +97,7 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		
 	ray[i].angle = dda->angle;
 	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
-	ray[i].distance = fabs(corrected_distance) * 50 / HEIGHT;
+	ray[i].distance = fabs(corrected_distance) / 10;
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
 	ray[i].wall_height = HEIGHT / ray[i].distance;
@@ -119,12 +119,29 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX;
+	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX / 10;
 	if (ray[i].hit_x < 0)
 		ray[i].hit_x = 0;
-	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY;
+	ray[i].hit_y = cub->player->y + ray->distance * dda->rayDirY / 10;
 	if (ray[i].hit_y > HEIGHT - 1)
 		ray[i].hit_y = HEIGHT - 1;
+}
+
+int	is_wall2(long double x, long double y, t_cub *cub)
+{
+	long double	j;
+	long double	i;
+
+	if (x < 0 || y < 0 || x > HEIGHT || y > HEIGHT)
+		return (1);
+	j = (y / 10);
+	i = (x / 10);
+	if (cub->data->map[(int)j][(int)i] == '1'
+		|| cub->data->map[(int)j][(int)i] == '\n'
+		|| !cub->data->map[(int)j][(int)i]
+		|| cub->data->map[(int)j][(int)i] == 'D')
+		return (1);
+	return (0);
 }
 
 void	start_dda(t_cub *cub, t_ray *ray)
@@ -150,7 +167,7 @@ void	start_dda(t_cub *cub, t_ray *ray)
 				dda->sideDistX += dda->deltaDistX;
 				dda->posX += dda->stepX;
 				dda->side = 0;
-				dda->hit = is_wall(dda->posX, dda->posY, cub);
+				dda->hit = is_wall2(dda->posX, dda->posY, cub);
 				{
 					ray[i].from_x = dda->posX;
 					ray[i].from_y = dda->posY;
@@ -161,7 +178,8 @@ void	start_dda(t_cub *cub, t_ray *ray)
 				dda->sideDistY += dda->deltaDistY;
 				dda->posY += dda->stepY;
 				dda->side = 1;
-				dda->hit = is_wall(dda->posX, dda->posY, cub);
+				// printf("posX %d posY %d\n", dda->posX, dda->posY);
+				dda->hit = is_wall2(dda->posX, dda->posY, cub);
 				if (dda->hit == 0)
 				{
 					ray[i].from_x = dda->posX;
