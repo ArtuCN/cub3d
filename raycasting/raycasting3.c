@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:37:58 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:20:10 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 	int l;
 	
 	h = (ray[i - 1].y * 50 / HEIGHT);
-	l = (ray[i - 1].x * 50 / WIDTH);
+	l = (ray[i - 1].x * 50 / HEIGHT);
 	j = (ray[i].y * 50 / HEIGHT);
 	k = (ray[i].x * 50 / HEIGHT);
 	if (i > 0)
