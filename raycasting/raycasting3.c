@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 17:37:58 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:45:38 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 	int l;
 	
 	h = (ray[i - 1].y * 50 / HEIGHT);
-	l = (ray[i - 1].x * 50 / WIDTH);
+	l = (ray[i - 1].x * 50 / HEIGHT);
 	j = (ray[i].y * 50 / HEIGHT);
 	k = (ray[i].x * 50 / HEIGHT);
 	if (i > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/26 14:13:55 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:49:52 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ int		is_door(int x, int y, t_cub *cub)
 	int j;
 	j = (y * 50 / HEIGHT);
 	i = (x * 50 / HEIGHT);
-	if (!cub->data->map[i])
+	if (!cub->data->map[j])
 		return (0);
-	if (cub->data->map[i][j] == 'D')
+	if (cub->data->map[j][i] == 'D')
 		return (1);
 	return (0);
 }
 
 void	add_direction(t_ray *ray, t_dda *dda)
 {
+	
 	if ((dda->sideDistX == dda->sideDistY))
 	{
 		ray->wall->direction = 'A'; // Colpito un angolo
@@ -109,11 +110,11 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		
 		ray[i].wall = malloc(sizeof(t_wall));
 		ray[i].wall->distance = ray[i].distance;
-		add_direction(&ray[i], dda);
-		add_position(ray[i].wall, dda->posX, dda->posY);
 		ray[i].wall->door = 0;
 		if (is_door(dda->posX, dda->posY, cub))
 			ray[i].wall->door = 1;
+		add_direction(&ray[i], dda);
+		add_position(ray[i].wall, dda->posX, dda->posY);
 		get_w_h(&ray[i], cub);
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;

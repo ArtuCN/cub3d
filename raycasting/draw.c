@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/26 14:46:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:45:50 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	}
     // x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
     // x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
-	printf("WALL ID %d ray hit y %Lf ray hit x %Lf x %d start cell %d\n", ray->wall->id, ray->hit_y, ray->hit_x ,x, start_cell);
+//	printf("WALL ID %d ray hit y %Lf ray hit x %Lf x %d start cell %d\n", ray->wall->id, ray->hit_y, ray->hit_x ,x, start_cell);
 	if (x < 0)
 		x = 0;
 	if (x >= ray->wall->width)
