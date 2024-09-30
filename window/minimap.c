@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 14:53:24 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 10:32:30 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
         i = minimap_x;
         while (i <= minimap_x + (HEIGHT / 50)) 
 		{
-        //    if ((i == (int)minimap_x) //|| (i % (int)((minimap_x)) == 0)
-          //      || (j == (int)minimap_y)) //|| (j % (int)((minimap_y)) == 0))
-              //  my_mlx_pixel_put(cub, i, j, 0x000000);
-            //else
+            if ((i == (int)minimap_x) //|| (i % (int)((minimap_x)) == 0)
+                || (j == (int)minimap_y)) //|| (j % (int)((minimap_y)) == 0))
+                my_mlx_pixel_put(cub, i, j, 0x000000);
+            else
                 my_mlx_pixel_put(cub, i, j, color);
             i++;
         }
@@ -92,7 +92,7 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	
 	cub->data->offset_x = x - MINIMAP_HEIGHT / 4;
     cub->data->offset_y = y - MINIMAP_HEIGHT / 4;
-	int minimap_x = x - cub->data->offset_x + MINIMAP_Y;
+	int minimap_x = x - cub->data->offset_x + MINIMAP_X;
     int minimap_y = y - cub->data->offset_y + MINIMAP_Y;
 
 	i = minimap_x - 1;

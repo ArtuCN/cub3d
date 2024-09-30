@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 12:13:08 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 10:50:26 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,6 @@ int	failing_img_addr(t_cub *cub)
 	free(cub->win);
 	free(cub->img);
 	return (printf("Error\nmlx_get_data_addr failed\n"), 0);
-}
-
-void	fill_black(t_cub *cub)
-{
-	int	y;
-	int	x;
-
-	x = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		while (x < WIDTH)
-		{
-			my_mlx_pixel_put(cub, x, y, BLACK);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
 }
 
 int	init_cube(t_cub *cub)

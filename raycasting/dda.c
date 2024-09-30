@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 14:49:52 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 10:40:19 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		is_door(int x, int y, t_cub *cub)
 	int j;
 	j = (y * 50 / HEIGHT);
 	i = (x * 50 / HEIGHT);
-	if (!cub->data->map[j])
+	if (!cub->data->map[j][i])
 		return (0);
 	if (cub->data->map[j][i] == 'D')
 		return (1);
@@ -107,8 +107,12 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall = ray[i - 1].wall;
 	else
 	{
-		
 		ray[i].wall = malloc(sizeof(t_wall));
+		if (!ray[i].wall)
+        {
+            printf("Error: malloc failed\n");
+            exit(EXIT_FAILURE);
+        }
 		ray[i].wall->distance = ray[i].distance;
 		ray[i].wall->door = 0;
 		if (is_door(dda->posX, dda->posY, cub))
@@ -119,12 +123,17 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX;
-	if (ray[i].hit_x < 0)
-		ray[i].hit_x = 0;
-	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY;
-	if (ray[i].hit_y > HEIGHT - 1)
-		ray[i].hit_y = HEIGHT - 1;
+    ray[i].hit_x = cub->player->x + ray[i].distance * dda->rayDirX * 50 / WIDTH;
+    if (ray[i].hit_x < 0)
+        ray[i].hit_x = 0;
+    if (ray[i].hit_x > HEIGHT - 1)
+        ray[i].hit_x = HEIGHT - 1;
+
+    ray[i].hit_y = cub->player->y + ray[i].distance * dda->rayDirY * 50 / HEIGHT;
+    if (ray[i].hit_y < 0)
+        ray[i].hit_y = 0;
+    if (ray[i].hit_y > HEIGHT - 1)
+        ray[i].hit_y = HEIGHT - 1;
 }
 
 void	start_dda(t_cub *cub, t_ray *ray)
