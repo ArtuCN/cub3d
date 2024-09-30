@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 14:49:52 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/27 16:50:38 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX;
+	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX * 50 / HEIGHT; 
 	if (ray[i].hit_x < 0)
 		ray[i].hit_x = 0;
-	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY;
+	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY * 50 / HEIGHT; 
 	if (ray[i].hit_y > HEIGHT - 1)
 		ray[i].hit_y = HEIGHT - 1;
 }

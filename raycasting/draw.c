@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/27 14:45:50 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/27 16:48:00 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	dir = get_dir(ray->wall->direction, ray->wall->door);
 	if (dir == 'N' || dir == 'S')
 	{
-		start_cell = (int)(ray->hit_x / (WIDTH / 50)) * (WIDTH / 50);
-		x = (ray->hit_x - start_cell) * ray->wall->width / (WIDTH / 50);
+		start_cell = (int)(ray->hit_x / (HEIGHT / 50)) * (HEIGHT / 50);
+		x = (ray->hit_x - start_cell) * ray->wall->width / (HEIGHT / 50);
 	}
 	else
 	{
-		start_cell = (int)(ray->hit_y / (WIDTH / 50)) * (WIDTH / 50);
-		x = (ray->hit_y - start_cell) * ray->wall->width / (WIDTH / 50);
+		start_cell = (int)(ray->hit_y / (HEIGHT / 50)) * (HEIGHT / 50);
+		x = (ray->hit_y - start_cell) * ray->wall->width / (HEIGHT / 50);
 	}
     // x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
     // x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
