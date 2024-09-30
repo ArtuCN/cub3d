@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/30 10:10:44 by adonato          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/27 17:01:36 by aconti           ###   ########.fr       */
+>>>>>>> f687a146a221bd50a66b0f59e3622d3496248fec
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +31,10 @@ int	same_dir(t_ray *old, t_ray *ray)
 	int h;
 	int i;
 
-	h = (old->from_x * 50 / HEIGHT);
-	i = (old->from_y * 50 / HEIGHT);
-	j = (ray->from_y * 50 / HEIGHT);
-	k = (ray->from_x * 50 / HEIGHT);	
+	h = (old->from_x / 10);
+	i = (old->from_y / 10);
+	j = (ray->from_y / 10);
+	k = (ray->from_x / 10);	
 	if (h  == k && i == j)
 		return (1);
 	return (0);
@@ -43,10 +47,10 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 	int h;
 	int l;
 	
-	h = (ray[i - 1].y * 50 / HEIGHT);
-	l = (ray[i - 1].x * 50 / HEIGHT);
-	j = (ray[i].y * 50 / HEIGHT);
-	k = (ray[i].x * 50 / HEIGHT);
+	h = (ray[i - 1].y / 10);
+	l = (ray[i - 1].x  / 10);
+	j = (ray[i].y / 10);
+	k = (ray[i].x / 10);
 	if (i > 0)
 	{
 		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])

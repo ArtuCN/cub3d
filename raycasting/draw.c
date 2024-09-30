@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/30 10:10:33 by adonato          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/27 16:48:50 by aconti           ###   ########.fr       */
+>>>>>>> f687a146a221bd50a66b0f59e3622d3496248fec
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +49,7 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	dir = get_dir(ray->wall->direction, ray->wall->door);
 	if (dir == 'N' || dir == 'S')
 	{
+<<<<<<< HEAD
 		start_cell = (int)(ray->hit_x / (HEIGHT / 50)) * (HEIGHT / 50);
 		x = (ray->hit_x - start_cell) * ray->wall->width / (HEIGHT / 50);
 	}
@@ -52,6 +57,15 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	{
 		start_cell = (int)(ray->hit_y / (HEIGHT / 50)) * (HEIGHT / 50);
 		x = (ray->hit_y - start_cell) * ray->wall->width / (HEIGHT / 50);
+=======
+		start_cell = (int)(ray->hit_x / 10) * 10;
+		x = (ray->hit_x - start_cell) * ray->wall->width / 10;
+	}
+	else
+	{
+		start_cell = (int)(ray->hit_y / 10) * 10;
+		x = (ray->hit_y - start_cell) * ray->wall->width / 10;
+>>>>>>> f687a146a221bd50a66b0f59e3622d3496248fec
 	}
     // x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
     // x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
