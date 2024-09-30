@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/30 12:01:20 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 12:49:23 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	is_wall(long double x, long double y, t_cub *cub)
 
 	if (x < 0 || y < 0 || x > HEIGHT || y > HEIGHT)
 		return (1);
-	j = (y * 50 / HEIGHT);
-	i = (x * 50 / HEIGHT);
+	j = (y);
+	i = (x);
 	if (cub->data->map[(int)j][(int)i] == '1'
 		|| cub->data->map[(int)j][(int)i] == '\n'
 		|| !cub->data->map[(int)j][(int)i]

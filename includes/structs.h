@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/26 13:40:14 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 12:43:55 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_wall
 	int		door;
 	int		x;
 	int		y;
+	int		first_pix_on_screen;
+	int		widht_pix_on_screen;
+	int		last_pix_on_screen;
 	double	wall_start;
 	double	wall_end;
 }		t_wall;
@@ -71,8 +74,8 @@ typedef struct s_ray
 typedef struct s_dda
 {
 	long double angle;
-	int		posX;
-	int		posY;
+	double		posX;
+	double		posY;
 	int		side;
 	double	rayDirX;
 	double	rayDirY;

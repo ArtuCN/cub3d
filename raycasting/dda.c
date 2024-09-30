@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 16:50:38 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 13:02:50 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		is_door(int x, int y, t_cub *cub)
 {
 	int i;
 	int j;
-	j = (y * 50 / HEIGHT);
-	i = (x * 50 / HEIGHT);
+	j = (y);
+	i = (x);
 	if (!cub->data->map[j])
 		return (0);
 	if (cub->data->map[j][i] == 'D')
@@ -50,14 +50,14 @@ void	add_direction(t_ray *ray, t_dda *dda)
 
 void	add_position(t_wall *wall, int x, int y)
 {
-	wall->x = x * 50 / HEIGHT;
-	wall->y = y * 50 / HEIGHT;
+	wall->x = x;
+	wall->y = y;
 }
 
 void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
 {
-	dda->posX = (int)player->x;
-	dda->posY = (int)player->y;
+	dda->posX = player->x;
+	dda->posY = player->y;
 	dda->rayDirX = cos(temp_ang * PI / 180.0);
 	dda->rayDirY = sin(temp_ang * PI / 180.0);
 	dda->deltaDistX = fabs(1.0 / dda->rayDirX);
@@ -97,7 +97,7 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		
 	ray[i].angle = dda->angle;
 	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
-	ray[i].distance = fabs(corrected_distance) * 50 / HEIGHT;
+	ray[i].distance = fabs(corrected_distance);
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
 	ray[i].wall_height = HEIGHT / ray[i].distance;
@@ -107,7 +107,6 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall = ray[i - 1].wall;
 	else
 	{
-		
 		ray[i].wall = malloc(sizeof(t_wall));
 		ray[i].wall->distance = ray[i].distance;
 		ray[i].wall->door = 0;
@@ -119,10 +118,10 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX * 50 / HEIGHT; 
+	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX; 
 	if (ray[i].hit_x < 0)
 		ray[i].hit_x = 0;
-	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY * 50 / HEIGHT; 
+	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY; 
 	if (ray[i].hit_y > HEIGHT - 1)
 		ray[i].hit_y = HEIGHT - 1;
 }
@@ -175,5 +174,6 @@ void	start_dda(t_cub *cub, t_ray *ray)
 			temp_ang = temp_ang - 360;
 	}
 	free(dda);
-	adding_pix_to_img(cub, ray);
+	wall_draw_info(cub, ray);
+	// adding_pix_to_img(cub, ray);
 }

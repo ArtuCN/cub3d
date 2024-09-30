@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/25 14:41:09 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 12:36:17 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # define EMPTY 0
 # define WIDTH 1500
 # define HEIGHT 1000
-#define MINIMAP_SCALE 0.25
-#define MINIMAP_WIDTH (WIDTH * MINIMAP_SCALE)
-#define MINIMAP_HEIGHT (HEIGHT * MINIMAP_SCALE)
-#define MINIMAP_X (0)
-#define MINIMAP_Y (0)
+# define MINIMAP_SCALE 0.25
+# define MINIMAP_WIDTH (WIDTH * MINIMAP_SCALE)
+# define MINIMAP_HEIGHT (HEIGHT * MINIMAP_SCALE)
+# define MINIMAP_X (0)
+# define MINIMAP_Y (0)
 # define FOV 60
 # define MAX_RENDER_DISTANCE 2.0
 

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/09/25 17:18:09 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 12:50:28 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	check_next_door(t_cub *cub)
 	long double	angle;
 
 	angle = cub->player->angle * PI / 180;
-	xd = (((cub->player->x + 20 * cos(angle)) * 50) / HEIGHT);
-	yd = (((cub->player->y + 20 * sin(angle)) * 50) / HEIGHT);
-	x = ((cub->player->x * 50) / HEIGHT);
-	y = ((cub->player->y * 50) / HEIGHT);
+	xd = (cub->player->x + 1 * cos(angle));
+	yd = (cub->player->y + 1 * sin(angle));
+	x = ((cub->player->x));
+	y = ((cub->player->y));
 	if (cub->data->map[yd][xd] == 'D')
 	{
 		cub->data->map[yd][xd] = 'O';
@@ -90,7 +90,7 @@ int	check_move(int keysym, t_cub *cub, char **map)
 	}
 	else
 		cub->pressed = 0;
-	if (map[(int)(y / (HEIGHT / 50))][(int)(x / (HEIGHT / 50))] == '1')
+	if (map[(int)(y)][(int)(x)] == '1')
 		return (0);
 	return (1);
 }

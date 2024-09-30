@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/27 16:48:00 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 12:58:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	get_dir(char dir, int door)
 	return (0);
 }
 
+// start x end = 0 c 64
+// x : end-start = c : 64
 unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 {
 	int	offset;
@@ -53,9 +55,6 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 		start_cell = (int)(ray->hit_y / (HEIGHT / 50)) * (HEIGHT / 50);
 		x = (ray->hit_y - start_cell) * ray->wall->width / (HEIGHT / 50);
 	}
-    // x = (int)((ray->hit_x - floor(ray->hit_x)) * ray->wall->width);
-    // x = (int)((ray->hit_y - floor(ray->hit_y)) * ray->wall->width);
-//	printf("WALL ID %d ray hit y %Lf ray hit x %Lf x %d start cell %d\n", ray->wall->id, ray->hit_y, ray->hit_x ,x, start_cell);
 	if (x < 0)
 		x = 0;
 	if (x >= ray->wall->width)
@@ -66,8 +65,6 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 		y = 0;
 	if (y >= ray->wall->height)
 		y = ray->wall->height - 1;
-	// printf("WALL I %d\n", i);
-	// printf("WALL ID: %d DISTANCE: %Lf x: %d y: %d\n", ray->wall->id,ray->distance, x, y);
 	offset = (y * cub->wall_cub[dir].img->line_len + x * (cub->wall_cub[dir].img->bpp / 8));
 	color = *(unsigned int *)(cub->wall_cub[dir].img->addr + offset);
 	return (color);
@@ -124,4 +121,35 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 		}
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+}
+
+void	wall_draw_info(t_cub *cub, t_ray *ray)
+{
+	int	width_screen;
+	int start_wall;
+	int end_wall;
+	width_screen = -1;
+	start_wall = 0;
+	end_wall = 1;
+	while (++width_screen < WIDTH)
+	{
+		if (!is_same(cub, ray, width_screen))
+		{
+			if (cub->num_walls != 1 && width_screen == 0)
+				continue;
+			if (end_wall >= WIDTH)
+				end_wall = WIDTH - 1;
+			ray[width_screen].wall->first_pix_on_screen = start_wall;
+			ray[width_screen].wall->last_pix_on_screen = end_wall;
+			ray[width_screen].wall->widht_pix_on_screen = end_wall - start_wall;
+			printf("TROVATO start_wall = %d\n", start_wall);
+			printf("TROVATO end_wall = %d\n", end_wall);
+			printf("DIR = %c\n", ray[width_screen].wall->direction);
+			start_wall = end_wall + 1;
+		}
+		printf("hit_x = %Lf\n", ray[width_screen].hit_x);
+		printf("hit_y = %Lf\n", ray[width_screen].hit_y);
+		end_wall++;
+	}
+	adding_pix_to_img(cub, ray);
 }
