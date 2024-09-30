@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/24 14:35:51 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 12:03:37 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 		}
 		// if (ray[temp].wall->direction == 'A')
 		// {
-		 	color = BLACK;
+		 	color = RED;
 		 	while (i < HEIGHT && i < ray[temp].wall_end)
 		 	{
 		 		offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
