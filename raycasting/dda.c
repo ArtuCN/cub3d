@@ -20,15 +20,13 @@ int		is_door(int x, int y, t_cub *cub)
 {
 	int i;
 	int j;
-<<<<<<< HEAD
+
 	j = (y * 50 / HEIGHT);
 	i = (x * 50 / HEIGHT);
 	if (!cub->data->map[j][i])
-=======
 	j = (y / 10);
 	i = (x / 10);
 	if (!cub->data->map[j])
->>>>>>> f687a146a221bd50a66b0f59e3622d3496248fec
 		return (0);
 	if (cub->data->map[j][i] == 'D')
 		return (1);
