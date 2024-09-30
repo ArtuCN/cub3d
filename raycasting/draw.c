@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/30 12:58:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:24:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	get_dir(char dir, int door)
 	return (0);
 }
 
-// start x end = 0 c 64
+// x : 0.5 = c 64
 // x : end-start = c : 64
+
+
 unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 {
 	int	offset;
@@ -41,20 +43,19 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	int x;
 	int	y;
 	int dir;
-	int start_cell;
 
 
 	dir = get_dir(ray->wall->direction, ray->wall->door);
 	if (dir == 'N' || dir == 'S')
 	{
-		start_cell = (int)(ray->hit_x / (HEIGHT / 50)) * (HEIGHT / 50);
-		x = (ray->hit_x - start_cell) * ray->wall->width / (HEIGHT / 50);
+		x = (ray->hit_x - (int)ray->hit_x) * 64;
 	}
 	else
 	{
-		start_cell = (int)(ray->hit_y / (HEIGHT / 50)) * (HEIGHT / 50);
-		x = (ray->hit_y - start_cell) * ray->wall->width / (HEIGHT / 50);
+		x = (ray->hit_y - (int)ray->hit_y) * 64;
 	}
+	// x = map(x, 0, 64, 0, cub->wall_cub[dir].width);
+	// x = cub->wall_cub[dir].width - x;
 	if (x < 0)
 		x = 0;
 	if (x >= ray->wall->width)
@@ -147,9 +148,14 @@ void	wall_draw_info(t_cub *cub, t_ray *ray)
 			printf("DIR = %c\n", ray[width_screen].wall->direction);
 			start_wall = end_wall + 1;
 		}
-		printf("hit_x = %Lf\n", ray[width_screen].hit_x);
-		printf("hit_y = %Lf\n", ray[width_screen].hit_y);
+		if (ray[width_screen].wall->direction == 'N' || ray[width_screen].wall->direction == 'S')
+			printf("hit_x = %Lf\n", ray[width_screen].hit_x);
+		else
+			printf("hit_y = %Lf\n", ray[width_screen].hit_y);
+		printf("CHAR = %c y = %Lf x = %Lf\n", cub->data->map[(int)ray[width_screen].y][(int)ray[width_screen].x], ray[width_screen].y, ray[width_screen].x);
 		end_wall++;
 	}
+	printf("TROVATO start_wall = %d\n", start_wall);
+	printf("TROVATO end_wall = %d\n", end_wall);
 	adding_pix_to_img(cub, ray);
 }

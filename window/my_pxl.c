@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_pxl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:01:55 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/19 10:36:22 by adonato          ###   ########.fr       */
+/*   Updated: 2024/09/30 17:43:33 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	put_player(t_cub *cub, int x, int y, unsigned int color)
 	int	end_x;
 	int	end_y;
 
-	start_x = x - 2;
-	start_y = y - 2;
-	end_x = x + 2;
-	end_y = y + 2;
+	start_x = x * 50 / HEIGHT - 2;
+	start_y = y * 50 / HEIGHT- 2;
+	end_x = x * 50 / HEIGHT + 2;
+	end_y = y * 50 / HEIGHT + 2;
 	if (!cub->add_minimap)
 		return (0);
 	if (start_x < 0)

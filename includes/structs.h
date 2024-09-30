@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/30 12:43:55 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 15:30:33 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_wall_cub
 
 typedef struct s_ray
 {
-	double			x;
-	double			y;
+	long double			x;
+	long double			y;
 	long double			hit_x;
 	long double			hit_y;
 	int				start_width;

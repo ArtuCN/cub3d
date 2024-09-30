@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/30 13:02:50 by aconti           ###   ########.fr       */
+/*   Updated: 2024/09/30 17:12:24 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].distance = dda->sideDistX - dda->deltaDistX;
 	else
 		ray[i].distance = dda->sideDistY - dda->deltaDistY;
-		
 	ray[i].angle = dda->angle;
 	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
 	ray[i].distance = fabs(corrected_distance);
@@ -118,12 +117,8 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = cub->player->x + ray->distance * dda->rayDirX; 
-	if (ray[i].hit_x < 0)
-		ray[i].hit_x = 0;
-	ray[i].hit_y = cub->player->x + ray->distance * dda->rayDirY; 
-	if (ray[i].hit_y > HEIGHT - 1)
-		ray[i].hit_y = HEIGHT - 1;
+	ray[i].hit_x = (dda->posX + ray->distance * dda->rayDirX);
+	ray[i].hit_y = (dda->posY + ray->distance * dda->rayDirY);
 }
 
 void	start_dda(t_cub *cub, t_ray *ray)
@@ -150,6 +145,7 @@ void	start_dda(t_cub *cub, t_ray *ray)
 				dda->posX += dda->stepX;
 				dda->side = 0;
 				dda->hit = is_wall(dda->posX, dda->posY, cub);
+				if (dda->hit == 0)
 				{
 					ray[i].from_x = dda->posX;
 					ray[i].from_y = dda->posY;
