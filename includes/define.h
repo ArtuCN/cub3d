@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 15:18:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:36:45 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@
 # define SYM_W 119
 # define SYM_M 109
 # define SYM_E 101
-
+# define SYM_UP 65362
+# define SYM_DOWN 65364
+# define SYM_LEFT 65361
+# define SYM_RIGHT 65363
 # define DOOR 0
 # define WALL_N 1
 # define WALL_S 2
