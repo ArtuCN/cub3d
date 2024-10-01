@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/30 12:48:25 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:28:05 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	same_dir(t_ray *old, t_ray *ray)
 	int h;
 	int i;
 
-	h = (old->from_x);
-	i = (old->from_y);
-	j = (ray->from_y);
-	k = (ray->from_x);	
+	h = (old->from_x) / TXT_SIZE;
+	i = (old->from_y) / TXT_SIZE;
+	j = (ray->from_y) / TXT_SIZE;
+	k = (ray->from_x) / TXT_SIZE;	
 	if (h  == k && i == j)
 		return (1);
 	return (0);
@@ -43,10 +43,10 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 	int h;
 	int l;
 	
-	h = (ray[i - 1].y);
-	l = (ray[i - 1].x);
-	j = (ray[i].y);
-	k = (ray[i].x);
+	h = (ray[i - 1].y) / TXT_SIZE;
+	l = (ray[i - 1].x) / TXT_SIZE;
+	j = (ray[i].y) / TXT_SIZE;
+	k = (ray[i].x) / TXT_SIZE;
 	if (i > 0)
 	{
 		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])

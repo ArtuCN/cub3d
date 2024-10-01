@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/01 12:33:24 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:47:45 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	}
 	else
 		x = (ray->hit_y - floor(ray->hit_y)) * ray->wall->width;
-	{
-	}
-	// x = map(x, 0, 64, 0, cub->wall_cub[dir].width);
-	// x = cub->wall_cub[dir].width - x;
 	if (x < 0)
 		x = 0;
 	if (x >= ray->wall->width)
@@ -126,38 +122,36 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 
 void	wall_draw_info(t_cub *cub, t_ray *ray)
 {
-	int	width_screen;
-	int start_wall;
-	int end_wall;
-	width_screen = -1;
-	start_wall = 0;
-	end_wall = 1;
-	while (++width_screen < WIDTH)
-	{
-		if (!is_same(cub, ray, width_screen))
-		{
-			if (cub->num_walls != 1 && width_screen == 0)
-				continue;
-			if (end_wall >= WIDTH)
-				end_wall = WIDTH - 1;
-			ray[width_screen].wall->first_pix_on_screen = start_wall;
-			ray[width_screen].wall->last_pix_on_screen = end_wall;
-			ray[width_screen].wall->widht_pix_on_screen = end_wall - start_wall;
-			printf("TROVATO start_wall = %d\n", start_wall);
-			printf("TROVATO end_wall = %d\n", end_wall);
-			printf("DIR = %c\n", ray[width_screen].wall->direction);
-			start_wall = end_wall + 1;
-		}
-		// ray[width_screen].x -= 0.5;
-		// ray[width_screen].y -= 0.5;
-		if (ray[width_screen].wall->direction == 'N' || ray[width_screen].wall->direction == 'S')
-			printf("hit_x = %Lf\n", ray[width_screen].hit_x);
-		else
-			printf("hit_y = %Lf\n", ray[width_screen].hit_y);
-		printf("CHAR = %c y = %Lf x = %Lf\n", cub->data->map[(int)ray[width_screen].y][(int)ray[width_screen].x], ray[width_screen].y, ray[width_screen].x);
-		end_wall++;
-	}
-	printf("TROVATO start_wall = %d\n", start_wall);
-	printf("TROVATO end_wall = %d\n", end_wall);
+	// int	width_screen;
+	// int start_wall;
+	// int end_wall;
+	// width_screen = -1;
+	// start_wall = 0;
+	// end_wall = 1;
+	// while (++width_screen < WIDTH)
+	// {
+	// 	if (!is_same(cub, ray, width_screen))
+	// 	{
+	// 		if (cub->num_walls != 1 && width_screen == 0)
+	// 			continue;
+	// 		if (end_wall >= WIDTH)
+	// 			end_wall = WIDTH - 1;
+	// 		ray[width_screen].wall->first_pix_on_screen = start_wall;
+	// 		ray[width_screen].wall->last_pix_on_screen = end_wall;
+	// 		ray[width_screen].wall->widht_pix_on_screen = end_wall - start_wall;
+	// 		printf("TROVATO start_wall = %d\n", start_wall);
+	// 		printf("TROVATO end_wall = %d\n", end_wall);
+	// 		printf("DIR = %c\n", ray[width_screen].wall->direction);
+	// 		start_wall = end_wall + 1;
+	// 	}
+	// 	if (ray[width_screen].wall->direction == 'N' || ray[width_screen].wall->direction == 'S')
+	// 		printf("hit_x = %Lf\n", ray[width_screen].hit_x);
+	// 	else
+	// 		printf("hit_y = %Lf\n", ray[width_screen].hit_y);
+	// 	printf("CHAR = %c y = %Lf x = %Lf\n", cub->data->map[(int)ray[width_screen].y][(int)ray[width_screen].x], ray[width_screen].y, ray[width_screen].x);
+	// 	end_wall++;
+	// }
+	// printf("TROVATO start_wall = %d\n", start_wall);
+	// printf("TROVATO end_wall = %d\n", end_wall);
 	adding_pix_to_img(cub, ray);
 }

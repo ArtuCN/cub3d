@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 13:02:36 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:37:16 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		is_door(int x, int y, t_cub *cub)
 {
 	int i;
 	int j;
-	j = (y);
-	i = (x);
+	j = (y / TXT_SIZE);
+	i = (x / TXT_SIZE);
 	if (!cub->data->map[j])
 		return (0);
 	if (cub->data->map[j][i] == 'D')
@@ -46,12 +46,13 @@ void	add_direction(t_ray *ray, t_dda *dda)
     	else if (dda->rayDirY < 0)
         	ray->wall->direction = 'N';
 	}
+	printf("DIR = %c\n", ray->wall->direction);
 }
 
 void	add_position(t_wall *wall, int x, int y)
 {
-	wall->x = x;
-	wall->y = y;
+	wall->x = x / TXT_SIZE;
+	wall->y = y / TXT_SIZE;
 }
 
 void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
@@ -105,11 +106,7 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 	ray[i].angle = dda->angle;
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
-	ray[i].hit_x = ((dda->posX) + ray->distance * dda->rayDirX);
-	ray[i].hit_y = ((dda->posY) + ray->distance * dda->rayDirY);
-	printf("hit_x = %Lf  posX %f distance %Lf rayDirX %f\n", ray[i].hit_x, dda->posX, ray[i].distance, dda->rayDirX);
-	printf("hit_y = %Lf  posY %f distance %Lf rayDirY %f\n", ray[i].hit_y, dda->posY, ray[i].distance, dda->rayDirY);
-	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
+	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0)) / TXT_SIZE;
 	ray[i].distance = fabs(corrected_distance);
 	ray[i].wall_height = HEIGHT / ray[i].distance;
 	ray[i].wall_start = -ray[i].wall_height / 2 + (HEIGHT / 2);
@@ -128,7 +125,10 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		get_w_h(&ray[i], cub);
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
+		printf("NUMERO DI PARETI = %d\n", cub->num_walls);
 	}
+	ray[i].hit_x = ((dda->posX) + ray->distance * dda->rayDirX) / TXT_SIZE;
+	ray[i].hit_y = ((dda->posY) + ray->distance * dda->rayDirY) / TXT_SIZE;
 	// ray[i].hit_y = map2(ray[i].hit_y, ray[i].y, ray[i].y + 0.5, ray[i].y - 0.5, ray[i].y + 0.5);
 	// ray[i].hit_x = map2(ray[i].hit_x, ray[i].x, ray[i].x + 0.5, ray[i].x - 0.5, ray[i].x + 0.5);
 }

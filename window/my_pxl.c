@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:01:55 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/30 17:43:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:25:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, unsigned int color)
 		mlx_pixel_put(cub->mlx, cub->win, x, y, color);
 }
 
-// void	my_mlx_pixel_put_minimap(t_cub *cub, int x, int y, unsigned int color)
-// {
-
-//     char    *dst;
-// 	if (!cub || !cub->data || !cub->data->img_map || !cub->data->img_map->addr) {
-//         printf("Errore: Immagine o dati non validi.\n");
-//         return;
-//     }
-// 	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-// 	{
-// 		printf("SONO ENTRATO\n");
-// 		dst = cub->data->img_map->addr + (y * cub->data->img_map->line_len + x * (cub->data->img_map->bpp / 8));
-// 		*(unsigned int*)dst = color;
-// 	}
-// }
-
 int	put_player(t_cub *cub, int x, int y, unsigned int color)
 {
 	int	start_x;
@@ -41,10 +25,10 @@ int	put_player(t_cub *cub, int x, int y, unsigned int color)
 	int	end_x;
 	int	end_y;
 
-	start_x = x * 50 / HEIGHT - 2;
-	start_y = y * 50 / HEIGHT- 2;
-	end_x = x * 50 / HEIGHT + 2;
-	end_y = y * 50 / HEIGHT + 2;
+	start_x = x - 2;
+	start_y = y - 2;
+	end_x = x + 2;
+	end_y = y + 2;
 	if (!cub->add_minimap)
 		return (0);
 	if (start_x < 0)

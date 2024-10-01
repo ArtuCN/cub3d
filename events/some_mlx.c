@@ -6,13 +6,11 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/26 13:44:51 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:42:01 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-
 
 void	adding_minimap(int keysym, t_cub *cub)
 {
@@ -40,13 +38,13 @@ int	key_handler(int keysym, t_cub *cub)
 			cub->player->angle += 360;
 		else if (keysym == SYM_W && check_move(keysym, cub, cub->data->map))
 		{
-			cub->player->x += 1.5 * cos(cub->player->angle * PI / 180);
-			cub->player->y += 1.5 * sin(cub->player->angle * PI / 180);
+			cub->player->x += 20 * cos(cub->player->angle * PI / 180);
+			cub->player->y += 20 * sin(cub->player->angle * PI / 180);
 		}
 		else if (keysym == SYM_S && check_move(keysym, cub, cub->data->map))
 		{
-			cub->player->x -= 1.5 * cos(cub->player->angle * PI / 180);
-			cub->player->y -= 1.5 * sin(cub->player->angle * PI / 180);
+			cub->player->x -= 20 * cos(cub->player->angle * PI / 180);
+			cub->player->y -= 20 * sin(cub->player->angle * PI / 180);
 		}
 		cub->pressed = 0;
 	}
