@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 15:20:46 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:46:45 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_wall(long double x, long double y, t_cub *cub)
 	long double	j;
 	long double	i;
 
-	if (x < 0 || y < 0 || x > HEIGHT || y > HEIGHT)
+	if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
 		return (1);
 	j = (y / TXT_SIZE);
 	i = (x / TXT_SIZE);
