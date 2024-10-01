@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 15:37:16 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:10:30 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	add_direction(t_ray *ray, t_dda *dda)
 		ray->wall->direction = 'A'; // Colpito un angolo
 	}
 	else if (dda->side == 0)
-    {	
+	{	
 		if (dda->rayDirX > 0)
 			ray->wall->direction = 'E';
-    	else if(dda->rayDirX < 0)
+		else if (dda->rayDirX < 0)
 			ray->wall->direction = 'W';
 	} 
 	else if (dda->side == 1)
 	{
-    	if (dda->rayDirY > 0)
-        	ray->wall->direction = 'S';
-    	else if (dda->rayDirY < 0)
-        	ray->wall->direction = 'N';
+		if (dda->rayDirY > 0)
+			ray->wall->direction = 'S';
+		else if (dda->rayDirY < 0)
+			ray->wall->direction = 'N';
 	}
 	printf("DIR = %c\n", ray->wall->direction);
 }

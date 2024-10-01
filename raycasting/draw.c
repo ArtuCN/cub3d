@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/01 15:47:45 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:12:37 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 
 
 	dir = get_dir(ray->wall->direction, ray->wall->door);
-	if (dir == 'N' || dir == 'S')
+	if (ray->wall->direction == 'N' || ray->wall->direction ==  'S')
 	{
 		x = (ray->hit_x - floor(ray->hit_x)) * ray->wall->width;
 	}
@@ -148,7 +148,6 @@ void	wall_draw_info(t_cub *cub, t_ray *ray)
 	// 		printf("hit_x = %Lf\n", ray[width_screen].hit_x);
 	// 	else
 	// 		printf("hit_y = %Lf\n", ray[width_screen].hit_y);
-	// 	printf("CHAR = %c y = %Lf x = %Lf\n", cub->data->map[(int)ray[width_screen].y][(int)ray[width_screen].x], ray[width_screen].y, ray[width_screen].x);
 	// 	end_wall++;
 	// }
 	// printf("TROVATO start_wall = %d\n", start_wall);
