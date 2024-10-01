@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/09/30 18:24:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:33:24 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	dir = get_dir(ray->wall->direction, ray->wall->door);
 	if (dir == 'N' || dir == 'S')
 	{
-		x = (ray->hit_x - (int)ray->hit_x) * 64;
+		x = (ray->hit_x - floor(ray->hit_x)) * ray->wall->width;
 	}
 	else
+		x = (ray->hit_y - floor(ray->hit_y)) * ray->wall->width;
 	{
-		x = (ray->hit_y - (int)ray->hit_y) * 64;
 	}
 	// x = map(x, 0, 64, 0, cub->wall_cub[dir].width);
 	// x = cub->wall_cub[dir].width - x;
@@ -148,6 +148,8 @@ void	wall_draw_info(t_cub *cub, t_ray *ray)
 			printf("DIR = %c\n", ray[width_screen].wall->direction);
 			start_wall = end_wall + 1;
 		}
+		// ray[width_screen].x -= 0.5;
+		// ray[width_screen].y -= 0.5;
 		if (ray[width_screen].wall->direction == 'N' || ray[width_screen].wall->direction == 'S')
 			printf("hit_x = %Lf\n", ray[width_screen].hit_x);
 		else

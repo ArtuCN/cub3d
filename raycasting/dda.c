@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/30 17:12:24 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:02:36 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
 	}
 }
 
+
+double map2(double x, double in_min, double in_max, double out_min, double out_max)
+{
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+
 void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 {
 	double corrected_distance;
@@ -95,10 +103,14 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 	else
 		ray[i].distance = dda->sideDistY - dda->deltaDistY;
 	ray[i].angle = dda->angle;
-	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
-	ray[i].distance = fabs(corrected_distance);
 	ray[i].x = dda->posX;
 	ray[i].y = dda->posY;
+	ray[i].hit_x = ((dda->posX) + ray->distance * dda->rayDirX);
+	ray[i].hit_y = ((dda->posY) + ray->distance * dda->rayDirY);
+	printf("hit_x = %Lf  posX %f distance %Lf rayDirX %f\n", ray[i].hit_x, dda->posX, ray[i].distance, dda->rayDirX);
+	printf("hit_y = %Lf  posY %f distance %Lf rayDirY %f\n", ray[i].hit_y, dda->posY, ray[i].distance, dda->rayDirY);
+	corrected_distance = ray[i].distance * cos((ray[i].angle - cub->player->angle) * (PI / 180.0));
+	ray[i].distance = fabs(corrected_distance);
 	ray[i].wall_height = HEIGHT / ray[i].distance;
 	ray[i].wall_start = -ray[i].wall_height / 2 + (HEIGHT / 2);
 	ray[i].wall_end = ray[i].wall_height / 2 + (HEIGHT / 2);
@@ -117,8 +129,8 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
 	}
-	ray[i].hit_x = (dda->posX + ray->distance * dda->rayDirX);
-	ray[i].hit_y = (dda->posY + ray->distance * dda->rayDirY);
+	// ray[i].hit_y = map2(ray[i].hit_y, ray[i].y, ray[i].y + 0.5, ray[i].y - 0.5, ray[i].y + 0.5);
+	// ray[i].hit_x = map2(ray[i].hit_x, ray[i].x, ray[i].x + 0.5, ray[i].x - 0.5, ray[i].x + 0.5);
 }
 
 void	start_dda(t_cub *cub, t_ray *ray)
