@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:25:14 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/10 15:59:44 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:30:25 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	init_data(t_data *data)
 		return (0);
 	add_ceiling(data);
 	add_floor(data);
-	printf("ceiling %d\n", data->color_ceiling);
-	printf("floor %d\n", data->color_floor);
 	data->max_x = 0;
 	data->max_y = 0;
 	data_max(data);

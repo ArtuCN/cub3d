@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/11 17:48:03 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/01 16:31:16 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,6 @@ int	check_cor(char *line)
 	return (0);
 }
 
-void	print_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		printf("%s\n", matrix[i]);
-		i++;
-	}
-}
-
 void	copy_map(char **matrix, int g, t_data *data)
 {
 	char	**map;
@@ -49,7 +37,6 @@ void	copy_map(char **matrix, int g, t_data *data)
 
 	i = 0;
 	len = 0;
-	print_matrix(matrix);
 	while (matrix[g + len])
 		len++;
 	map = malloc(sizeof(char *) * (len + 1));

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/24 12:13:08 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:30:01 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	init_cube(t_cub *cub)
 		return (failing_img_addr(cub));
 	player_init(cub);
 	adding_wall(cub);
-	// start_raycast(cub, cub->player);
 	start_dda(cub, cub->player->ray);
 	calling_mlx(cub);
 	return (1);

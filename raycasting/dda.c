@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:34:12 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 16:10:30 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:29:47 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ int		is_door(int x, int y, t_cub *cub)
 void	add_direction(t_ray *ray, t_dda *dda)
 {
 	
-	if ((dda->sideDistX == dda->sideDistY))
-	{
-		ray->wall->direction = 'A'; // Colpito un angolo
-	}
-	else if (dda->side == 0)
+	if (dda->side == 0)
 	{	
 		if (dda->rayDirX > 0)
 			ray->wall->direction = 'E';
@@ -46,7 +42,6 @@ void	add_direction(t_ray *ray, t_dda *dda)
 		else if (dda->rayDirY < 0)
 			ray->wall->direction = 'N';
 	}
-	printf("DIR = %c\n", ray->wall->direction);
 }
 
 void	add_position(t_wall *wall, int x, int y)
@@ -88,12 +83,6 @@ void	init_dda(t_dda *dda, t_player *player, long double temp_ang)
 }
 
 
-double map2(double x, double in_min, double in_max, double out_min, double out_max)
-{
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
-
 
 void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 {
@@ -125,12 +114,10 @@ void	init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i)
 		get_w_h(&ray[i], cub);
 		ray[i].wall->id = cub->num_walls;
 		cub->num_walls++;
-		printf("NUMERO DI PARETI = %d\n", cub->num_walls);
 	}
 	ray[i].hit_x = ((dda->posX) + ray->distance * dda->rayDirX) / TXT_SIZE;
 	ray[i].hit_y = ((dda->posY) + ray->distance * dda->rayDirY) / TXT_SIZE;
-	// ray[i].hit_y = map2(ray[i].hit_y, ray[i].y, ray[i].y + 0.5, ray[i].y - 0.5, ray[i].y + 0.5);
-	// ray[i].hit_x = map2(ray[i].hit_x, ray[i].x, ray[i].x + 0.5, ray[i].x - 0.5, ray[i].x + 0.5);
+
 }
 
 void	start_dda(t_cub *cub, t_ray *ray)
@@ -182,6 +169,5 @@ void	start_dda(t_cub *cub, t_ray *ray)
 			temp_ang = temp_ang - 360;
 	}
 	free(dda);
-	wall_draw_info(cub, ray);
-	// adding_pix_to_img(cub, ray);
+	adding_pix_to_img(cub, ray);
 }
