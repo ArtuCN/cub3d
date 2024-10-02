@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/02 14:58:48 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:00:43 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	adding_sprite(t_cub *cub, int i)
 		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_6.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 7)
 		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_7.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	printf("i = %d\n", i);
 }
 
 void	adding_wall(t_cub *cub)
 {
 	int i;
 
+	cub->show_sword = 0;
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
 	i = -1;
 	while (++i < 5)
@@ -71,7 +71,6 @@ void	adding_wall(t_cub *cub)
 	cub->sword = malloc(sizeof(t_sword) * 8);
 	while (++i < 8)
 	{
-		printf("i = %d\n", i);
 		adding_sprite(cub, i);
 		img_info(cub->sword[i].img);
 	}

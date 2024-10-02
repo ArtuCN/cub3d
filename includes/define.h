@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/02 14:46:19 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:18:43 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define DARK_GREEN 0x274E13
 # define TRANSPARENT_COLOR 0xFF000000 
 
-
 # define PI 3.14159265358979323846
+# define SYM_SPACE 32
 # define SYM_A 97
 # define SYM_D 100
 # define SYM_S 115

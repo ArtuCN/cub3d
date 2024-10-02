@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 17:58:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:06:56 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <stdio.h>
 # include <X11/X.h>
 # include "structs.h"
+# include <sys/time.h>
 
-//sprites
-void	render_sprite(t_cub *cub);
+//sword
+void	drawing_sword(t_cub *cub);
+unsigned int get_sprite_pixel_color(t_sword *sword, int x, int y);
 
 
 //window

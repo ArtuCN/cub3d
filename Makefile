@@ -19,7 +19,7 @@ EVENTS = events/close.c events/some_mlx.c events/moves.c
 WINDOW = window/my_pxl.c window/init_win.c window/minimap.c window/player_init.c window/init_cub.c
 PARSING = parsing/init_data.c parsing/check_continue.c parsing/other_init.c parsing/parsing_map.c parsing/map_checks.c parsing/check_matrix.c
 MAIN = main.c
-RAYCASTING = raycasting/dda.c raycasting/raycasting.c raycasting/draw.c raycasting/raycasting2.c raycasting/raycasting3.c raycasting/draw2.c
+RAYCASTING = raycasting/sword.c raycasting/dda.c raycasting/raycasting.c raycasting/draw.c raycasting/raycasting2.c raycasting/raycasting3.c raycasting/draw2.c
 GET_NEXT_LINE = includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c
 LIBFT_DIR = includes/libft
 

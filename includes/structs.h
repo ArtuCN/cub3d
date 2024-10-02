@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/01 17:38:44 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:00:23 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ typedef struct s_player
 
 typedef struct s_sword
 {
-	int		x;
-	int		y;
 	int		width;
 	int		height;
 	t_img	*img;
@@ -112,6 +110,7 @@ typedef struct s_sword
 
 typedef struct s_cub
 {
+	int			show_sword;
 	char		*name;
 	void		*mlx;
 	void		*win;

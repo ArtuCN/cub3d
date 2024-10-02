@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/02 15:03:35 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:13:08 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	key_handler(int keysym, t_cub *cub)
 			cub->player->angle += 360;
 		else if ((keysym == SYM_W || keysym == SYM_UP)&& check_move(keysym, cub, cub->data->map))
 		{
-			cub->player->x += 20 * cos(cub->player->angle * PI / 180);
-			cub->player->y += 20 * sin(cub->player->angle * PI / 180);
+			cub->player->x += 10 * cos(cub->player->angle * PI / 180);
+			cub->player->y += 10 * sin(cub->player->angle * PI / 180);
 		}
 		else if ((keysym == SYM_S || keysym == SYM_DOWN) && check_move(keysym, cub, cub->data->map))
 		{
-			cub->player->x -= 20 * cos(cub->player->angle * PI / 180);
-			cub->player->y -= 20 * sin(cub->player->angle * PI / 180);
+			cub->player->x -= 10 * cos(cub->player->angle * PI / 180);
+			cub->player->y -= 10 * sin(cub->player->angle * PI / 180);
 		}
 		cub->pressed = 0;
 	}
@@ -63,8 +63,19 @@ int key_press(int keysym, t_cub *cub)
 	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W || keysym == SYM_S
 		|| keysym == SYM_UP || keysym == SYM_DOWN || keysym == SYM_LEFT || keysym == SYM_RIGHT)
 		cub->pressed = 1;
-	// if (keysym == SYM_Q)
-	// 	render_sprite(cub);
+	if (keysym == SYM_Q)
+	{
+		if (cub->show_sword)
+			cub->show_sword = 0;
+		else
+			cub->show_sword = 1;
+		
+	}
+	if (keysym == SYM_SPACE)
+	{
+		if (cub->show_sword)
+			cub->show_sword = 3;
+	}
 	return (0);
 }
 
@@ -77,9 +88,26 @@ int key_release(int keysym, t_cub *cub)
 
 void	calling_mlx(t_cub *cub)
 {
+	struct timeval	current_time;
+	static struct timeval	last_update_time;
+	long elapsed_time;
+
+	gettimeofday(&last_update_time, NULL);
 	mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_release, cub);   
-	mlx_key_hook (cub->win, key_handler, cub);
+	mlx_key_hook(cub->win, key_handler, cub);
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
+	mlx_clear_window(cub->mlx, cub->win);
+	gettimeofday(&current_time, NULL);
+	elapsed_time = (current_time.tv_sec - last_update_time.tv_sec) * 1000;
+	elapsed_time += (current_time.tv_usec - last_update_time.tv_usec) / 1000;
+	printf("Elapsed time: %ld\n", elapsed_time);
+	if (elapsed_time > 100)
+	{
+		printf("Elapsed time: %ld\n", elapsed_time);
+		drawing_sword(cub);
+	}
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
 	mlx_loop(cub->mlx);
 }
+
