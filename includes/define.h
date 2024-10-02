@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 18:02:43 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 14:46:19 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define BLACK 0x000000
 # define VIOLET 0xFF00FF
 # define DARK_GREEN 0x274E13
+# define TRANSPARENT_COLOR 0xFF000000 
+
 
 # define PI 3.14159265358979323846
 # define SYM_A 97
@@ -52,4 +54,7 @@
 # define WALL_S 2
 # define WALL_W 3
 # define WALL_E 4
+
+# define SPRITE_Y 30
+# define SPRITE_X 20
 #endif

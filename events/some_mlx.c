@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 18:02:26 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/02 15:03:35 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int key_press(int keysym, t_cub *cub)
 	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W || keysym == SYM_S
 		|| keysym == SYM_UP || keysym == SYM_DOWN || keysym == SYM_LEFT || keysym == SYM_RIGHT)
 		cub->pressed = 1;
-	if (keysym == SYM_Q)
-		render_sprite(cub);
+	// if (keysym == SYM_Q)
+	// 	render_sprite(cub);
 	return (0);
 }
 
