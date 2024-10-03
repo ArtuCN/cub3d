@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 18:06:20 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:42:44 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
 	int	j;
 	int player_minimap_x = cub->player->x;
     int player_minimap_y = cub->player->y;
-    int offset_x = player_minimap_x - MINIMAP_HEIGHT / 4;
+    int offset_x = player_minimap_x - MINIMAP_WIDTH / 4;
     int offset_y = player_minimap_y - MINIMAP_HEIGHT / 4;
 	int minimap_x = x * TXT_SIZE - offset_x + MINIMAP_X;
     int minimap_y = y * TXT_SIZE - offset_y + MINIMAP_Y;
@@ -31,7 +31,7 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
 		{
             if ((i == (int)minimap_x) //|| (i % (int)((minimap_x)) == 0)
                 || (j == (int)minimap_y)) //|| (j % (int)((minimap_y)) == 0))
-                my_mlx_pixel_put(cub, i, j, 0x000000);
+                my_mlx_pixel_put(cub, i, j, BLACK);
             else
                 my_mlx_pixel_put(cub, i, j, color);
             i++;
@@ -68,8 +68,8 @@ void	draw_rays_minimap(t_cub *cub, int x, int y)
 	while (temp_ang <= cub->player->angle + 30)
 	{
 		i = -1;
-		minimap_x = x - cub->data->offset_x + MINIMAP_X;
-		minimap_y = y - cub->data->offset_y + MINIMAP_Y;
+		minimap_x = x - cub->data->offset_x + MINIMAP_X / 4;
+		minimap_y = y - cub->data->offset_y + MINIMAP_Y / 4;
 		while (++i <= 10)
 		{
 			minimap_x += 5 * cos(temp_ang * PI / 180);
@@ -90,10 +90,10 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	int	i;
 	int	j;
 	
-	cub->data->offset_x = x - MINIMAP_HEIGHT / 4;
+	cub->data->offset_x = x - MINIMAP_WIDTH / 4;
     cub->data->offset_y = y - MINIMAP_HEIGHT / 4;
-	int minimap_x = x - cub->data->offset_x + MINIMAP_Y;
-    int minimap_y = y - cub->data->offset_y + MINIMAP_X;
+	int minimap_x = x - cub->data->offset_x + MINIMAP_X;
+    int minimap_y = y - cub->data->offset_y + MINIMAP_Y;
 
 	i = minimap_x - 1;
 	while (i <= minimap_x + 2)
