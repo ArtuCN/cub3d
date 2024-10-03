@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/03 16:56:23 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:04:31 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,14 @@ int main_loop(t_cub *cub)
 {
 
 		mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
-   		cub->pressed = 1;
+   		cub->pressed = 0;
 		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 		mlx_clear_window(cub->mlx, cub->win);
 		free_wall(cub->player);
 		cub->num_walls = 0;
 		start_dda(cub, cub->player->ray);
 		draw_minimap(cub, cub->data,cub->data->map);
-		cub->pressed = 0;
+		cub->pressed = 1;
     return (0);
 }
 

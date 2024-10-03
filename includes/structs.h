@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/03 16:55:16 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:11:22 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct s_sword
 
 typedef struct s_cub
 {
+	int			x_mouse;
+	int			y_mouse;	
 	int			show_sword;
 	char		*name;
 	void		*mlx;
@@ -126,8 +128,6 @@ typedef struct s_cub
 	t_dda		*dda;
 	int			pressed;
 	int			num_walls;
-	int			x_mouse;
-	int			y_mouse;
 }				t_cub;
 
 typedef struct s_data

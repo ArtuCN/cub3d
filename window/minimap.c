@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 16:46:45 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/03 18:06:20 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	draw_square(t_cub *cub, int x, int y, unsigned int color)
     int player_minimap_y = cub->player->y;
     int offset_x = player_minimap_x - MINIMAP_HEIGHT / 4;
     int offset_y = player_minimap_y - MINIMAP_HEIGHT / 4;
-	int minimap_x = x * TXT_SIZE - offset_x + MINIMAP_Y;
+	int minimap_x = x * TXT_SIZE - offset_x + MINIMAP_X;
     int minimap_y = y * TXT_SIZE - offset_y + MINIMAP_Y;
 	
     j = minimap_y;
@@ -68,7 +68,7 @@ void	draw_rays_minimap(t_cub *cub, int x, int y)
 	while (temp_ang <= cub->player->angle + 30)
 	{
 		i = -1;
-		minimap_x = x - cub->data->offset_x + MINIMAP_Y;
+		minimap_x = x - cub->data->offset_x + MINIMAP_X;
 		minimap_y = y - cub->data->offset_y + MINIMAP_Y;
 		while (++i <= 10)
 		{
@@ -93,7 +93,7 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	cub->data->offset_x = x - MINIMAP_HEIGHT / 4;
     cub->data->offset_y = y - MINIMAP_HEIGHT / 4;
 	int minimap_x = x - cub->data->offset_x + MINIMAP_Y;
-    int minimap_y = y - cub->data->offset_y + MINIMAP_Y;
+    int minimap_y = y - cub->data->offset_y + MINIMAP_X;
 
 	i = minimap_x - 1;
 	while (i <= minimap_x + 2)
