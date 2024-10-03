@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/02 16:00:23 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:55:16 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ typedef struct s_cub
 	t_dda		*dda;
 	int			pressed;
 	int			num_walls;
+	int			x_mouse;
+	int			y_mouse;
 }				t_cub;
 
 typedef struct s_data

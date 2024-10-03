@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/01 16:36:13 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:56:23 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,63 @@ int	check_move(int keysym, t_cub *cub, char **map)
 		return (0);
 	return (1);
 }
+
+void rotate_pov(t_cub *cub, int x, int y)
+{
+    static int prev_x = -1;
+    static int prev_y = -1;
+    int delta_x;
+    long double angle_change;
+	
+	 {
+		if (prev_x == -1 && prev_y == -1) 
+		{
+   	    	prev_x = x;
+   	   		prev_y = y;
+        	return;
+  		}
+    	delta_x = x - prev_x;
+   		angle_change = delta_x * 0.25; 
+    	cub->player->angle += angle_change;
+    	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
+    	prev_x = WIDTH / 2;
+    	prev_y = HEIGHT / 2;
+	}
+}
+
+int main_loop(t_cub *cub)
+{
+
+		mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
+   		cub->pressed = 1;
+		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
+		mlx_clear_window(cub->mlx, cub->win);
+		free_wall(cub->player);
+		cub->num_walls = 0;
+		start_dda(cub, cub->player->ray);
+		draw_minimap(cub, cub->data,cub->data->map);
+		cub->pressed = 0;
+    return (0);
+}
+
+// int	mouse_rotate_pov(t_cubed *cubed)
+// {
+// 	t_player	*p;
+// 	int			x;
+// 	double		rotation;
+
+// 	p = cubed->player;
+// 	x = cubed->game->mouse_x;
+// 	rotation = (x - (WIDTH / 2)) * SENSITIVITY * 0.001;
+// 	p->angle += rotation;
+// 	if (p->angle > 2 * PI)
+// 		p->angle -= 2 * PI;
+// 	if (p->angle < 0)
+// 		p->angle += 2 * PI;
+// 	p->d_x = cos(p->angle);
+// 	p->d_y = sin(p->angle);
+// 	if (x != WIDTH / 2)
+// 		mlx_mouse_move(cubed->mlx, cubed->win, WIDTH / 2, HEIGHT / 2);
+// 	return (1);
+// }
+

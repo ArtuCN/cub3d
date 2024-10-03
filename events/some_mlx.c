@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artucn <artucn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 12:48:51 by artucn           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:57:12 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	key_handler(int keysym, t_cub *cub)
 			cub->player->x -= 10 * cos(cub->player->angle * PI / 180);
 			cub->player->y -= 10 * sin(cub->player->angle * PI / 180);
 		}
+		mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
+		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 		cub->pressed = 0;
 	}
 	adding_minimap(keysym, cub);
@@ -114,9 +116,10 @@ void	calling_mlx(t_cub *cub)
 {
 	mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_release, cub);   
-	mlx_key_hook(cub->win, key_handler, cub);
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
 	mlx_loop_hook(cub->mlx, uptade_animation, (void *)cub);
+	mlx_key_hook(cub->win, key_handler, cub);
+	mlx_loop_hook(cub->mlx, main_loop, cub);
 	mlx_loop(cub->mlx);
 }
 
