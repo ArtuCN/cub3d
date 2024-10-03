@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 18:46:43 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/03 19:15:35 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int draw_square(t_cub *cub, int x, int y, unsigned int color)
     int j;
     int player_minimap_x = cub->player->x * SCALE_FACTOR;
     int player_minimap_y = cub->player->y * SCALE_FACTOR;
-    int offset_x = player_minimap_x - (MINIMAP_WIDTH * SCALE_FACTOR) / 4;
-    int offset_y = player_minimap_y - (MINIMAP_HEIGHT * SCALE_FACTOR) / 4;
+    int offset_x = player_minimap_x - (MINIMAP_WIDTH * SCALE_FACTOR) / 2;
+    int offset_y = player_minimap_y - (MINIMAP_HEIGHT * SCALE_FACTOR) / 2;
     int minimap_x = x * (TXT_SIZE * SCALE_FACTOR) - offset_x + MINIMAP_X;
     int minimap_y = y * (TXT_SIZE * SCALE_FACTOR) - offset_y + MINIMAP_Y;
 
@@ -91,8 +91,8 @@ void draw_player(t_cub *cub, int x, int y, unsigned int color)
     int i;
     int j;
 
-    cub->data->offset_x = x * SCALE_FACTOR - (MINIMAP_WIDTH * SCALE_FACTOR) / 4;
-    cub->data->offset_y = y * SCALE_FACTOR - (MINIMAP_HEIGHT * SCALE_FACTOR) / 4;
+    cub->data->offset_x = x * SCALE_FACTOR - (MINIMAP_WIDTH * SCALE_FACTOR) / 2;
+    cub->data->offset_y = y * SCALE_FACTOR - (MINIMAP_HEIGHT * SCALE_FACTOR) / 2;
     int minimap_x = x * SCALE_FACTOR - cub->data->offset_x + MINIMAP_X;
     int minimap_y = y * SCALE_FACTOR - cub->data->offset_y + MINIMAP_Y;
 
