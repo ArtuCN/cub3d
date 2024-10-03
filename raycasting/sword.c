@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sword.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: artucn <artucn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:13:04 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/02 17:03:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/03 12:48:14 by artucn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	drawing_sword(t_cub *cub)
 		i++;
 	}
 	current_frame++;
-	if (current_frame >= 6)
+	if (current_frame >= 3)
 		current_frame = 1;
+	mlx_clear_window(cub->mlx, cub->win);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
 }
