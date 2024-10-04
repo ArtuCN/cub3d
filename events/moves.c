@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/04 14:34:36 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 16:44:12 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	check_next_door(t_cub *cub)
 	long double	angle;
 
 	angle = cub->player->angle * PI / 180;
-	xd = (cub->player->x + 20 * cos(angle)) / TXT_SIZE;
-	yd = (cub->player->y + 20 * sin(angle)) / TXT_SIZE;
+	xd = (cub->player->x + 70 * cos(angle)) / TXT_SIZE;
+	yd = (cub->player->y + 70 * sin(angle)) / TXT_SIZE;
 	x = ((cub->player->x)) / TXT_SIZE;
 	y = ((cub->player->y)) / TXT_SIZE;
 	if (cub->data->map[yd][xd] == 'D')
@@ -157,6 +157,8 @@ int	update_animation(t_cub *cub)
 int main_loop(t_cub *cub)
 {
 	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
+	if (cub->pause == 1)
+		return (0);
 	cub->pressed = 0;
 	rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 	mlx_clear_window(cub->mlx, cub->win);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:28:06 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:31:22 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define SYM_W 119
 # define SYM_M 109
 # define SYM_E 101
+# define SYM_P 112
 # define SYM_UP 65362
 # define SYM_DOWN 65364
 # define SYM_LEFT 65361
@@ -54,6 +55,7 @@
 # define WALL_S 2
 # define WALL_W 3
 # define WALL_E 4
+# define ESC 65307
 
 # define SPRITE_Y 20
 # define SPRITE_X 10

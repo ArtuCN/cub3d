@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 19:15:35 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 15:21:37 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,26 @@ int is_wall(long double x, long double y, t_cub *cub)
     return (0);
 }
 
+int is_wall_minimap(long double x, long double y, t_cub *cub)
+{
+    long double j;
+    long double i;
+
+    x /= SCALE_FACTOR;
+    y /= SCALE_FACTOR;
+    
+    if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+        return (1);
+    j = (y / TXT_SIZE);
+    i = (x / TXT_SIZE);
+    if (cub->data->map[(int)j][(int)i] == '1'
+        || cub->data->map[(int)j][(int)i] == '\n'
+        || !cub->data->map[(int)j][(int)i]
+        || cub->data->map[(int)j][(int)i] == 'D')
+        return (1);
+    return (0);
+}
+
 void draw_rays_minimap(t_cub *cub, int x, int y)
 {
     int i;
@@ -77,7 +97,7 @@ void draw_rays_minimap(t_cub *cub, int x, int y)
             minimap_y += 5 * sin(temp_ang * PI / 180);
             if ((int)minimap_x < 0 || (int)minimap_y < 0 || (int)minimap_x >= MINIMAP_WIDTH
                 || (int)minimap_y >= MINIMAP_HEIGHT 
-                || is_wall(minimap_x + cub->data->offset_x, minimap_y + cub->data->offset_y, cub))
+                || is_wall_minimap(minimap_x + cub->data->offset_x, minimap_y + cub->data->offset_y, cub))
                 break;
             else
                 my_mlx_pixel_put(cub, minimap_x, minimap_y, RED);

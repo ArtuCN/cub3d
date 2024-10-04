@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:27:20 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:28:21 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	adding_wall(t_cub *cub)
 
 	cub->show_sword = 0;
 	cub->change = 0;
+	cub->pause = 0;
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
 	i = -1;
 	while (++i < 5)
