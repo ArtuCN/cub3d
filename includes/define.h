@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 17:06:20 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 14:28:06 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@
 # define WALL_W 3
 # define WALL_E 4
 
-# define SPRITE_Y 30
-# define SPRITE_X 20
+# define SPRITE_Y 20
+# define SPRITE_X 10
 #endif

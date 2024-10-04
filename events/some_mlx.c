@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 18:04:17 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 14:23:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ int key_press(int keysym, t_cub *cub)
 			cub->show_sword = 1;
 		
 	}
-	if (keysym == SYM_SPACE)
-	{
-		if (cub->show_sword)
-			cub->show_sword = 3;
-	}
 	return (0);
 }
 
@@ -88,28 +83,7 @@ int key_release(int keysym, t_cub *cub)
 	return (0);
 }
 
-int	uptade_animation(void *param)
-{
-	t_cub *cub;
-	
-	cub = (t_cub *)param;
-	struct timeval	current_time;
-	static struct timeval	last_update_time;
-	long elapsed_time;
 
-	gettimeofday(&current_time, NULL);
-	
-	// Calcola il tempo trascorso dall'ultimo aggiornamento
-	elapsed_time = (current_time.tv_sec - last_update_time.tv_sec) * 1000;
-	elapsed_time += (current_time.tv_usec - last_update_time.tv_usec) / 1000;	
-	if ((cub->show_sword == 1) && (elapsed_time > 500))
-	{
-		mlx_clear_window(cub->mlx, cub->win);
-		start_dda(cub, cub->player->ray);
-		usleep(1000000);
-	}
-	return (0);
-}
 
 
 void	calling_mlx(t_cub *cub)
@@ -117,7 +91,6 @@ void	calling_mlx(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_release, cub);   
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
-	mlx_loop_hook(cub->mlx, uptade_animation, (void *)cub);
 	mlx_key_hook(cub->win, key_handler, cub);
 	mlx_loop_hook(cub->mlx, main_loop, cub);
 	mlx_loop(cub->mlx);

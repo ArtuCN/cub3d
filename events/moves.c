@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/03 18:04:31 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 14:34:36 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,54 @@ void rotate_pov(t_cub *cub, int x, int y)
 	}
 }
 
+long get_time_difference_ms(struct timeval *start, struct timeval *end)
+{
+    long seconds = end->tv_sec - start->tv_sec;
+    long microseconds = end->tv_usec - start->tv_usec;
+    if (microseconds < 0)
+    {
+        seconds -= 1;
+        microseconds += 1000000;
+    }
+    return (seconds * 1000) + (microseconds / 1000);
+}
+
+
+int	update_animation(t_cub *cub)
+{
+	
+	static int first = 0;
+	struct timeval	last_update_time;
+	long time;
+	if (first == 0)
+	{
+		gettimeofday(&cub->current_time, NULL);
+		first = 1;
+	}
+	gettimeofday(&last_update_time, NULL);
+	time = get_time_difference_ms(&cub->current_time, &last_update_time);
+	if ((cub->show_sword == 1) && (time > 1000))
+	{
+		cub->current_time = last_update_time;
+		cub->change = 1;
+		return (1);
+	}
+	cub->change = 0;
+	return (0);
+}
+
 int main_loop(t_cub *cub)
 {
-
-		mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
-   		cub->pressed = 0;
-		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
-		mlx_clear_window(cub->mlx, cub->win);
-		free_wall(cub->player);
-		cub->num_walls = 0;
-		start_dda(cub, cub->player->ray);
-		draw_minimap(cub, cub->data,cub->data->map);
-		cub->pressed = 1;
+	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
+	cub->pressed = 0;
+	rotate_pov(cub, cub->x_mouse, cub->y_mouse);
+	mlx_clear_window(cub->mlx, cub->win);
+	free_wall(cub->player);
+	cub->num_walls = 0;
+	start_dda(cub, cub->player->ray);
+	draw_minimap(cub, cub->data,cub->data->map);
+	update_animation(cub);
+	cub->pressed = 1;
     return (0);
 }
 

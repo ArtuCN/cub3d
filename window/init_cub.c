@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/02 16:00:43 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:27:20 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,29 @@ void	adding_sprite(t_cub *cub, int i)
 	if (i == 0)
 		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_0.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 1)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_1.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_01.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 2)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_2.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_02.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 3)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_3.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_03.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 4)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_4.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_04.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 5)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_5.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_05.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 6)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_6.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_06.xpm", &cub->sword[i].width, &cub->sword[i].height);
 	else if (i == 7)
-		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_7.xpm", &cub->sword[i].width, &cub->sword[i].height);
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_07.xpm", &cub->sword[i].width, &cub->sword[i].height);
+	else if (i == 8)
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_08.xpm", &cub->sword[i].width, &cub->sword[i].height);
+	else if (i == 9)
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_09.xpm", &cub->sword[i].width, &cub->sword[i].height);
+	else if (i == 10)
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_10.xpm", &cub->sword[i].width, &cub->sword[i].height);
+	else if (i == 11)
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_11.xpm", &cub->sword[i].width, &cub->sword[i].height);
+	else if (i == 12)
+		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_12.xpm", &cub->sword[i].width, &cub->sword[i].height);
 }
 
 void	adding_wall(t_cub *cub)
@@ -60,6 +70,7 @@ void	adding_wall(t_cub *cub)
 	int i;
 
 	cub->show_sword = 0;
+	cub->change = 0;
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
 	i = -1;
 	while (++i < 5)
@@ -68,8 +79,8 @@ void	adding_wall(t_cub *cub)
 		img_info(cub->wall_cub[i].img);
 	}
 	i = -1;
-	cub->sword = malloc(sizeof(t_sword) * 8);
-	while (++i < 8)
+	cub->sword = malloc(sizeof(t_sword) * 12);
+	while (++i < 12)
 	{
 		adding_sprite(cub, i);
 		img_info(cub->sword[i].img);

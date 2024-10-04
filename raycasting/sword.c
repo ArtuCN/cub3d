@@ -3,60 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sword.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artucn <artucn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:13:04 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 12:48:14 by artucn           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:30:12 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	sword_hit(t_cub *cub, int sprite)
-{
-	int x;
-	int y;
-	int i;
-	int j;
-	int offset;
-	unsigned int color;
-
-	// Posizione in basso a destra
-	int start_x = WIDTH - (cub->sword->width * SPRITE_X);  // Moltiplica la larghezza per 5
-	int start_y = HEIGHT - (cub->sword->height * SPRITE_Y); // Moltiplica l'altezza per 5
-	if (sprite == 7)
-	{
-		cub->show_sword = 1;
-		return ;
-	}
-	while (i < cub->sword->height)
-	{
-		j = 0;
-		while (j < cub->sword->width)
-		{
-			color = get_sprite_pixel_color(&cub->sword[sprite], j, i);		
-			x = start_x + (j * SPRITE_X);
-			y = start_y + (i * SPRITE_Y);
-
-			if (color != TRANSPARENT_COLOR)
-			{
-				for (int dy = 0; dy < SPRITE_Y; dy++)
-				{
-					for (int dx = 0; dx < SPRITE_X; dx++)
-					{
-						offset = ((y + dy) * cub->img->line_len + (x + dx) * (cub->img->bpp / 8));
-						*(unsigned int *)(cub->img->addr + offset) = color;
-					}
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
-	usleep(10);
-	sword_hit(cub, sprite++);	
-}
 
 unsigned int get_sprite_pixel_color(t_sword *sword, int x, int y)
 {
@@ -86,14 +40,12 @@ void	drawing_sword(t_cub *cub)
 	unsigned int color;
 
 	// Posizione in basso a destra
-		int start_x = WIDTH - (cub->sword->width * SPRITE_X);  // Moltiplica la larghezza per 5
-		int start_y = HEIGHT - (cub->sword->height * SPRITE_Y); // Moltiplica l'altezza per 5
-	if (!cub->show_sword)
-	{
-		mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+	int start_x = WIDTH - (cub->sword->width * SPRITE_X);
+	int start_y = HEIGHT - (cub->sword->height * SPRITE_Y);
+	if (!cub->show_sword || cub->change == 0)
 		return ;
-	}
 	i = 0;
+	cub->change = 0;
 	while (i < cub->sword->height)
 	{
 		j = 0;
@@ -119,8 +71,7 @@ void	drawing_sword(t_cub *cub)
 		i++;
 	}
 	current_frame++;
-	if (current_frame >= 3)
-		current_frame = 1;
-	mlx_clear_window(cub->mlx, cub->win);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+	if (current_frame > 11)
+		current_frame = 0;
+	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
 }
