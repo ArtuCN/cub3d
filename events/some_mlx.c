@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 17:12:02 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:17:44 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	key_handler(int keysym, t_cub *cub)
 	if (cub->pause)
 		return(key_handler_pause(keysym, cub));
 	if (keysym == SYM_P)
-	{
 		cub->pause = 1;
-	}	
 	if (keysym == SYM_E)
 		check_next_door(cub);
 	if (cub->pressed)
@@ -65,8 +63,6 @@ int	key_handler(int keysym, t_cub *cub)
 		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 		cub->pressed = 0;
 	}
-	if (keysym == SYM_E)
-		check_next_door(cub);
 	if (cub->pressed)
 	{	
 		if (keysym == SYM_D || keysym == SYM_RIGHT)
