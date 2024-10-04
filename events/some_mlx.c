@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 16:46:22 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:57:12 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	key_handler(int keysym, t_cub *cub)
 		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 		cub->pressed = 0;
 	}
-	if (keysym == SYM_E)
-		check_next_door(cub);
 	if (cub->pressed)
 	{	
 		if (keysym == SYM_D || keysym == SYM_RIGHT)
@@ -136,15 +134,12 @@ int key_release(int keysym, t_cub *cub)
 
 void	calling_mlx(t_cub *cub)
 {
+	mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_release, cub);   
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
-	if (cub->pause == 0)
-	{
-		mlx_key_hook(cub->win, key_handler, cub);
-		mlx_mouse_hide(cub->mlx, cub->win);
-		mlx_loop_hook(cub->mlx, main_loop, cub);
-		mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
-	}
+	mlx_key_hook(cub->win, key_handler, cub);
+	mlx_mouse_hide(cub->mlx, cub->win);
+	mlx_loop_hook(cub->mlx, main_loop, cub);
 	mlx_loop(cub->mlx);
 }
 

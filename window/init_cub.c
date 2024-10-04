@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 16:46:48 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:32:28 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,9 @@ void	adding_wall(t_cub *cub)
 		adding_hit(cub, i);
 		img_info(cub->hit[i].img);
 	}
+	cub->pause_img = malloc(sizeof(t_sword));
+        cub->pause_img->img = mlx_xpm_file_to_image(cub->mlx, "textures/pause.xpm",
+                &cub->pause_img->width, &cub->pause_img->height);
+        img_info(cub->pause_img->img);
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/03 16:57:46 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:33:39 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,5 @@ void	get_w_h(t_ray *ray, t_cub *cub);
 //dda
 void	start_dda(t_cub *cub, t_ray *ray);
 void	wall_draw_info(t_cub *cub, t_ray *ray);
-
+void	draw_pause(t_cub *cub);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/04 16:54:52 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 19:13:09 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,47 +118,42 @@ void rotate_pov(t_cub *cub, int x, int y)
 	}
 }
 
-long get_time_difference_ms(struct timeval *start, struct timeval *end)
+
+
+int update_animation(t_cub *cub)
 {
-    long seconds = end->tv_sec - start->tv_sec;
-    long microseconds = end->tv_usec - start->tv_usec;
-    if (microseconds < 0)
+    static int first = 0;
+    struct timeval last_update_time;
+    long time_diff;
+
+    if (first == 0)
     {
-        seconds -= 1;
-        microseconds += 1000000;
+        gettimeofday(&cub->current_time, NULL);
+        first = 1;
     }
-    return (seconds * 1000) + (microseconds / 1000);
+
+    gettimeofday(&last_update_time, NULL);
+
+    time_diff = (last_update_time.tv_sec - cub->current_time.tv_sec) * 1000;
+	time_diff += (last_update_time.tv_usec - cub->current_time.tv_usec) / 1000;
+    if ((cub->show_sword == 1) && (time_diff > 200))
+    {
+        cub->current_time = last_update_time;
+        cub->change = 1;
+        return (1);
+    }
+    if ((cub->show_sword == 2) && (time_diff > 50))
+    {
+        cub->current_time = last_update_time;
+        cub->change = 1;
+        return (1);
+    }
+
+    cub->change = 0;
+    return (0);
 }
 
 
-int	update_animation(t_cub *cub)
-{
-	
-	static int first = 0;
-	struct timeval	last_update_time;
-	long time;
-	if (first == 0)
-	{
-		gettimeofday(&cub->current_time, NULL);
-		first = 1;
-	}
-	gettimeofday(&last_update_time, NULL);
-	time = get_time_difference_ms(&cub->current_time, &last_update_time);
-	if ((cub->show_sword == 2) && (time > 50))
-	{
-		cub->current_time = last_update_time;
-		cub->change = 1;
-		return (1);
-	}
-	if ((cub->show_sword == 1) && (time > 250))
-	{
-		cub->current_time = last_update_time;
-		cub->change = 1;
-		return (1);
-	}
-	cub->change = 0;
-	return (0);
-}
 
 int main_loop(t_cub *cub)
 {
@@ -166,7 +161,10 @@ int main_loop(t_cub *cub)
 	static int t_mouse_y = 0;
 	
 	if (cub->pause == 1)
+	{
+		draw_pause(cub);
 		return (0);
+	}
 	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
 	if(update_animation(cub) || cub->x_mouse != t_mouse_x || cub->y_mouse != t_mouse_y)
 	{

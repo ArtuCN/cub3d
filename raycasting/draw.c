@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 15:47:03 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 17:57:37 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,38 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 	return (color);
 }
 
+void    draw_pause(t_cub *cub)
+{
+        int i;
+        int j;
+        int offset;
+        unsigned int color;
+        int text_width;
+        int text_height;
+        int start_x;
+        int start_y;
 
+        if (cub->pause == 0)
+                return ;
+        text_width = cub->pause_img->width * 9;  // Tripled the size again
+        text_height = cub->pause_img->height * 9;  // Tripled the size again
+        start_x = (WIDTH - text_width) / 2;
+        start_y = (HEIGHT - text_height) / 2;
+
+        for (i = 0; i < text_height; i++)
+        {
+                for (j = 0; j < text_width; j++)
+                {
+                        offset = ((start_y + i) * cub->img->line_len + (start_x + j) * (cub->img->bpp / 8));
+                        color = get_sprite_pixel_color(cub->pause_img, j / 9, i / 9);  // Adjusted for new size
+                        if ((color & 0xFF000000) == 0x00000000)  // Check if the pixel is not transparent
+                        {
+                                *(unsigned int *)(cub->img->addr + offset) = color;
+                        }
+                }
+        }
+        mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+}
 
 
 
@@ -77,7 +108,6 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 	unsigned int color;
 	
 	temp = -1;
-	drawing_sword(cub);
 	while (++temp < WIDTH)
 	{
 		i = 0;
