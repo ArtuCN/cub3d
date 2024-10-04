@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 17:31:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 19:17:31 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ typedef struct s_cub
 {
 	int			pause;
 	int			x_mouse;
-	int			y_mouse;	
+	int			y_mouse;
+	int			t_mouse_y;
+	int			t_mouse_x;
 	int			show_sword;
 	char		*name;
 	void		*mlx;

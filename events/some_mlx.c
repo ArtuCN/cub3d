@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 17:57:12 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 19:18:38 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,10 @@ void	calling_mlx(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, key_release, cub);   
 	mlx_hook(cub->win, 17, 1L << 2, close_window, cub);
-	mlx_key_hook(cub->win, key_handler, cub);
-	mlx_mouse_hide(cub->mlx, cub->win);
-	mlx_loop_hook(cub->mlx, main_loop, cub);
+		mlx_key_hook(cub->win, key_handler, cub);
+		mlx_mouse_hide(cub->mlx, cub->win);
+		mlx_loop_hook(cub->mlx, main_loop, cub);
+		mlx_hook(cub->win, 2, 1L << 0, key_press, cub);
 	mlx_loop(cub->mlx);
 }
 
