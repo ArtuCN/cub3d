@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 16:46:22 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:12:02 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,22 @@ int	key_handler(int keysym, t_cub *cub)
 int key_press(int keysym, t_cub *cub)
 {
 	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W || keysym == SYM_S
-		|| keysym == SYM_UP || keysym == SYM_DOWN || keysym == SYM_LEFT || keysym == SYM_RIGHT || keysym == SYM_SPACE)
+		|| keysym == SYM_UP || keysym == SYM_DOWN || keysym == SYM_LEFT || keysym == SYM_RIGHT)
 		cub->pressed = 1;
 	if (keysym == SYM_Q)
 	{
-		cub->pressed = 1;
-		cub->change = 1;
 		if (cub->show_sword)
 			cub->show_sword = 0;
 		else
 			cub->show_sword = 1;
 		
 	}
-	if (keysym == SYM_SPACE)
-	{
-		if (cub->show_sword == 1)
-			cub->show_sword = 2;
-		cub->frame = 0;
-	}
 	return (0);
 }
 
 int key_release(int keysym, t_cub *cub)
 {
-	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W
-		|| keysym == SYM_S || keysym == SYM_UP || keysym == SYM_DOWN
-		|| keysym == SYM_LEFT || keysym == SYM_RIGHT || keysym == SYM_Q || keysym == SYM_SPACE)  
+	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W || keysym == SYM_S)
 		cub->pressed = 0;
 	return (0);
 }

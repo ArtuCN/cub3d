@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/04 16:54:52 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 17:10:34 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	check_next_door(t_cub *cub)
 	long double	angle;
 
 	angle = cub->player->angle * PI / 180;
-	xd = (cub->player->x + 70 * cos(angle)) / TXT_SIZE;
-	yd = (cub->player->y + 70 * sin(angle)) / TXT_SIZE;
+	xd = (cub->player->x + 60 * cos(angle)) / TXT_SIZE;
+	yd = (cub->player->y + 60 * sin(angle)) / TXT_SIZE;
 	x = ((cub->player->x)) / TXT_SIZE;
 	y = ((cub->player->y)) / TXT_SIZE;
 	if (cub->data->map[yd][xd] == 'D')
@@ -162,13 +162,10 @@ int	update_animation(t_cub *cub)
 
 int main_loop(t_cub *cub)
 {
-	static int t_mouse_x = 0;
-	static int t_mouse_y = 0;
-	
 	if (cub->pause == 1)
 		return (0);
 	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
-	if(update_animation(cub) || cub->x_mouse != t_mouse_x || cub->y_mouse != t_mouse_y)
+	if(update_animation(cub) || cub->x_mouse != cub->t_mouse_x || cub->y_mouse != cub->t_mouse_y)
 	{
 		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
 		cub->pressed = 0;
@@ -180,8 +177,8 @@ int main_loop(t_cub *cub)
 		draw_minimap(cub, cub->data,cub->data->map);
 		cub->pressed = 1;
 	}
-	t_mouse_x = cub->x_mouse;
-	t_mouse_y = cub->y_mouse;
+	cub->t_mouse_x = cub->x_mouse;
+	cub->t_mouse_y = cub->y_mouse;
     return (0);
 }
 
