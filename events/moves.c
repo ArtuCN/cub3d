@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/04 14:45:14 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:55:42 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,12 @@ int	update_animation(t_cub *cub)
 	}
 	gettimeofday(&last_update_time, NULL);
 	time = get_time_difference_ms(&cub->current_time, &last_update_time);
+	if ((cub->show_sword == 2) && (time > 50))
+	{
+		cub->current_time = last_update_time;
+		cub->change = 1;
+		return (1);
+	}
 	if ((cub->show_sword == 1) && (time > 250))
 	{
 		cub->current_time = last_update_time;

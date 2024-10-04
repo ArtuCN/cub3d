@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 12:45:15 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:59:09 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,13 @@ typedef struct s_cub
 	int			height;
 	int			len;
 	int			add_minimap;
+	int			frame;
 	t_img		*img;
 	t_data		*data;
 	t_player	*player;
 	t_wall_cub	*wall_cub;
 	t_sword		*sword;
+	t_sword		*hit;
 	int 		change;
 	t_dda		*dda;
 	struct timeval	current_time;

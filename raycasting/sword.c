@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:13:04 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:56:59 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 16:00:47 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	drawing_sword(t_cub *cub)
 	int y;
 	int i;
 	int j;
-	static int current_frame = 0;
 	int offset;
 	unsigned int color;
 
@@ -45,13 +44,17 @@ void	drawing_sword(t_cub *cub)
 	if (!cub->show_sword && cub->change == 0)
 		return ;
 	i = 0;
+	
 	// cub->change = 0;
 	while (i < cub->sword->height)
 	{
 		j = 0;
 		while (j < cub->sword->width)
 		{
-			color = get_sprite_pixel_color(&cub->sword[current_frame], j, i);		
+			if (cub->show_sword == 2)
+				color = get_sprite_pixel_color(&cub->hit[cub->frame], j, i);
+			else
+				color = get_sprite_pixel_color(&cub->sword[cub->frame], j, i);		
 			x = start_x + (j * SPRITE_X);
 			y = start_y + (i * SPRITE_Y);
 
@@ -70,8 +73,13 @@ void	drawing_sword(t_cub *cub)
 		}
 		i++;
 	}
-	current_frame++;
-	if (current_frame > 11)
-		current_frame = 0;
+	cub->frame++;
+	if (cub->frame > 11 && cub->show_sword == 1)
+		cub->frame = 0;
+	else if (cub->frame > 3 && cub->show_sword == 2)
+	{
+		cub->frame = 0;
+		cub->show_sword = 1;
+	}
 	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
 }
