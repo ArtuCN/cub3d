@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:28:06 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:44:22 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@
 # define WALL_E 4
 
 # define SPRITE_Y 20
-# define SPRITE_X 10
+# define SPRITE_X 15
 #endif

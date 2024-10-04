@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:20:38 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:23:18 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:54:42 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int key_press(int keysym, t_cub *cub)
 		cub->pressed = 1;
 	if (keysym == SYM_Q)
 	{
+		cub->pressed = 1;
+		cub->change = 1;
 		if (cub->show_sword)
 			cub->show_sword = 0;
 		else
@@ -78,7 +80,9 @@ int key_press(int keysym, t_cub *cub)
 
 int key_release(int keysym, t_cub *cub)
 {
-	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W || keysym == SYM_S)
+	if (keysym == SYM_D || keysym == SYM_A || keysym == SYM_W
+		|| keysym == SYM_S || keysym == SYM_UP || keysym == SYM_DOWN
+		|| keysym == SYM_LEFT || keysym == SYM_RIGHT || keysym == SYM_Q)
 		cub->pressed = 0;
 	return (0);
 }

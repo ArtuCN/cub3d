@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/04 14:34:36 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:45:14 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	update_animation(t_cub *cub)
 	}
 	gettimeofday(&last_update_time, NULL);
 	time = get_time_difference_ms(&cub->current_time, &last_update_time);
-	if ((cub->show_sword == 1) && (time > 1000))
+	if ((cub->show_sword == 1) && (time > 250))
 	{
 		cub->current_time = last_update_time;
 		cub->change = 1;
@@ -156,16 +156,23 @@ int	update_animation(t_cub *cub)
 
 int main_loop(t_cub *cub)
 {
+	static int t_mouse_x = 0;
+	static int t_mouse_y = 0;
 	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->x_mouse, &cub->y_mouse);
-	cub->pressed = 0;
-	rotate_pov(cub, cub->x_mouse, cub->y_mouse);
-	mlx_clear_window(cub->mlx, cub->win);
-	free_wall(cub->player);
-	cub->num_walls = 0;
-	start_dda(cub, cub->player->ray);
-	draw_minimap(cub, cub->data,cub->data->map);
-	update_animation(cub);
-	cub->pressed = 1;
+	if  (update_animation(cub) || cub->x_mouse != t_mouse_x || cub->y_mouse != t_mouse_y)
+	{
+		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
+		cub->pressed = 0;
+		rotate_pov(cub, cub->x_mouse, cub->y_mouse);
+		mlx_clear_window(cub->mlx, cub->win);
+		free_wall(cub->player);
+		cub->num_walls = 0;
+		start_dda(cub, cub->player->ray);
+		draw_minimap(cub, cub->data,cub->data->map);
+		cub->pressed = 1;
+	}
+	t_mouse_x = cub->x_mouse;
+	t_mouse_y = cub->y_mouse;
     return (0);
 }
 

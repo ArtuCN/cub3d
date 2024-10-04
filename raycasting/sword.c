@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:13:04 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 14:30:12 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:56:59 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	drawing_sword(t_cub *cub)
 	// Posizione in basso a destra
 	int start_x = WIDTH - (cub->sword->width * SPRITE_X);
 	int start_y = HEIGHT - (cub->sword->height * SPRITE_Y);
-	if (!cub->show_sword || cub->change == 0)
+	if (!cub->show_sword && cub->change == 0)
 		return ;
 	i = 0;
-	cub->change = 0;
+	// cub->change = 0;
 	while (i < cub->sword->height)
 	{
 		j = 0;
