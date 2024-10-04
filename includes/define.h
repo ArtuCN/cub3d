@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 15:31:22 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 16:47:19 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@
 # define ESC 65307
 
 # define SPRITE_Y 20
-# define SPRITE_X 10
+# define SPRITE_X 15
 #endif

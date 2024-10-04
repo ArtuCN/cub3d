@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 14:31:08 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:47:03 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 	unsigned int color;
 	
 	temp = -1;
+	drawing_sword(cub);
 	while (++temp < WIDTH)
 	{
 		i = 0;

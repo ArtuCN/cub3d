@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 15:28:21 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/04 16:46:48 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,23 @@ void	adding_sprite(t_cub *cub, int i)
 		cub->sword[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_12.xpm", &cub->sword[i].width, &cub->sword[i].height);
 }
 
+void	adding_hit(t_cub *cub, int i)
+{
+	if (i == 0)
+		cub->hit[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/hit0.xpm", &cub->hit[i].width, &cub->hit[i].height);
+	else if (i == 1)
+		cub->hit[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/hit1.xpm", &cub->hit[i].width, &cub->hit[i].height);
+	else if (i == 2)
+		cub->hit[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/hit2.xpm", &cub->hit[i].width, &cub->hit[i].height);
+	else if (i == 3)
+		cub->hit[i].img = mlx_xpm_file_to_image(cub->mlx, "textures/hit3.xpm", &cub->hit[i].width, &cub->hit[i].height);
+}
+
 void	adding_wall(t_cub *cub)
 {
 	int i;
 
-	cub->show_sword = 0;
+	cub->show_sword = 1;
 	cub->change = 0;
 	cub->pause = 0;
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
@@ -85,5 +97,12 @@ void	adding_wall(t_cub *cub)
 	{
 		adding_sprite(cub, i);
 		img_info(cub->sword[i].img);
+	}
+	cub->hit = malloc(sizeof(t_sword) * 4);
+	i = -1;
+	while (++i < 4)
+	{
+		adding_hit(cub, i);
+		img_info(cub->hit[i].img);
 	}
 }
