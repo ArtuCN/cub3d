@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:25:14 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 16:30:25 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:42:06 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	init_data(t_data *data)
 	add_floor(data);
 	data->max_x = 0;
 	data->max_y = 0;
-	data_max(data);
+	if (!data_max(data))
+		return (0);
 	return (1);
 }

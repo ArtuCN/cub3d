@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/11 17:54:17 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/07 19:20:21 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,25 @@ int	check_zero(char **map, int x, int y, char player)
 
 	y1 = y;
 	x1 = x;
-	while (map[y][x] == '0' || map[y][x] == 'D')
+
+	if (x1 == 0 || y1 == 1)
+		return (0);
+	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D'))
 		x++;
 	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	x = x1;
-	while ((map[y][x] == '0' || map[y][x] == 'D') && x > 0)
+	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D') && x > 0)
 		x--;
 	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	x = x1;
-	while (map[y][x] == '0'|| map[y][x] == 'D')
+	while (map[y][x] && (map[y][x] == '0'|| map[y][x] == 'D'))
 		y++;
 	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	y = y1;
-	while ((map[y][x] == '0' || map[y][x] == 'D') && y > 0)
+	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D') && y > 1)
 		y--;
 	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);

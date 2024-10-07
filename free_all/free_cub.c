@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 17:06:48 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 17:35:51 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	free_img(t_cub *cub)
 			{
 				if (cub->wall_cub[i].img->img_ptr)
 				{
-					printf("Destroying image %d\n", i);
 					mlx_destroy_image(cub->mlx, cub->wall_cub[i].img->img_ptr);
 					cub->wall_cub[i].img->img_ptr = NULL;
 				}
@@ -161,8 +160,12 @@ void	free_cub(t_cub *cub)
 	}
 	mlx_destroy_image(cub->mlx, cub->img->img_ptr);
 	free(cub->img);
-	mlx_destroy_window(cub->mlx,
-		cub->win);
+	while(cub->win)
+	{
+		if (cub->win)
+			mlx_destroy_window(cub->mlx, cub->win);
+		cub->win = NULL;
+	}
 	mlx_destroy_display(cub->mlx);
 	free (cub->mlx);
 }

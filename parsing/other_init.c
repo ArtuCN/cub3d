@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:35:15 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/10 15:48:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:27:43 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	get_cor(t_data *data)
 	return (1);
 }
 
-void	data_max(t_data *data)
+int	data_max(t_data *data)
 {
 	int	i;
 	int	j;
@@ -65,4 +65,7 @@ void	data_max(t_data *data)
 		i++;
 	}
 	data->max_y = i;
+	if (data->max_x < 3 || data->max_y < 3)
+		return (0);
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 12:35:38 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:28:01 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ int		check_matrix(t_data *data);
 int		check_map_continue(char **matrix, char player);
 int		check_null_data(t_data *data);
 int		get_cor(t_data *data);
-void	data_max(t_data *data);
+int	data_max(t_data *data);
 int		check_char(int c);
 void	print_rays(t_player *player);
 //events
+void	free_matrix(char **mat);
 void	calling_mlx(t_cub *cub);
 int		close_window(t_cub *cub);
 void	fill_black(t_cub *cub);

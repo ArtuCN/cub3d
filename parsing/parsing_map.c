@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/10 15:51:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:48:14 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	len_mat(int fd, t_data *data)
 	}
 	data->matrix = malloc(sizeof(char *) * (i + 1));
 	if (!data->matrix)
-		return (printf("Error\nmalloc failed\n"), 0);
+		return (printf("Malloc Failed\n"), 0);
 	data->matrix[i] = NULL;
 	close(fd);
 	return (1);
@@ -61,17 +61,34 @@ int	regular_map(char *name, t_cub *cub)
 
 	cub->data = malloc(sizeof(t_data));
 	if (!name)
-		return (printf("Error\nno map\n"), 0);
+	{
+		free(cub->data);
+		return (printf("Map Not Found\n"), 0);
+	}
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
-		return (printf("Error\nopen failed\n"), 0);
+	{
+		free(cub->data);
+		return (printf("Map Not Found\n"), 0);
+	}
 	if (!len_mat(fd, cub->data))
-		return (0);
+	{
+		free(cub->data);		
+		return (printf("Empty Map\n"), 0);
+	}
 	fd = open(name, O_RDONLY);
 	if (!put_map(fd, cub->data))
-		return (0);
+	{
+		free_matrix(cub->data->matrix);		
+		free(cub->data->matrix);
+		free(cub->data);		
+		return (printf("Error4"), 0);
+	}
 	close(fd);
 	if (!check_matrix(cub->data))
+	{	
+		free(cub->data);	
 		return (0);
+	}
 	return (1);
 }
