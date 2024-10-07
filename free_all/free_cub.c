@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:08:44 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 15:36:15 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 17:06:48 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,24 @@ void	free_img(t_cub *cub)
 	int	i;
 	
 	i = -1;
-	// while (++i < 5)
-	// {
-	// 	if (cub->wall_cub[i].img)
-	// 	{
-	// 		if (cub->wall_cub[i].img->img_ptr)
-	// 		{
-	// 			printf("Destroying image %d\n", i);
-	// 			mlx_destroy_image(cub->mlx, cub->wall_cub[i].img->img_ptr);
-	// 			cub->wall_cub[i].img->img_ptr = NULL;
-	// 		}
-	// 		free(cub->wall_cub[i].img);
-	// 		cub->wall_cub[i].img = NULL;
-	// 	}
-	// }
-	free(cub->wall_cub);
+	if (cub->wall_cub)
+	{
+		while (++i < 5)
+		{
+			if (cub->wall_cub[i].img)
+			{
+				if (cub->wall_cub[i].img->img_ptr)
+				{
+					printf("Destroying image %d\n", i);
+					mlx_destroy_image(cub->mlx, cub->wall_cub[i].img->img_ptr);
+					cub->wall_cub[i].img->img_ptr = NULL;
+				}
+				free(cub->wall_cub[i].img);
+				cub->wall_cub[i].img = NULL;
+			}
+		}
+		free(cub->wall_cub);
+	}
 	i = 0;
 	while (i < 12)
 	{
@@ -102,26 +105,31 @@ void	free_img(t_cub *cub)
 				mlx_destroy_image(cub->mlx, cub->sword[i].img->img_ptr);
 				cub->sword[i].img->img_ptr = NULL;
 			}
-			free(cub->sword[i].img->img_ptr); // Libera correttamente
+			free(cub->sword[i].img); // Libera la struttura t_img
 			cub->sword[i].img = NULL; // Imposta il puntatore a NULL per evitare doppia liberazione
 		}
 		i++;
 	}
-
-	i = 0;
-	while (i < 4)
+	free(cub->sword);
+	cub->sword = NULL; // Imposta il puntatore a NULL per evitare doppia liberazione
+	if (cub->hit)
 	{
-		if (cub->hit[i].img) // Aggiungi controllo per cub->hit[i].img
+		i = 0;
+		while (i < 4)
 		{
-			// if (cub->hit[i].img->img_ptr) // Verifica se l'immagine ha un puntatore valido
-			// {
-			// 	mlx_destroy_image(cub->mlx, cub->hit[i].img->img_ptr);
-			// 	cub->hit[i].img->img_ptr = NULL;
-			// }
-			free(cub->hit[i].img->img_ptr); // Libera correttamente
-			cub->hit[i].img = NULL; // Imposta il puntatore a NULL
+			if (cub->hit[i].img) // Aggiungi controllo per cub->hit[i].img
+			{
+				if (cub->hit[i].img->img_ptr) // Verifica se l'immagine ha un puntatore valido
+				{
+					mlx_destroy_image(cub->mlx, cub->hit[i].img->img_ptr);
+					cub->hit[i].img->img_ptr = NULL;
+				}
+				free(cub->hit[i].img); // Libera la struttura t_img
+				cub->hit[i].img = NULL; // Imposta il puntatore a NULL
+			}
+			i++;
 		}
-		i++;
+		free(cub->hit);
 	}
 }
 
@@ -140,11 +148,21 @@ void	free_cub(t_cub *cub)
 	free(data->east);
 	free(data->ceiling);
 	free(data->floor);
-	free_img(cub);
+	free(data);
 	free_wall(cub->player);
 	free(cub->player->ray);
 	free(cub->player);
-	free(data);
-	free(cub->wall_cub);
+	free_img(cub);
+	if (cub->pause_img && cub->pause_img->img && cub->pause_img->img->img_ptr)
+	{
+		mlx_destroy_image(cub->mlx, cub->pause_img->img->img_ptr);
+		free(cub->pause_img->img);
+		free(cub->pause_img);
+	}
+	mlx_destroy_image(cub->mlx, cub->img->img_ptr);
 	free(cub->img);
+	mlx_destroy_window(cub->mlx,
+		cub->win);
+	mlx_destroy_display(cub->mlx);
+	free (cub->mlx);
 }
