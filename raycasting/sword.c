@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:13:04 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 16:00:47 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 12:16:36 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ unsigned int get_sprite_pixel_color(t_sword *sword, int x, int y)
 
 	sprite_img = sword->img;
 	
-	// Controlla che x e y siano all'interno dei limiti dello sprite
 	if (x < 0 || x >= sword->width || y < 0 || y >= sword->height)
-		return (0);  // Restituisci un colore trasparente o 0 se fuori dai limiti
-
+		return (0);
 	
 	offset = (y * sprite_img->line_len + x * (sprite_img->bpp / 8));
 

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 17:32:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:39:04 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ void	adding_img(t_cub *cub, int i)
 
 void	img_info(t_img *img)
 {
-	img->addr = mlx_get_data_addr(&img->img_ptr,
-		&(img->bpp),
-		&(img->line_len),
-		&(img->endian));
+	if (img && img->img_ptr) // Assicurati che il puntatore sia valido
+    {
+        img->addr = mlx_get_data_addr(img->img_ptr, // Correzione qui, senza '&'
+            &(img->bpp),
+            &(img->line_len),
+            &(img->endian));
+    }
+
 }
 
 
@@ -84,6 +88,7 @@ void	adding_wall(t_cub *cub)
 	cub->show_sword = 1;
 	cub->change = 0;
 	cub->pause = 0;
+	cub->frame = 0;
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
 	i = -1;
 	while (++i < 5)

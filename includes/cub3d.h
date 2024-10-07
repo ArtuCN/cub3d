@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 17:33:39 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/07 12:35:38 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <X11/X.h>
 # include "structs.h"
 # include <sys/time.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 //sword
 void	drawing_sword(t_cub *cub);
