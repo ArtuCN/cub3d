@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:02 by aconti            #+#    #+#             */
-/*   Updated: 2024/09/27 14:46:01 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:47:51 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-
 
 void	get_w_h(t_ray *ray, t_cub *cub)
 {

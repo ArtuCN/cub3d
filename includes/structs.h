@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:15:22 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 19:17:31 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 13:31:20 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ typedef struct s_img
 
 typedef struct s_wall
 {
-	int		n_rays;
-	int		id;
-	long double first_hit_x;
-	long double first_hit_y;
+	int			n_rays;
+	int			id;
+	long double	first_hit_x;
+	long double	first_hit_y;
 	long double	distance;
-	int		height;
-	int		width;
-	char	direction;
-	int		door;
-	int		x;
-	int		y;
-	int		first_pix_on_screen;
-	int		widht_pix_on_screen;
-	int		last_pix_on_screen;
-	double	wall_start;
-	double	wall_end;
+	int			height;
+	int			width;
+	char		direction;
+	int			door;
+	int			x;
+	int			y;
+	int			first_pix_on_screen;
+	int			widht_pix_on_screen;
+	int			last_pix_on_screen;
+	double		wall_start;
+	double		wall_end;
 }		t_wall;
 
 typedef struct s_wall_cub
@@ -53,10 +53,10 @@ typedef struct s_wall_cub
 
 typedef struct s_ray
 {
-	long double			x;
-	long double			y;
-	long double			hit_x;
-	long double			hit_y;
+	long double		x;
+	long double		y;
+	long double		hit_x;
+	long double		hit_y;
 	int				start_width;
 	int				end_width;
 	double			angle;
@@ -73,22 +73,21 @@ typedef struct s_ray
 
 typedef struct s_dda
 {
-	long double angle;
-	double		posX;
-	double		posY;
-	int		side;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
-	int		hit;
+	long double	angle;
+	double		pos_x;
+	double		pos_y;
+	int			side;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
 }	t_dda;
-
 
 typedef struct s_player
 {
@@ -107,35 +106,34 @@ typedef struct s_sword
 	t_img	*img;
 }				t_sword;
 
-
 typedef struct s_cub
 {
-	int			pause;
-	int			x_mouse;
-	int			y_mouse;
-	int			t_mouse_y;
-	int			t_mouse_x;
-	int			show_sword;
-	char		*name;
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	int			len;
-	int			add_minimap;
-	int			frame;
-	t_img		*img;
-	t_data		*data;
-	t_player	*player;
-	t_wall_cub	*wall_cub;
-	t_sword		*sword;
-	t_sword		*hit;
-	t_sword		*pause_img;
-	int 		change;
-	t_dda		*dda;
+	int				pause;
+	int				x_mouse;
+	int				y_mouse;
+	int				t_mouse_y;
+	int				t_mouse_x;
+	int				show_sword;
+	char			*name;
+	void			*mlx;
+	void			*win;
+	int				width;
+	int				height;
+	int				len;
+	int				add_minimap;
+	int				frame;
+	t_img			*img;
+	t_data			*data;
+	t_player		*player;
+	t_wall_cub		*wall_cub;
+	t_sword			*sword;
+	t_sword			*hit;
+	t_sword			*pause_img;
+	int				change;
+	t_dda			*dda;
 	struct timeval	current_time;
-	int			pressed;
-	int			num_walls;
+	int				pressed;
+	int				num_walls;
 }				t_cub;
 
 typedef struct s_data

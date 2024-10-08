@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 18:59:03 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:04:43 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,12 @@ int	check_first_char(char **matrix, t_data *data)
 			i++;
 		g++;
 	}
-	while (matrix[g] && !ft_strncmp(matrix[g], "\n", 1) && !ft_strncmp(matrix[g], "\0", 1))
+	while (matrix[g] && !ft_strncmp(matrix[g], "\n", 1)
+		&& !ft_strncmp(matrix[g], "\0", 1))
 		g++;
 	copy_map(matrix, g, data);
 	if (!check_map(data->map, data))
-	{
-		//free_matrix(data->matrix);
-		//free_matrix(data->map);
 		return (0);
-	}	
 	return (1);
 }
 
@@ -86,7 +83,7 @@ int	check_matrix(t_data *data)
 	{
 		free_matrix(data->map);
 		free_matrix(data->matrix);
-		return (printf("Map Info Are Not Correct\n"), 0);;
+		return (printf("Map Info Are Not Correct\n"), 0);
 	}
 	if (!init_data(data))
 	{
@@ -103,7 +100,7 @@ int	check_matrix(t_data *data)
 		if (data->floor)
 			free(data->floor);
 		free(data->map);
-		free_matrix(data->matrix);	
+		free_matrix(data->matrix);
 		return (printf("Map is Not Correct\n"), 0);
 	}
 	return (1);

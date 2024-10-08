@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/04 16:47:19 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 13:54:26 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # define WIDTH 1500
 # define HEIGHT 1000
 # define MINIMAP_SCALE 0.25
-# define MINIMAP_WIDTH (WIDTH * MINIMAP_SCALE)
-# define MINIMAP_HEIGHT (HEIGHT * MINIMAP_SCALE)
-# define MINIMAP_X (0)
-# define MINIMAP_Y (0)
+# define MINIMAP_WIDTH 375
+# define MINIMAP_HEIGHT 250
 # define FOV 60
 # define MAX_RENDER_DISTANCE 2.0
 # define TXT_SIZE 64
@@ -35,7 +33,7 @@
 # define VIOLET 0xFF00FF
 # define DARK_GREEN 0x274E13
 # define TRANSPARENT_COLOR 0xFF000000 
-# define HALF_TXT_SIZE (TXT_SIZE / 2)
+# define HALF_TXT_SIZE 32
 # define PI 3.14159265358979323846
 # define SYM_SPACE 32
 # define SYM_A 97
@@ -56,7 +54,8 @@
 # define WALL_W 3
 # define WALL_E 4
 # define ESC 65307
-
 # define SPRITE_Y 20
 # define SPRITE_X 15
+# define MINIMAP_X 0
+# define MINIMAP_Y 0
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_continue.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:21:19 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 19:17:21 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 14:05:39 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_door(char **map, int y, int x, char player)
 	if (map[x][y + 1] == '0' || map[x][y + 1] == player)
 	{
 		if (map[x + 1][y] == '0'
-			||  map[x - 1][y] == '0' || map[x][y - 1] == '0')
+			|| map[x - 1][y] == '0' || map[x][y - 1] == '0')
 			return (1);
 	}
 	if (map[x][y - 1] == '0' || map[x][y - 1] == player)
@@ -55,12 +55,11 @@ int	check_map_continue(char **matrix, char player)
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
-	while (matrix[y])
+	y = -1;
+	while (matrix[++y])
 	{
-		x = 0;
-		while (matrix[y][x])
+		x = -1;
+		while (matrix[y][++x])
 		{
 			if (matrix[y][x] == '0')
 			{
@@ -74,9 +73,7 @@ int	check_map_continue(char **matrix, char player)
 				if (!check_door(matrix, x, y, player))
 					return (0);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (1);
 }
