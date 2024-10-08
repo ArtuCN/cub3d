@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:48:25 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 16:45:26 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:27:53 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,97 +15,58 @@
 void	adding_img(t_cub *cub, int i)
 {
 	cub->wall_cub[i].img = malloc(sizeof(t_img));
-	if (i == DOOR)
-		cub->wall_cub[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/door.xpm", &cub->wall_cub[i].width, &cub->wall_cub[i].height);
-	else if (i == WALL_N)
-		cub->wall_cub[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/wall_n.xpm", &cub->wall_cub[i].width, &cub->wall_cub[i].height);
-	else if (i == WALL_S)
-		cub->wall_cub[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/wall_s.xpm", &cub->wall_cub[i].width, &cub->wall_cub[i].height);
-	else if (i == WALL_W)
-		cub->wall_cub[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/wall_w.xpm", &cub->wall_cub[i].width, &cub->wall_cub[i].height);
-	else if (i == WALL_E)
-		cub->wall_cub[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/wall_e.xpm", &cub->wall_cub[i].width, &cub->wall_cub[i].height);
-	if (cub->wall_cub[i].img && cub->wall_cub[i].img->img_ptr) // Assicurati che il puntatore sia valido
+	get_texture(cub, i);
+	if (cub->wall_cub[i].img && cub->wall_cub[i].img->img_ptr)
 	{
-		cub->wall_cub[i].img->addr = mlx_get_data_addr(cub->wall_cub[i].img->img_ptr,
-			&(cub->wall_cub[i].img->bpp),
-			&(cub->wall_cub[i].img->line_len),
-			&(cub->wall_cub[i].img->endian));
+		cub->wall_cub[i].img->addr = mlx_get_data_addr
+			(cub->wall_cub[i].img->img_ptr, &(cub->wall_cub[i].img->bpp),
+				&(cub->wall_cub[i].img->line_len),
+				&(cub->wall_cub[i].img->endian));
 	}
 }
-
-// void	img_info(t_img *img)
-// {
-// 	static int i = 0;
-
-// 	if (img && img->img_ptr) // Assicurati che il puntatore sia valido
-//     {
-//         img->addr = mlx_get_data_addr(img->img_ptr,
-//             &(img->bpp),
-//             &(img->line_len),
-//             &(img->endian));
-//     }
-
-// }
 
 void	adding_sprite(t_cub *cub, int i)
 {
 	cub->sword[i].img = malloc(sizeof(t_img));
-	if (i == 0)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_0.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 1)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_01.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 2)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_02.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 3)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_03.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 4)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_04.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 5)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_05.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 6)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_06.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 7)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_07.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 8)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_08.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 9)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_09.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 10)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_10.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 11)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_11.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	else if (i == 12)
-		cub->sword[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/sprite_12.xpm", &cub->sword[i].width, &cub->sword[i].height);
-	if (cub->sword[i].img && cub->sword[i].img->img_ptr) // Assicurati che il puntatore sia valido
-    {
-        cub->sword[i].img->addr = mlx_get_data_addr(cub->sword[i].img->img_ptr,
-            &(cub->sword[i].img->bpp),
-            &(cub->sword[i].img->line_len),
-            &(cub->sword[i].img->endian));
-    }
-
+	if (i >= 0 && i <= 4)
+		get_sprites0_4(cub, i);
+	else if (i >= 5 && i <= 8)
+		get_sprites5_8(cub, i);
+	else if (i >= 9 && i <= 12)
+		get_sprites9_12(cub, i);
+	if (cub->sword[i].img && cub->sword[i].img->img_ptr)
+	{
+		cub->sword[i].img->addr = mlx_get_data_addr
+			(cub->sword[i].img->img_ptr, &(cub->sword[i].img->bpp),
+				&(cub->sword[i].img->line_len),
+				&(cub->sword[i].img->endian));
+	}
 }
 
 void	adding_hit(t_cub *cub, int i)
 {
 	cub->hit[i].img = malloc(sizeof(t_img));
 	if (i == 0)
-		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/hit0.xpm", &cub->hit[i].width, &cub->hit[i].height);
+		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx,
+				"textures/hit0.xpm", &cub->hit[i].width,
+				&cub->hit[i].height);
 	else if (i == 1)
-		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/hit1.xpm", &cub->hit[i].width, &cub->hit[i].height);
+		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx,
+				"textures/hit1.xpm", &cub->hit[i].width,
+				&cub->hit[i].height);
 	else if (i == 2)
-		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/hit2.xpm", &cub->hit[i].width, &cub->hit[i].height);
+		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx,
+				"textures/hit2.xpm", &cub->hit[i].width,
+				&cub->hit[i].height);
 	else if (i == 3)
-		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/hit3.xpm", &cub->hit[i].width, &cub->hit[i].height);
-	if (cub->hit[i].img && cub->hit[i].img->img_ptr) // Assicurati che il puntatore sia valido
-    {
-        cub->hit[i].img->addr = mlx_get_data_addr(cub->hit[i].img->img_ptr,
-            &(cub->hit[i].img->bpp),
-            &(cub->hit[i].img->line_len),
-            &(cub->hit[i].img->endian));
-    }
-
+		cub->hit[i].img->img_ptr = mlx_xpm_file_to_image(cub->mlx,
+				"textures/hit3.xpm", &cub->hit[i].width,
+				&cub->hit[i].height);
+	if (cub->hit[i].img && cub->hit[i].img->img_ptr)
+		cub->hit[i].img->addr = mlx_get_data_addr
+			(cub->hit[i].img->img_ptr, &(cub->hit[i].img->bpp),
+				&(cub->hit[i].img->line_len),
+				&(cub->hit[i].img->endian));
 }
 
 void	get_pause(t_cub *cub)
@@ -115,29 +76,29 @@ void	get_pause(t_cub *cub)
 	if (!cub->pause_img)
 	{
 		printf("Failed to allocate memory for pause_img\n");
-		return;  // O gestisci l'errore in modo appropriato
+		return ;
 	}
-	cub->pause_img->img->img_ptr = mlx_xpm_file_to_image(cub->mlx, "textures/pause.xpm",
-		&cub->pause_img->width, &cub->pause_img->height);
+	cub->pause_img->img->img_ptr = mlx_xpm_file_to_image
+		(cub->mlx, "textures/pause.xpm", &cub->pause_img->width,
+			&cub->pause_img->height);
 	if (!cub->pause_img->img)
 	{
 		printf("Failed to load image for pause\n");
 		free(cub->pause_img);
-		return;  // Gestisci l'errore
+		return ;
 	}
-	
-	if (cub->pause_img->img && cub->pause_img->img->img_ptr) // Assicurati che il puntatore sia valido
-    {
-        cub->pause_img->img->addr = mlx_get_data_addr(cub->pause_img->img->img_ptr,
-            &(cub->pause_img->img->bpp),
-            &(cub->pause_img->img->line_len),
-            &(cub->pause_img->img->endian));
-    }
+	if (cub->pause_img->img && cub->pause_img->img->img_ptr)
+	{
+		cub->pause_img->img->addr = mlx_get_data_addr
+			(cub->pause_img->img->img_ptr, &(cub->pause_img->img->bpp),
+				&(cub->pause_img->img->line_len),
+				&(cub->pause_img->img->endian));
+	}
 }
 
 void	adding_wall(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	cub->show_sword = 1;
 	cub->change = 0;
@@ -146,17 +107,11 @@ void	adding_wall(t_cub *cub)
 	cub->wall_cub = malloc(sizeof(t_wall_cub) * 5);
 	i = -1;
 	while (++i < 5)
-	{
 		adding_img(cub, i);
-		// img_info(cub->wall_cub[i].img);
-	}
 	i = -1;
 	cub->sword = malloc(sizeof(t_sword) * 12);
 	while (++i < 12)
-	{
 		adding_sprite(cub, i);
-		// img_info(cub->sword[i].img);
-	}
 	cub->hit = malloc(sizeof(t_sword) * 4);
 	i = -1;
 	while (++i < 4)

@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 14:32:56 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 15:59:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	adding_ray_info(t_ray *ray)
 
 int	same_dir(t_ray *old, t_ray *ray)
 {
-	int j;
-	int k;
-	int h;
-	int i;
+	int	j;
+	int	k;
+	int	h;
+	int	i;
 
 	h = (old->from_x) / TXT_SIZE;
 	i = (old->from_y) / TXT_SIZE;
 	j = (ray->from_y) / TXT_SIZE;
-	k = (ray->from_x) / TXT_SIZE;	
-	if (h  == k && i == j)
+	k = (ray->from_x) / TXT_SIZE;
+	if (h == k && i == j)
 		return (1);
 	return (0);
 }
@@ -40,9 +40,9 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 {
 	int	j;
 	int	k;
-	int h;
-	int l;
-	
+	int	h;
+	int	l;
+
 	h = (ray[i - 1].y) / TXT_SIZE;
 	l = (ray[i - 1].x) / TXT_SIZE;
 	j = (ray[i].y) / TXT_SIZE;
@@ -51,7 +51,7 @@ int	is_same(t_cub *cub, t_ray *ray, int i)
 	{
 		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])
 			&& (cub->data->map[j][k] == cub->data->map[h][l]))
-			return (1);//uguali
+			return (1);
 	}
-	return (0);//diversi
+	return (0);
 }

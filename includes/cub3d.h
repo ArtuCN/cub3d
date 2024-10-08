@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:57:27 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 15:04:56 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:33:47 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void			my_mlx_pixel_put(t_cub *cub, int x, int y, unsigned int color);
 void			draw_player(t_cub *cub, int x, int y, unsigned int color);
 void			draw_rays_minimap(t_cub *cub, int x, int y);
 void			adding_wall(t_cub *cub);
+int				is_wall(long double x, long double y, t_cub *cub);
+int				is_wall_minimap(long double x, long double y, t_cub *cub);
+int				put_player(t_cub *cub, int x, int y, unsigned int color);
 //parsing
 int				regular_map(char *name, t_cub *cub);
 int				check_zero(char **map, int x, int y, char player);
@@ -66,8 +69,10 @@ void			rotate_pov(t_cub *cub, int x, int y);
 int				key_handler(int keysym, t_cub *cub);
 void			adding_minimap(int keysym, t_cub *cub);
 int				key_handler_pause(int keysym, t_cub *cub);
-int				go_forward(t_cub *cub, long double *x, long double *y, long double angle);
-int				go_backward(t_cub *cub, long double *x, long double *y, long double angle);
+int				go_f(t_cub *cub, long double *x,
+					long double *y, long double angle);
+int				go_b(t_cub *cub, long double *x,
+					long double *y, long double angle);
 
 //press_release
 int				key_press(int keysym, t_cub *cub);
@@ -90,13 +95,20 @@ void			draw_all(t_cub *cub, t_player *player);
 void			adding_ray_info(t_ray *ray);
 void			adding_pix_to_img(t_cub *cub, t_ray *ray);
 void			get_w_h(t_ray *ray, t_cub *cub);
+void			get_sprites0_4(t_cub *cub, int i);
+void			get_sprites5_8(t_cub *cub, int i);
+void			get_sprites9_12(t_cub *cub, int i);
+void			get_texture(t_cub *cub, int i);
 //dda
 void			start_dda(t_cub *cub, t_ray *ray);
 void			wall_draw_info(t_cub *cub, t_ray *ray);
 void			draw_pause(t_cub *cub);
-void			some_other_init(t_dda *dda, t_player *player, long double temp_ang);
+void			some_other_init(t_dda *dda, t_player *player,
+					long double temp_ang);
 void			init_ray(t_ray *ray, t_dda *dda, t_cub *cub, int i);
 void			dist(t_dda *dda, t_cub *cub, t_ray *ray, int i);
 void			add_direction(t_ray *ray, t_dda *dda);
+void			draw_cealing(int *i, t_ray *ray, int temp, t_cub *cub);
+void			draw_floor(int *i, t_ray *ray, int temp, t_cub *cub);
 
 #endif

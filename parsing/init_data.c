@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:25:14 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 18:42:06 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:53:53 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	add_num(char *tmp, int *i)
 	return (num);
 }
 
-void	add_ceiling(t_data *data)
+int	add_ceiling(t_data *data)
 {
 	int	i;
 	int	red;
@@ -55,10 +55,17 @@ void	add_ceiling(t_data *data)
 	red = add_num(data->ceiling, &i);
 	green = add_num(data->ceiling, &i);
 	blue = add_num(data->ceiling, &i);
+	if (red < 0 || red > 255 || green < 0 || green > 255
+		|| blue < 0 || blue > 255)
+	{
+		printf("Error\nInvalid color\n");
+		return (0);
+	}
 	data->color_ceiling = rgb_to_hex(red, green, blue);
+	return (1);
 }
 
-void	add_floor(t_data *data)
+int	add_floor(t_data *data)
 {
 	int	i;
 	int	red;
@@ -69,15 +76,22 @@ void	add_floor(t_data *data)
 	red = add_num(data->floor, &i);
 	green = add_num(data->floor, &i);
 	blue = add_num(data->floor, &i);
+	if (red < 0 || red > 255 || green < 0 || green > 255
+		|| blue < 0 || blue > 255)
+	{
+		printf("Error\nInvalid color\n");
+		return (0);
+	}
 	data->color_floor = rgb_to_hex(red, green, blue);
+	return (1);
 }
 
 int	init_data(t_data *data)
 {
 	if (!get_cor(data))
 		return (0);
-	add_ceiling(data);
-	add_floor(data);
+	if (!add_ceiling(data) || !add_floor(data))
+		return (0);
 	data->max_x = 0;
 	data->max_y = 0;
 	if (!data_max(data))

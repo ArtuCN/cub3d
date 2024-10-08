@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 14:04:43 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:56:25 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	check_matrix(t_data *data)
 {
 	if (!check_first_char(data->matrix, data))
 	{
-		free_matrix(data->map);
 		free_matrix(data->matrix);
 		return (printf("Map Info Are Not Correct\n"), 0);
 	}
@@ -99,7 +98,7 @@ int	check_matrix(t_data *data)
 			free(data->ceiling);
 		if (data->floor)
 			free(data->floor);
-		free(data->map);
+		free_matrix(data->map);
 		free_matrix(data->matrix);
 		return (printf("Map is Not Correct\n"), 0);
 	}

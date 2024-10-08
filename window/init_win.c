@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:07:32 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/01 16:30:01 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:25:21 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	cub_img_malloc(t_cub *cub)
 
 int	failing_img_addr(t_cub *cub)
 {
-	mlx_destroy_image(cub->mlx, cub->img->img_ptr) ;
+	mlx_destroy_image(cub->mlx, cub->img->img_ptr);
 	free(cub->mlx);
 	free(cub->win);
 	free(cub->img);

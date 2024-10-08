@@ -6,16 +6,11 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:23:00 by artucn            #+#    #+#             */
-/*   Updated: 2024/10/04 17:57:37 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:32:40 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int map(long double value, long double in_min, long double in_max, long double out_min, long double out_max)
-{
-    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
 
 int	get_dir(char dir, int door)
 {
@@ -32,21 +27,16 @@ int	get_dir(char dir, int door)
 	return (0);
 }
 
-// x : 0.5 = c 64
-// x : end-start = c : 64
-
-
 unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 {
-	int	offset;
-	unsigned int color;
-	int x;
-	int	y;
-	int dir;
-
+	int				offset;
+	unsigned int	color;
+	int				x;
+	int				y;
+	int				dir;
 
 	dir = get_dir(ray->wall->direction, ray->wall->door);
-	if (ray->wall->direction == 'N' || ray->wall->direction ==  'S')
+	if (ray->wall->direction == 'N' || ray->wall->direction == 'S')
 		x = (ray->hit_x - floor(ray->hit_x)) * ray->wall->width;
 	else
 		x = (ray->hit_y - floor(ray->hit_y)) * ray->wall->width;
@@ -60,66 +50,61 @@ unsigned int	get_color(t_ray *ray, int i, t_cub *cub)
 		y = 0;
 	if (y >= ray->wall->height)
 		y = ray->wall->height - 1;
-	offset = (y * cub->wall_cub[dir].img->line_len + x * (cub->wall_cub[dir].img->bpp / 8));
+	offset = (y * cub->wall_cub[dir].img->line_len
+			+ x * (cub->wall_cub[dir].img->bpp / 8));
 	color = *(unsigned int *)(cub->wall_cub[dir].img->addr + offset);
 	return (color);
 }
 
-void    draw_pause(t_cub *cub)
+void	put_pause(t_cub *cub, int i, int start_y)
 {
-        int i;
-        int j;
-        int offset;
-        unsigned int color;
-        int text_width;
-        int text_height;
-        int start_x;
-        int start_y;
+	int				j;
+	int				offset;
+	int				text_width;
+	unsigned int	color;
+	int				start_x;
 
-        if (cub->pause == 0)
-                return ;
-        text_width = cub->pause_img->width * 9;  // Tripled the size again
-        text_height = cub->pause_img->height * 9;  // Tripled the size again
-        start_x = (WIDTH - text_width) / 2;
-        start_y = (HEIGHT - text_height) / 2;
-
-        for (i = 0; i < text_height; i++)
-        {
-                for (j = 0; j < text_width; j++)
-                {
-                        offset = ((start_y + i) * cub->img->line_len + (start_x + j) * (cub->img->bpp / 8));
-                        color = get_sprite_pixel_color(cub->pause_img, j / 9, i / 9);  // Adjusted for new size
-                        if ((color & 0xFF000000) == 0x00000000)  // Check if the pixel is not transparent
-                        {
-                                *(unsigned int *)(cub->img->addr + offset) = color;
-                        }
-                }
-        }
-        mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+	j = -1;
+	text_width = cub->pause_img->width * 9;
+	start_x = (WIDTH - text_width) / 2;
+	while (++j < text_width)
+	{
+		offset = ((start_y + i) * cub->img->line_len
+				+ (start_x + j) * (cub->img->bpp / 8));
+		color = get_sprite_pixel_color(cub->pause_img, j / 9, i / 9);
+		if ((color & 0xFF000000) == 0x00000000)
+			*(unsigned int *)(cub->img->addr + offset) = color;
+	}
 }
 
+void	draw_pause(t_cub *cub)
+{
+	int	i;
+	int	text_height;
+	int	start_y;
 
+	i = -1;
+	if (cub->pause == 0)
+		return ;
+	text_height = cub->pause_img->height * 9;
+	start_y = (HEIGHT - text_height) / 2;
+	while (++i < text_height)
+		put_pause(cub, i, start_y);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->img_ptr, 0, 0);
+}
 
 void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 {
-	int	i;
-	int	temp;
-	int offset;
-	unsigned int color;
-	
+	int				i;
+	int				temp;
+	int				offset;
+	unsigned int	color;
+
 	temp = -1;
 	while (++temp < WIDTH)
 	{
 		i = 0;
-		color = cub->data->color_ceiling;
-		if (!ray[temp].wall_start)
-			ray[temp].wall_start = ray[temp - 1].wall_start;
-		while (i < HEIGHT && i < ray[temp].wall_start)
-		{
-			offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
-			*(unsigned int *)(cub->img->addr + offset) = color;
-			i++;
-		}
+		draw_cealing(&i, ray, temp, cub);
 		while (i < HEIGHT && i < ray[temp].wall_end)
 		{
 			offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
@@ -127,13 +112,7 @@ void	adding_pix_to_img(t_cub *cub, t_ray *ray)
 			*(unsigned int *)(cub->img->addr + offset) = color;
 			i++;
 		}
-		color = cub->data->color_floor;
-		while (i < HEIGHT)
-		{
-			offset = (i * cub->img->line_len + temp * (cub->img->bpp / 8));
-			*(unsigned int *)(cub->img->addr + offset) = color;
-			i++;
-		}
+		draw_floor(&i, ray, temp, cub);
 	}
 	drawing_sword(cub);
 	mlx_clear_window(cub->mlx, cub->win);

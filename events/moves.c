@@ -6,13 +6,13 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 18:21:12 by adonato           #+#    #+#             */
-/*   Updated: 2024/10/08 15:03:56 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:35:54 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	go_backward(t_cub *cub, long double *x, long double *y, long double angle)
+int	go_b(t_cub *cub, long double *x, long double *y, long double angle)
 {
 	long double	xd;
 	long double	yd;
@@ -26,7 +26,7 @@ int	go_backward(t_cub *cub, long double *x, long double *y, long double angle)
 	return (0);
 }
 
-int	go_forward(t_cub *cub, long double *x, long double *y, long double angle)
+int	go_f(t_cub *cub, long double *x, long double *y, long double angle)
 {
 	long double	xd;
 	long double	yd;
@@ -42,13 +42,11 @@ int	go_forward(t_cub *cub, long double *x, long double *y, long double angle)
 
 void	rotate_pov(t_cub *cub, int x, int y)
 {
-	static int	prev_x;
-	static int	prev_y;
+	static int	prev_x = -1;
+	static int	prev_y = -1;
 	int			delta_x;
 	long double	angle_change;
 
-	prev_x = -1;
-	prev_y = -1;
 	{
 		if (prev_x == -1 && prev_y == -1)
 		{

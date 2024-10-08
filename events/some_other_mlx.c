@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:38:28 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 15:03:41 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:36:15 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	check_move(int keysym, t_cub *cub, char **map)
 	angle = cub->player->angle * PI / 180;
 	if (keysym == SYM_S || keysym == SYM_DOWN)
 	{
-		if (!go_backward(cub, &x, &y, angle))
+		if (!go_b(cub, &x, &y, angle))
 			return (0);
 	}
 	if (keysym == SYM_W || keysym == SYM_UP)
 	{
-		if (!go_forward(cub, &x, &y, angle))
+		if (!go_f(cub, &x, &y, angle))
 			return (0);
 	}
 	else
