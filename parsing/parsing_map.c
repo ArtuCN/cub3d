@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 14:31:26 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:41:11 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	some_if(char *name, t_cub *cub, int fd)
 	if (!len_mat(fd, cub->data))
 	{
 		free(cub->data);
-		return (printf("Empty Map\n"), 0);
+		return (printf("Error\n"), 0);
 	}
 	return (1);
 }
@@ -89,7 +89,7 @@ int	regular_map(char *name, t_cub *cub)
 		free_matrix(cub->data->matrix);
 		free(cub->data->matrix);
 		free(cub->data);
-		return (printf("Error"), 0);
+		return (printf("Error\n"), 0);
 	}
 	close(fd);
 	if (!check_matrix(cub->data))

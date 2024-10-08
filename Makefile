@@ -59,6 +59,8 @@ $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(COMPILE) -c $< -o $@
 
+bonus: all
+
 # Cleaning object files
 clean:
 	rm -f $(OBJS)

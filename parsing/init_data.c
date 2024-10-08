@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:25:14 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 16:53:53 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 18:42:52 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ unsigned int	rgb_to_hex(int red, int green, int blue)
 int	add_num(char *tmp, int *i)
 {
 	int	num;
+	int	count;
 
+	count = *i;
 	num = 0;
-	while (tmp[*i] != ',' && tmp[*i] != '\0')
+	while (tmp[*i] != ',' && tmp[*i] != '\n' && tmp[*i] != '\0')
 	{
 		num = num * 10 + (tmp[*i] - '0');
 		(*i)++;
 	}
+	if (count == *i)
+		return (-1);
 	if (tmp[*i] == ',')
 		(*i)++;
 	return (num);

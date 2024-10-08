@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:35:15 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/07 18:27:43 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/08 18:42:38 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ int	check_null_data(t_data *data)
 	if (!data->north || !data->south || !data->west
 		|| !data->east || !data->floor
 		|| !data->ceiling)
+		return (0);
+	if (ft_strncmp(data->north, "NO ./../textures/wall_n.xpm\n",
+			ft_strlen(data->north))
+		|| ft_strncmp(data->south, "SO ./../textures/wall_s.xpm\n",
+			ft_strlen(data->south))
+		|| ft_strncmp(data->west, "WE ./../textures/wall_w.xpm\n",
+			ft_strlen(data->east))
+		|| ft_strncmp(data->east, "EA ./../textures/wall_e.xpm\n",
+			ft_strlen(data->west)))
 		return (0);
 	return (1);
 }

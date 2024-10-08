@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:34:37 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 17:34:40 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:44:58 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	draw_player(t_cub *cub, int x, int y, unsigned int color)
 	int	minimap_x;
 	int	minimap_y;
 
-	minimap_x = x * SCALE_FACTOR - cub->data->offset_x + MINIMAP_X;
-	minimap_y = y * SCALE_FACTOR - cub->data->offset_y + MINIMAP_Y;
 	cub->data->offset_x = x * SCALE_FACTOR
 		- (MINI_WIDTH * SCALE_FACTOR) / 2;
 	cub->data->offset_y = y * SCALE_FACTOR
 		- (MINI_HEIGHT * SCALE_FACTOR) / 2;
+	minimap_x = x * SCALE_FACTOR - cub->data->offset_x + MINIMAP_X;
+	minimap_y = y * SCALE_FACTOR - cub->data->offset_y + MINIMAP_Y;
 	i = minimap_x - 1;
 	while (i <= minimap_x + 2)
 	{
