@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 14:44:23 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:12:10 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int	check_first_char(char **matrix, t_data *data)
 
 int	check_matrix(t_data *data)
 {
+	data->map = NULL;
 	if (!check_first_char(data->matrix, data))
 	{
 		free_matrix(data->matrix);
-		if (data->map)
+		if (data->map != NULL)
 			free_matrix(data->map);
 		return (printf("Map Info Are Not Correct\n"), 0);
 	}
