@@ -23,6 +23,12 @@ RAYCASTING = raycasting/sword.c raycasting/dda.c raycasting/dda2.c raycasting/ra
 GET_NEXT_LINE = includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c
 LIBFT_DIR = includes/libft
 
+
+PURPLE = '\033[0;35m'
+GREEN = '\033[0;32m'
+RED = '\033[0;31m'
+NONE = '\033[0m'
+
 # Libraries and include directories
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = "https://github.com/42Paris/minilibx-linux.git"
@@ -31,6 +37,8 @@ DEST_DIR = includes
 
 # Compilation flags
 FLAGS = -L$(DEST_DIR)/$(MLX_DIR) -lmlx -lX11 -lXext -lm -L$(LIBFT_DIR) -lft
+MAKEFLAGS += --no-print-directory
+
 COMPILE = gcc -Wall -Wextra -Werror -g
 
 # Source and object files
@@ -43,34 +51,35 @@ all: $(DEST_DIR)/$(MLX_DIR) $(LIBFT) $(NAME)
 
 # Cloning and setting up MinilibX
 $(DEST_DIR)/$(MLX_DIR):
-	@git clone $(MLX) $(DEST_DIR)/$(MLX_DIR)
-	@cd $(DEST_DIR)/$(MLX_DIR) && ./configure
-
+	@git clone $(MLX) $(DEST_DIR)/$(MLX_DIR) > /dev/null 2>&1
+	@cd $(DEST_DIR)/$(MLX_DIR) && ./configure > /dev/null 2>&1
+	@echo $(GREEN)"MinilibX Cloned! ✔️"$(NONE)
 # Building libft
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
+	@echo $(RED)"Libft Compiled!	 ✔️"$(NONE)
 
 # Linking the final executable
 $(NAME): $(OBJS) $(LIBFT)
-	$(COMPILE) $(OBJS) $(FLAGS) -o $(NAME)
-
+	@$(COMPILE) $(OBJS) $(FLAGS) -o $(NAME)
+	@echo $(PURPLE)"Cub3d Compiled!	 ✔️"$(NONE)
 # Compiling object files
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(COMPILE) -c $< -o $@
+	@$(COMPILE) -c $< -o $@
 
 bonus: all
 
 # Cleaning object files
 clean:
-	rm -f $(OBJS)
-	rm -rf $(OBJS_DIR)
+	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 # Full clean
 fclean: clean
-	rm -f $(NAME)
-	rm -rf $(DEST_DIR)/$(MLX_DIR)
+	@rm -f $(NAME)
+	@rm -rf $(DEST_DIR)/$(MLX_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 # Rebuild
