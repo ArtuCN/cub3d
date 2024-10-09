@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 12:03:44 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 14:20:33 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	regular_map(char *name, t_cub *cub)
 	close(fd);
 	if (!check_matrix(cub->data))
 	{
-		free_matrix(cub->data->map);
 		free(cub->data);
 		return (0);
 	}
