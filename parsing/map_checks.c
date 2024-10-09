@@ -6,7 +6,7 @@
 /*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 16:53:40 by adonato          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:55:06 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_zero(char **map, int x, int y, char player)
 	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D') && y > 0)
 		y--;
 	if (map[y][x] != '1' && map[y][x] != player)
-		return (printf(0);
+		return (0);
 	return (1);
 }
 
