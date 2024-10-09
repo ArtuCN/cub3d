@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 14:22:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 15:49:15 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	check_map(char **matrix, t_data *data)
 		}
 		y++;
 	}
+	if (player == 0)
+		return (0);
 	data->player_dir = player;
 	if (!check_map_continue(matrix, player))
 		return (0);
