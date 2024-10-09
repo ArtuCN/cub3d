@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:09:30 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 14:20:33 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 14:44:48 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	regular_map(char *name, t_cub *cub)
 	if (!put_map(fd, cub->data))
 	{
 		free_matrix(cub->data->matrix);
-		free(cub->data->matrix);
 		free(cub->data);
 		return (printf("Error\n"), 0);
 	}

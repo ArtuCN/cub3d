@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   check_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 14:21:00 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 14:44:23 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	free_coord(t_data *data)
+{
+	if (data->north)
+		free(data->north);
+	if (data->south)
+		free(data->south);
+	if (data->west)
+		free(data->west);
+	if (data->east)
+		free(data->east);
+	if (data->ceiling)
+		free(data->ceiling);
+	if (data->floor)
+		free(data->floor);
+}
 
 int	check_cor(char *line)
 {
@@ -82,25 +98,16 @@ int	check_matrix(t_data *data)
 	if (!check_first_char(data->matrix, data))
 	{
 		free_matrix(data->matrix);
-		free_matrix(data->map);
+		if (data->map)
+			free_matrix(data->map);
 		return (printf("Map Info Are Not Correct\n"), 0);
 	}
 	if (!init_data(data))
 	{
-		if (data->north)
-			free(data->north);
-		if (data->south)
-			free(data->south);
-		if (data->west)
-			free(data->west);
-		if (data->east)
-			free(data->east);
-		if (data->ceiling)
-			free(data->ceiling);
-		if (data->floor)
-			free(data->floor);
-		free_matrix(data->map);
+		free_coord(data);
 		free_matrix(data->matrix);
+		if (data->map)
+			free_matrix(data->map);
 		return (printf("Map is Not Correct\n"), 0);
 	}
 	return (1);
