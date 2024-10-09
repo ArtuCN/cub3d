@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:25:14 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/08 18:42:52 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 16:10:31 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ int	add_ceiling(t_data *data)
 	int	green;
 	int	blue;
 
-	i = 2;
+	i = 1;
+	if (!data->ceiling)
+		return (printf("Error\nInvalid color\n"), 0);
+	while (data->ceiling[i] == 32 || data->ceiling[i] == 9)
+		i++;
 	red = add_num(data->ceiling, &i);
 	green = add_num(data->ceiling, &i);
 	blue = add_num(data->ceiling, &i);
@@ -76,7 +80,11 @@ int	add_floor(t_data *data)
 	int	green;
 	int	blue;
 
-	i = 2;
+	if (!data->floor)
+		return (printf("Error\nInvalid color\n"), 0);
+	i = 1;
+	while (data->floor[i] == 32 || data->floor[i] == 9)
+		i++;
 	red = add_num(data->floor, &i);
 	green = add_num(data->floor, &i);
 	blue = add_num(data->floor, &i);
