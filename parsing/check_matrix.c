@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:18:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 16:12:10 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 16:53:07 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int	check_first_char(char **matrix, t_data *data)
 			i++;
 		g++;
 	}
-	while (matrix[g] && !ft_strncmp(matrix[g], "\n", 1)
-		&& !ft_strncmp(matrix[g], "\0", 1))
+	while (matrix[g] && (matrix[g][0] == '\n' || matrix[g][0] == '\0'))
 		g++;
 	copy_map(matrix, g, data);
 	if (!check_map(data->map, data))

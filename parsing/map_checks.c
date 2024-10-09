@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adonato <adonato@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:28:39 by aconti            #+#    #+#             */
-/*   Updated: 2024/10/09 15:56:35 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/09 16:53:40 by adonato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	set_values(int x, int y, int *x1, int *y1)
 {
 	*x1 = x;
 	*y1 = y;
-	if (x == 0 || y == 1)
+	if (x == 0 || y == 0)
 		return (0);
 	return (1);
 }
@@ -43,10 +43,10 @@ int	check_zero(char **map, int x, int y, char player)
 	if (map[y][x] != '1' && map[y][x] != player)
 		return (0);
 	y = y1;
-	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D') && y > 1)
+	while (map[y][x] && (map[y][x] == '0' || map[y][x] == 'D') && y > 0)
 		y--;
 	if (map[y][x] != '1' && map[y][x] != player)
-		return (0);
+		return (printf(0);
 	return (1);
 }
 
