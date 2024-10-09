@@ -6,7 +6,7 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:14:11 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 09:55:01 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/01 15:22:44 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	find_player_pos(t_cub *cub, t_data *data)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (data->map[y])
@@ -25,8 +25,8 @@ void	find_player_pos(t_cub *cub, t_data *data)
 		{
 			if (data->map[y][x] == data->player_dir)
 			{
-				cub->player->x = x * (WIDTH / 50);
-				cub->player->y = y * (HEIGHT / 50);
+				cub->player->x = (x + 0.5) * TXT_SIZE;
+				cub->player->y = (y + 0.5) * TXT_SIZE;
 				return ;
 			}
 			x++;
@@ -38,20 +38,17 @@ void	find_player_pos(t_cub *cub, t_data *data)
 void	set_angle(t_player *player, t_data *data)
 {
 	if (data->player_dir == 'N')
-		player->angle = 0;
-	else if (data->player_dir == 'S')
-		player->angle = 180;
-	else if (data->player_dir == 'W')
 		player->angle = 270;
-	else if (data->player_dir == 'E')
+	else if (data->player_dir == 'S')
 		player->angle = 90;
+	else if (data->player_dir == 'W')
+		player->angle = 180;
+	else if (data->player_dir == 'E')
+		player->angle = 0;
 }
 
 void	player_init(t_cub *cub)
 {
-	t_player *player;
-	player = malloc(sizeof(t_player));
-	cub->player = player;
 	if (!cub->player)
 	{
 		free(cub->mlx);
@@ -59,6 +56,9 @@ void	player_init(t_cub *cub)
 		free(cub->img);
 		return ;
 	}
+	cub->player->ray = malloc(sizeof(t_ray) * WIDTH);
+	cub->player->num_rays = WIDTH;
+	cub->player->increment = 60L / (long double)WIDTH;
 	set_angle(cub->player, cub->data);
 	find_player_pos(cub, cub->data);
 }

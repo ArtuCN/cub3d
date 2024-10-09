@@ -5,94 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 11:09:08 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 14:54:36 by aconti           ###   ########.fr       */
+/*   Created: 2024/09/16 10:06:27 by aconti            #+#    #+#             */
+/*   Updated: 2024/10/08 15:59:18 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int is_wall(int x, int y, t_cub *cub)
+void	adding_ray_info(t_ray *ray)
 {
-    int map_x = fmap(x, cub->data->max_x, WIDTH);
-    int map_y = fmap(y, cub->data->max_y, HEIGHT);
+	ray->hit_x = ray->x + ray->distance * cos(ray->angle * PI / 180);
+	ray->hit_y = ray->y + ray->distance * sin(ray->angle * PI / 180);
+	ray->wall_start = (HEIGHT / 2) - (HEIGHT / ray->distance);
+	ray->wall_end = (HEIGHT / 2) + (HEIGHT / ray->distance);
+}
 
-    // Debugging: Stampa le coordinate della mappa
-    printf("Checking wall at map coordinates (%d, %d)\n", map_x, map_y);
+int	same_dir(t_ray *old, t_ray *ray)
+{
+	int	j;
+	int	k;
+	int	h;
+	int	i;
 
-    if (cub->data->map[map_y][map_x] == '1')
-	{
-		printf("FOUND WALL at (%d, %d)\n", map_y, map_x);
+	h = (old->from_x) / TXT_SIZE;
+	i = (old->from_y) / TXT_SIZE;
+	j = (ray->from_y) / TXT_SIZE;
+	k = (ray->from_x) / TXT_SIZE;
+	if (h == k && i == j)
 		return (1);
-	}
 	return (0);
 }
 
-void find_wall(t_cub *cub)
+int	is_same(t_cub *cub, t_ray *ray, int i)
 {
-	int x = cub->player->x;
-	int y = cub->player->y;
-	int i = 0;
+	int	j;
+	int	k;
+	int	h;
+	int	l;
 
-	while (!is_wall(x, y, cub) && i < 2000)
+	h = (ray[i - 1].y) / TXT_SIZE;
+	l = (ray[i - 1].x) / TXT_SIZE;
+	j = (ray[i].y) / TXT_SIZE;
+	k = (ray[i].x) / TXT_SIZE;
+	if (i > 0)
 	{
-		// Disegna la linea
-		my_mlx_pixel_put(cub, x, y, GREEN);
-
-		// Aggiorna x e y con un piccolo passo
-		x += 2 * cos(cub->player->angle * PI / 180);
-		y += 2 * sin(cub->player->angle * PI / 180);
-
-		// Debugging: Stampa le coordinate attuali
-		printf("Drawing at coordinates (%d, %d)\n", x, y);
-
-		i++;
+		if (k == l && j == h && same_dir(&ray[i - 1], &ray[i])
+			&& (cub->data->map[j][k] == cub->data->map[h][l]))
+			return (1);
 	}
-	
+	return (0);
 }
-
-
-// void draw_wall(int x, int height, t_cub *cub) {
-//     int start = (HEIGHT / 2) - (height / 2);
-//     int end = start + height;
-
-//     // Disegna i pixel della colonna
-//     int y = start;
-//     while (y < end) {
-//         my_mlx_pixel_put(cub, x, y, RED);
-//         y++;
-//     }
-// }
-
-// void cast_rays(t_cub *cub)
-// {
-//     for (int x = 0; x < WIDTH; x++) {
-//         // Calcola l'angolo del raggio corrente
-//         float ray_angle = (cub->player->angle - FOV / 2.0) + ((float)x / WIDTH) * FOV;
-        
-//         // Calcola la direzione del raggio
-//         float ray_x = cos(ray_angle);
-//         float ray_y = sin(ray_angle);
-        
-//         // Lancia il raggio finché non colpisce un muro
-//         float distance = 0;
-//         int hit_wall = 0;
-//         while (!hit_wall && distance < MAX_RENDER_DISTANCE) {
-//             distance += 0.1;  // Incrementa la distanza percorsa dal raggio
-            
-//             int map_x = (int)(cub->player->x + ray_x * distance);
-//             int map_y = (int)(cub->player->y + ray_y * distance);
-            
-//             // Controlla se il raggio ha colpito un muro
-//             if (cub->data->map[map_y][map_x] == 1) {
-//                 hit_wall = 1;
-//             }
-//         }
-
-//         // Calcola l'altezza della parete
-//         int wall_height = (int)(HEIGHT / (distance * cos(ray_angle - cub->player->angle)));
-        
-//         // Disegna la parete sullo schermo
-//         draw_wall(x, wall_height, cub);
-//     }
-// }

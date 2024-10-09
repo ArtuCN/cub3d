@@ -1,131 +1,128 @@
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/27 17:50:49 by adonato           #+#    #+#             */
+/*   Updated: 2024/09/10 17:17:45 by aconti           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 4
-#endif
+#include "get_next_line.h"
 
-char *fstrchr(char *s, char c)
+char	*get_next_line(int fd)
 {
-	while(*s)
-	{
-		if(*s == c)
-			return(s);
-		s++;
-	}
-	return(NULL);
+	static t_lost	*txt;
+	char			*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	ft_create_new_list(&txt, fd);
+	if (txt == NULL)
+		return (NULL);
+	line = ft_attach(txt);
+	ft_start_txt(&txt);
+	return (line);
 }
 
-int ft_strlen(char *s)
+void	ft_create_new_list(t_lost **txt, int fd)
 {
-	int i = 0;
-	while(s[i])
+	int		count;	
+	char	*buf;
+
+	while (!ft_end_line(*txt))
+	{
+		buf = malloc(BUFFER_SIZE + 1);
+		if (buf == NULL)
+			return ;
+		count = read(fd, buf, BUFFER_SIZE);
+		if (count == 0)
+		{
+			free(buf);
+			return ;
+		}
+		if (count < 0 || !count)
+		{
+			free(buf);
+			ft_dealloc2(txt, NULL, NULL);
+			return ;
+		}
+		buf[count] = '\0';
+		ft_add_node2(txt, buf);
+	}
+}
+
+void	ft_add_node2(t_lost **txt, char *buf)
+{
+	t_lost	*newnode;
+	t_lost	*lastnode;
+
+	newnode = malloc(sizeof(t_lost));
+	if (newnode == NULL)
+		return ;
+	lastnode = ft_lstlast2(*txt);
+	if (lastnode == NULL)
+		*txt = newnode;
+	else
+		lastnode->next = newnode;
+	newnode->content = buf;
+	newnode->next = NULL;
+}
+
+char	*ft_attach(t_lost *txt)
+{
+	int		len;
+	char	*nextstr;
+
+	if (txt == NULL)
+		return (NULL);
+	len = ft_strlen2(txt);
+	nextstr = malloc(len + 1);
+	if (nextstr == NULL)
+		return (NULL);
+	ft_new_str2(txt, nextstr);
+	return (nextstr);
+}
+
+void	ft_start_txt(t_lost **txt)
+{
+	t_lost	*lastnode;
+	t_lost	*cleannode;
+	int		i;
+	int		j;
+	char	*buf;
+
+	buf = malloc(BUFFER_SIZE + 1);
+	cleannode = malloc(sizeof(t_lost));
+	if (buf == NULL || cleannode == NULL)
+		return ;
+	lastnode = ft_lstlast2(*txt);
+	i = 0;
+	j = 0;
+	while (lastnode->content[i] && lastnode->content[i] != '\n')
+		++i;
+	while (lastnode->content[i] && lastnode->content[++i])
+		buf[j++] = lastnode->content[i];
+	buf[j] = '\0';
+	cleannode->content = buf;
+	cleannode->next = NULL;
+	ft_dealloc2(txt, cleannode, buf);
+}
+/*
+int	main()
+{
+	int	i = 0;
+	int	fd;
+	char	*str;
+	fd = open("prova.txt", O_RDONLY);
+	while (i < 5)
+	{
+		str = get_next_line(fd);
+		printf("%s", str);
+		free(str);
 		i++;
-	return(i);
-}
-
-char *ft_strdup(char *s)
-{
-	char *x = malloc(ft_strlen(s)+1);
-	int i = 0;
-	while(s[i])
-	{
-		x[i] = s[i];
-		i++;
 	}
-	x[i] = '\0';
-	return x;
-}
-
-char *ft_strjoinfree(char *s1, char *s2)
-{
-	if(!s1 || !s2)
-		return(NULL);
-	int len1 = ft_strlen(s1);
-	int len2 = ft_strlen(s2);
-	char *new = malloc(len1+len2+1);
-	int i = 0;
-	int x = 0;
-	while(s1[i])
-	{
-		new[x] = s1[i];
-		i++;
-		x++;
-	}
-	i=0;
-	while(s2[i])
-	{
-		new[x] = s2[i];
-		i++;
-		x++;
-	}
-	free(s1);
-	new[x] = '\0';
-	return(new);
-}
-
-char *get_next_line(int fd)
-{
-	static char cont[BUFFER_SIZE + 1];
-	char *line;
-	char *next_line;
-	int letti;
-	int	size;
-	int i = 1;
-	int x = 0;
-
-	line = ft_strdup(cont);
-	while(!(fstrchr(line, '\n')) && (letti = read(fd, cont, BUFFER_SIZE)) > 0)
-	{
-		cont[letti] = '\0';
-		line = ft_strjoinfree(line, cont);
-	}
-	if(ft_strlen(line) == 0)
-		return(free(line),NULL);
-
-	next_line = fstrchr(line, '\n');
-	if(next_line != NULL)//questo e il caso in cui c'e il carattere '\n' nella stringa
-	{
-		//size dovrebbe essere la lunghezza della stringa fino al carattere '\n'
-		size = next_line - line +1;
-		while(x < BUFFER_SIZE+1)
-			cont[x++] = '\0';
-		//serve a svuotare la stringa statica
-		x=0;
-		while(next_line[i] && x < BUFFER_SIZE+1)
-			cont[x++] = next_line[i++];
-		//serve a copiare il contenuto dopo il carattere '\n' nella stringa statica
-	}
-	else//questo e il caso in cui non c'e il carattere '\n' nella stringa
-	{
-		//size dovrebbe essere la lunghezza della stringa
-		size = ft_strlen(line);
-		while(x < BUFFER_SIZE+1)
-			cont[x++] = '\0';
-	}
-	line[size] = '\0';
-	return(line);
-}
-
-
-// int main()
-// {
-//     int fd = open("test.txt", O_RDONLY);
-//     char *line;
-
-//     if (fd < 0)
-//     {
-//         printf("Could not open file\n");
-//         return (1);
-//     }
-
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("%s\n", line);
-//         free(line);
-//     }
-//     close(fd);
-//     return (0);
-// }
+	close(fd);
+}*/

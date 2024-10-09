@@ -6,33 +6,57 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:10:54 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:46 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:34:30 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
 
+# define EPSILON 0.0001
 # define WALL 1
 # define EMPTY 0
 # define WIDTH 1500
 # define HEIGHT 1000
+# define SCALE_FACTOR 0.5
+# define MINIMAP_SCALE 0.25
+# define MINI_WIDTH 375
+# define MINI_HEIGHT 250
 # define FOV 60
 # define MAX_RENDER_DISTANCE 2.0
-
+# define TXT_SIZE 64
 # define YELLOW 0xFFFF00
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-
-# define PI 3.1415926535
-
+# define VIOLET 0xFF00FF
+# define DARK_GREEN 0x274E13
+# define TRANSPARENT_COLOR 0xFF000000 
+# define HALF_TXT_SIZE 32
+# define PI 3.14159265358979323846
+# define SYM_SPACE 32
 # define SYM_A 97
 # define SYM_D 100
 # define SYM_S 115
 # define SYM_W 119
-
-
+# define SYM_M 109
+# define SYM_E 101
+# define SYM_P 112
+# define SYM_UP 65362
+# define SYM_DOWN 65364
+# define SYM_LEFT 65361
+# define SYM_RIGHT 65363
+# define SYM_Q 113
+# define DOOR 0
+# define WALL_N 1
+# define WALL_S 2
+# define WALL_W 3
+# define WALL_E 4
+# define ESC 65307
+# define SPRITE_Y 20
+# define SPRITE_X 15
+# define MINIMAP_X 0
+# define MINIMAP_Y 0
 #endif

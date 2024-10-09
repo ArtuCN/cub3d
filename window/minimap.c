@@ -6,94 +6,105 @@
 /*   By: aconti <aconti@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:01 by aconti            #+#    #+#             */
-/*   Updated: 2024/08/09 13:57:28 by aconti           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:29:21 by aconti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-void	my_mlx_pixel_put(t_cub *cub, int x, int y, unsigned int color)
+void	while_square(t_cub *cub, int mini_x, int mini_y, unsigned int color)
 {
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-		mlx_pixel_put(cub->mlx, cub->win, x, y, color);
-}
+	int	i;
+	int	j;
 
-int	draw_square(t_cub *cub, int x, int y, unsigned int color)
-{
-	int i;
-	int j;
-	
-	j = (y * (HEIGHT / 50));
-	while(j <= ((HEIGHT / 50) + (y * (HEIGHT / 50))))
+	j = mini_y;
+	while (j <= mini_y + (TXT_SIZE * SCALE_FACTOR))
 	{
-		i = (x * (WIDTH / 50));
-		while(i <= ((WIDTH / 50) + (x * (WIDTH / 50))))
+		i = mini_x;
+		while (i <= mini_x + (TXT_SIZE * SCALE_FACTOR))
 		{
-			if ((i == 0) || (i % (WIDTH / 50) == 0) || (j == 0) || (j % (HEIGHT / 50) == 0))
-				my_mlx_pixel_put(cub, i, j, 0x000000);
-			else 
+			if ((i == (int)mini_x) || (j == (int)mini_y))
+				my_mlx_pixel_put(cub, i, j, BLACK);
+			else
 				my_mlx_pixel_put(cub, i, j, color);
 			i++;
 		}
 		j++;
 	}
+}
+
+int	draw_square(t_cub *cub, int x, int y, unsigned int color)
+{
+	int	offset_x;
+	int	offset_y;
+	int	minimap_x;
+	int	minimap_y;
+
+	offset_x = cub->player->x * SCALE_FACTOR
+		- (MINI_WIDTH * SCALE_FACTOR) / 2;
+	offset_y = cub->player->y * SCALE_FACTOR
+		- (MINI_HEIGHT * SCALE_FACTOR) / 2;
+	minimap_x = x * (TXT_SIZE * SCALE_FACTOR) - offset_x + MINIMAP_X;
+	minimap_y = y * (TXT_SIZE * SCALE_FACTOR) - offset_y + MINIMAP_Y;
+	while_square(cub, minimap_x, minimap_y, color);
 	return (1);
 }
 
-
-int	put_player(t_cub *cub, int x, int y, unsigned int color)
+void	single_square(t_cub *cub, char **map, int p_x, int p_y)
 {
-	int start_x = x;
-	int start_y = y;
-	int end_x = x + 2;
-	int end_y = y + 2;
-
-	// Ensure we don't draw out of bounds
-	if (start_x < 0) start_x = 0;
-	if (start_y < 0) start_y = 0;
-	if (end_x >= WIDTH) end_x = WIDTH - 1;
-	if (end_y >= HEIGHT) end_y = HEIGHT - 1;
-
-	int i = start_x;
-	while (i <= end_x)
-	{
-		int j = start_y;
-		while (j <= end_y)
-		{
-			my_mlx_pixel_put(cub, i, j, color);
-			j++;
-		}
-		i++;
-	}
-	return (1);
+	if (map[p_y][p_x] == '1')
+		draw_square(cub, p_x, p_y, BLUE);
+	else if ((map[p_y][p_x] == '0' || map[p_y][p_x] == 'E'
+		|| map[p_y][p_x] == 'W' || map[p_y][p_x] == 'N'
+		|| map[p_y][p_x] == 'S'))
+		draw_square(cub, p_x, p_y, WHITE);
+	if (map[p_y][p_x] == 'D')
+		draw_square(cub, p_x, p_y, DARK_GREEN);
+	if (map[p_y][p_x] == 'O')
+		draw_square(cub, p_x, p_y, GREEN);
 }
 
-int	draw_minimap(t_cub *cub, char **map)
+void	in_while_map(t_cub *cub, int p_x, int p_y, char **map)
 {
-	int	x;
-	int y;
+	int	final_x;
+	int	final_y;
 
-	y = 0;
-	// cast_rays(cub);
-	// printf("%d, %d \n", fmap(cub->player->x, WIDTH, cub->data->max_x), fmap(cub->player->y, HEIGHT, cub->data->max_y));
-	while(map[y])
+	final_y = p_y + 6;
+	while (map[p_y] && p_y <= final_y)
 	{
-		x = 0;
-		while(map[y][x])
+		p_x = (int)(cub->player->x * SCALE_FACTOR)
+			/ (TXT_SIZE * SCALE_FACTOR);
+		if (p_x < 3)
+			p_x = 0;
+		else
+			p_x -= 3;
+		final_x = p_x + 6;
+		while (map[p_y][p_x] && p_x <= final_x)
 		{
-			if (map[y][x] == '1')
-				draw_square(cub, x, y, BLUE);
-			else if (map[y][x] == '0' || map[y][x] == 'E' || map[y][x] == 'W' || map[y][x] == 'N' || map[y][x] == 'S')
-				draw_square(cub, x, y, WHITE);		
-//			else
-//				draw_square(cub, x, y, 0xFFFFFF);
-			// printf("PRIMA X %d, PRIMA Y %d \n", x, y);
-			x++;
+			single_square(cub, map, p_x, p_y);
+			p_x++;
 		}
-		y++;
+		p_y++;
 	}
+}
+
+int	draw_minimap(t_cub *cub, t_data *data, char **map)
+{
+	int	player_x;
+	int	player_y;
+
+	player_x = (int)(cub->player->x * SCALE_FACTOR)
+		/ (TXT_SIZE * SCALE_FACTOR);
+	player_y = (int)(cub->player->y * SCALE_FACTOR)
+		/ (TXT_SIZE * SCALE_FACTOR);
+	(void)data;
+	if (!cub->add_minimap)
+		return (0);
+	if (player_y < 3)
+		player_y = 0;
+	else
+		player_y -= 3;
+	in_while_map(cub, player_x, player_y, map);
 	put_player(cub, cub->player->x, cub->player->y, RED);
-	find_wall(cub);
 	return (1);
 }
